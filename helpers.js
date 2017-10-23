@@ -19,9 +19,9 @@ exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 exports.siteName = `gjjames | jeweller`;
 
 exports.menu = [
-  { slug: '/stores', title: 'Stores', icon: 'store', },
-  { slug: '/tags', title: 'Tags', icon: 'tag', },
-  { slug: '/top', title: 'Top', icon: 'top', },
-  { slug: '/add', title: 'Add', icon: 'add', },
-  { slug: '/map', title: 'Map', icon: 'map', },
+  { slug: '/products', title: 'Products', icon: 'store', },
+  { slug: '/about', title: 'About', icon: 'tag', },
+  { slug: '/contact', title: 'Contact', icon: 'map', },
+//   { slug: '/add', title: 'Add', icon: 'add', },
+//   { slug: '/map', title: 'Map', icon: 'map', },
 ];
