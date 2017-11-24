@@ -18,7 +18,11 @@ const productSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    tags: [String]
+    tags: [String],
+    photo: {
+        type: String,
+        required: 'Please choose a photo to upload'
+    }
 });
 
 productSchema.pre('save', function(next) {
