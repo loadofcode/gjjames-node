@@ -16,12 +16,12 @@ exports.staticMap = ([lng, lat]) => `https://maps.googleapis.com/maps/api/static
 exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 
 // Some details about the site
-exports.siteName = `gjjames | jeweller`;
+exports.siteName = `gjjames.co.uk`;
 
 exports.menu = [
   { slug: '/products', title: 'Products', icon: 'store', },
   { slug: '/about', title: 'About', icon: 'tag', },
   { slug: '/contact', title: 'Contact', icon: 'map', },
-//   { slug: '/add', title: 'Add', icon: 'add', },
-//   { slug: '/map', title: 'Map', icon: 'map', },
+  { slug: '/add', title: 'Add', icon: 'add', },
+  { slug: '/map', title: 'Map', icon: 'map', },
 ];

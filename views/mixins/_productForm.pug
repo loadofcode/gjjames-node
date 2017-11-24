@@ -1,0 +1,16 @@
+mixin productForm(product = {})
+	form(action=`/add/${product._id || ''}` method="POST" class="card")
+		label(for="productName") Product Name
+		input(type="text", name="productName" value=product.productName)
+		label(for="SKU") SKU Code
+		input(type="text", name="SKU" value=product.SKU)
+		label(for="description") Product Description
+		textarea(name="description")= product.description
+		- const choices = ['ring', 'diamond', 'necklace', 'bracelets', 'silver', 'gold', 'platinum']
+		- const tags = product.tags || []
+		ul.tags
+			each choice in choices
+				.tag.tag__choice
+					input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
+					label(for=choice)= choice
+		input(type="submit" value="Save Product" class="button")

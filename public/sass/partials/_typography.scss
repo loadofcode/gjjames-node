@@ -37,7 +37,7 @@ p {
   font-size: 1.6rem;
 }
 
-.title {
+.title, .title--product {
   word-wrap: break-word;
   position: relative;
   z-index: 2;
@@ -68,6 +68,10 @@ p {
     $yellowa: rgba($yellow,0.8);
     background-image: linear-gradient(to right, $yellowa 100%, $yellowa 50%);
   }
+}
+
+.title--product{
+  font-size: 23px;
 }
 
 .title--single {
