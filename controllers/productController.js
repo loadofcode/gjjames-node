@@ -53,6 +53,12 @@ exports.getProducts = async (req, res) => {
     res.render('products', {title: 'Products', products});
 }
 
+exports.getProductBySlug = async (req, res, next) => {
+    const product = await Product.findOne({ slug: req.params.slug });
+    if(!product) return next();
+    res.render('product', { product, title: product.productName });
+}
+
 exports.editProduct = async (req, res) => {
     const product = await Product.findOne({_id: req.params.id});
     

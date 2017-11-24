@@ -20,8 +20,6 @@ exports.siteName = `gjjames.co.uk`;
 
 exports.menu = [
   { slug: '/products', title: 'Products', icon: 'store', },
-  { slug: '/about', title: 'About', icon: 'tag', },
-  { slug: '/contact', title: 'Contact', icon: 'map', },
-  { slug: '/add', title: 'Add', icon: 'add', },
-  { slug: '/map', title: 'Map', icon: 'map', },
+  { slug: '/about', title: 'About', icon: 'heart', },
+  { slug: '/contact', title: 'Contact', icon: 'pencil', }
 ];

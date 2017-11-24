@@ -23,4 +23,6 @@ router.post('/add/:id',
 
 router.get('/products/:id/edit', catchErrors(productController.editProduct));
 
+router.get('/product/:slug', catchErrors(productController.getProductBySlug));
+
 module.exports = router;

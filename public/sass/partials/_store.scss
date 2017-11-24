@@ -1,7 +1,10 @@
 .stores {
   display:flex;
-  flex-wrap:wrap;
+  // flex-wrap:wrap;
   margin: -1.25em 0 0 -1.25em;
+  @media all and (max-width: 1024px) {
+    flex-wrap: wrap;
+  }
 }
 
 .store {
