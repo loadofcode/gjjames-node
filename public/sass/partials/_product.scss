@@ -20,12 +20,12 @@
 }
 
 .product__contact {
-    background-color: #53279F;
+    background-color: $lightPurple;
     height: 100px;
     display: flex;
     .btn-more {
         border: 1px solid $white;
-        background: #53279F;
+        background: $lightPurple;
         color: $white;
         margin: 0 auto;
         margin-top: 1.75em;
@@ -33,7 +33,7 @@
         width: 156px;
         &:hover {
             background: $white;
-            color: #53279F;
+            color: $lightPurple;
         }
     }
 }

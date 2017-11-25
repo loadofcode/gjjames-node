@@ -10,6 +10,7 @@
 .tag {
   display: block;
   margin-right: 1rem;
+  margin-bottom: 0.5rem;
   &__choice {
     display: flex;
     justify-content: center;
@@ -31,11 +32,10 @@
     }
   }
   &__link {
-    background:$yellow;
-    color:$black;
+    background:$lightPurple;
+    color:$white;
     display: flex;
-    padding-left: 10px;
-    clip-path: polygon(10px 0%, 100% 1%, 100% 100%, 10px 100%, 0% 50%);
+    border-radius: 4px;
     &--active {
       background: lighten($purple, 40%);
       .tag__text {

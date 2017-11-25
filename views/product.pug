@@ -7,9 +7,15 @@ block content
                 .product__img
                     img(src=`/uploads/${product.photo || 'store.png'}`, alt="product.productName")
                 .product__info
-                    h3= product.productName
-                    h4= product.SKU
-                    p= product.tags
+                    h2
+                        a(href=`/products/${product.slug}`) #{product.productName}
+                    h3= product.SKU
                     p= product.description
+                    if product.tags
+                        ul.tags
+                            each tag in product.tags
+                                li.tag
+                                    a.tag__link(href=`/tags/${tag}`)
+                                        span.tag__text #{tag}
         .product__contact
                 input(type="Submit" value="More Info" class="button btn-more")
