@@ -1,4 +1,15 @@
 extends layout
 
 block content
-    h2 #{product.productName}
+    .inner
+        .card.product__card
+            .product__inner
+                .product__img
+                    img(src=`/uploads/${product.photo || 'store.png'}`, alt="product.productName")
+                .product__info
+                    h3= product.productName
+                    h4= product.SKU
+                    p= product.tags
+                    p= product.description
+        .product__contact
+                input(type="Submit" value="More Info" class="button btn-more")

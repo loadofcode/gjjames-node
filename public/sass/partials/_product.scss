@@ -1,0 +1,36 @@
+.product__card {
+    margin-top: 50px;
+    @media all and (max-width:1399px) {
+        margin-top: 0;
+    }
+}
+.product__inner {
+    display: flex;
+
+    .product__info {
+        margin: -1.25em 0 0 2em;
+
+        p {
+            line-height: 1.25
+        }
+    }
+}
+
+.product__contact {
+    background-color: #53279F;
+    height: 100px;
+    display: flex;
+    .btn-more {
+        border: 1px solid $white;
+        background: #53279F;
+        color: $white;
+        margin: 0 auto;
+        margin-top: 1.75em;
+        height: 40px;
+        width: 156px;
+        &:hover {
+            background: $white;
+            color: #53279F;
+        }
+    }
+}

@@ -19,3 +19,5 @@ mixin productForm(product = {})
 					input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
 					label(for=choice)= choice
 		input(type="submit" value="Save Product" class="button")
+		if product
+			input(type="submit" value="Delete Product" class="button")
