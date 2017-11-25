@@ -3,6 +3,9 @@ const router = express.Router();
 const productController = require('../controllers/productController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
+const stock = 'stock123';
+const admin = 'admin';
+
 router.get('/', productController.homePage);
 router.get('/products', catchErrors(productController.getProducts));
 router.get('/add', productController.addProduct);

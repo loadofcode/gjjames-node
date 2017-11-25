@@ -2,20 +2,22 @@
   display: flex;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 50px;
   justify-content: space-between;
-  background: $black;
+  /* Indigo Nav Background: */
+background-image: $backgroundPurpleGrad;
   &__section {
     display: flex;
     &--search {
-      flex: 1 1 auto;
+      flex: 0 1 auto;
     }
   }
   &__item {
+    width: 100%;
     display: flex;
   }
+
   &__link {
-    background: $black;
     color: white;
     border-right: 1px solid rgba(255,255,255,0.1);
     text-transform: uppercase;
@@ -34,13 +36,10 @@
       margin-bottom: 1rem;
     }
     &:hover, &--active {
-      border-bottom-color: rgba(0,0,0,0.2);
-      border-right-color: rgba(0,0,0,0.05);
+      border-bottom-color: white;
       svg {
         transform: scale(1.2)
       }
-      background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, $yellow 85%, #48ded4 95%) fixed;
-      // background: none;
     }
     &--logo {
       &:hover {
@@ -49,7 +48,7 @@
         }
       }
       svg {
-        width: 200px;
+        width: 150px;
         margin: 0;
       }
     }
@@ -59,6 +58,7 @@
 
 @media all and (max-width: 1200px) {
   .nav {
+    padding: 0;
     &__link {
       padding-left: 1rem;
       padding-right: 1rem;
