@@ -8,6 +8,9 @@ const admin = 'admin';
 
 router.get('/', productController.homePage);
 router.get('/products', catchErrors(productController.getProducts));
+
+router.get('/products/tags/:tag', catchErrors(productController.getProductsByTag));
+
 router.get('/add', productController.addProduct);
 
 // Add new Product

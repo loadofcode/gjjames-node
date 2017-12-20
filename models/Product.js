@@ -25,14 +25,29 @@ const productSchema = new mongoose.Schema({
     }
 });
 
-productSchema.pre('save', function(next) {
+productSchema.pre('save', async function(next) {
     if (!this.isModified('productName')) {
         return next();
     }
     this.slug = slug(this.productName);
-    next();
+    // find other products of slug, slug-1, slug-2
+    const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
+    const productsWithSlug = await this.constructor.find({ slug: slugRegEx });
+    if (productsWithSlug.length) {
+        this.slug = `${this.slug}-${productsWithSlug.length + 1}`;
+    }
 
-    // TODO make more resilitent so slugs are unique
+    next();
 })
+
+productSchema.statics.getTagsList = function() {
+    // mongoDB aggregate pipeline
+    return this.aggregate([
+        { $unwind: '$tags' },
+        { $group: { _id: '$tags', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+
+    ]);
+}
 
 module.exports = mongoose.model('Product', productSchema);

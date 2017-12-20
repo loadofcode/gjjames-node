@@ -1,8 +1,8 @@
 mixin productCard(product = {})
     .store
-        a(href=`/product/${product.slug}`)
+        a(href=`/product/${product.slug}` class="store--hover")
             .store__hero
                 img(src=`/uploads/${product.photo || 'store.png'}`, alt=product.productName)
             .store__details
-                h2.title--product  #{product.productName}
+                p.title--product  #{product.productName}
                 //- p= product.SKU
