@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
+const categoryController = require('../controllers/categoryController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
 const stock = 'stock123';
 const admin = 'admin';
 
+// Product Routes
 router.get('/', productController.homePage);
 router.get('/products', catchErrors(productController.getProducts));
 
@@ -30,5 +32,11 @@ router.post('/add/:id',
 router.get('/products/:id/edit', catchErrors(productController.editProduct));
 
 router.get('/product/:slug', catchErrors(productController.getProductBySlug));
+
+
+// Category Routes
+router.get('/add-category', categoryController.addCategory);
+// add new category
+router.post('/add-category', catchErrors(categoryController.createCategory));
 
 module.exports = router;

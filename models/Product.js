@@ -19,6 +19,11 @@ const productSchema = new mongoose.Schema({
         trim: true
     },
     tags: [String],
+    category: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Category',
+        required: 'You must supply a category to the product'
+    },
     photo: {
         type: String,
         required: 'Please choose a photo to upload'
