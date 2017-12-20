@@ -20,9 +20,8 @@ const productSchema = new mongoose.Schema({
     },
     tags: [String],
     category: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Category',
-        required: 'You must supply a category to the product'
+        type: String,
+        required: 'Please choose a category for this product'
     },
     photo: {
         type: String,
@@ -50,6 +49,16 @@ productSchema.statics.getTagsList = function() {
     return this.aggregate([
         { $unwind: '$tags' },
         { $group: { _id: '$tags', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+
+    ]);
+}
+
+productSchema.statics.getCategoriesList = function() {
+    // mongoDB aggregate pipeline
+    return this.aggregate([
+        { $unwind: '$category' },
+        { $group: { _id: '$category', count: { $sum: 1 } } },
         { $sort: { count: -1 } }
 
     ]);

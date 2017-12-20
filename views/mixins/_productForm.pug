@@ -1,19 +1,18 @@
-mixin productForm(product = {}, category= {})
+mixin productForm(product = {}, category = [])
 	form(action=`/add/${product._id || ''}` method="POST" class="form--flex card" enctype="multipart/form-data")
 		label(for="productName") Product Name
 		input(type="text", name="productName" value=product.productName)
 		label(for="SKU") SKU Code
 		input(type="text", name="SKU" value=product.SKU)
 
-		//- GET categories from category collection and dispay in 
-		//- a select - option input
-		- const options = [category.categoryName]
+		//- GET categories from category collection and dispay in select input
+		- const options = category
 		- const categories = product.category || []
 		label(for="category") Category
 		select(name="category")
-			option(value="") -- Please choose a category --
-			each option in options
-				option(value=option id=option) option
+			option(value="" disabled selected) -- Please choose a category --
+			each option in category
+				option(value=option id=option name=option)= option
 
 		//- Image upload
 		label(for="photo") Photo

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
+const Category = mongoose.model('Category');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
@@ -20,8 +21,23 @@ exports.homePage = (req, res) => {
     res.render('index', { title: 'Home' });
 };
 
+// exports.addProduct = (req, res) => {
+//     const category = Category.find();
+//     console.log("category", category.categoryName);
+//     res.render('editProduct', { title: 'Add Product', category });
+// };
+
 exports.addProduct = (req, res) => {
-    res.render('editProduct', { title: 'Add Product' });
+    return Category.find()
+        .exec()
+        .then(category => {
+            res.render('editProduct', {
+                title: 'Add Product',
+                category: category.map((item, index) => {
+                    return item.categoryName.toString();
+                })
+            });
+        })
 };
 
 exports.upload = multer(multerOptions).single('photo');
@@ -42,7 +58,9 @@ exports.resize = async(req, res, next) => {
 };
 
 exports.createProduct = async(req, res) => {
+    console.log(req.body)
     const product = await (new Product(req.body)).save();
+    console.log('blah')
     req.flash('success', `Successfully added ${product.productName}`);
     res.redirect(`/product/${product.slug}`);
 };
@@ -53,22 +71,22 @@ exports.createProduct = async(req, res) => {
 // }
 
 exports.getProducts = async(req, res) => {
-    const tag = req.params.tag;
-    const tagsPromise = Product.getTagsList();
+    const category = req.params.category;
+    const categoryPromise = Product.getCategoriesList();
     const productsPromise = Product.find();
-    const [tags, products] = await Promise.all([tagsPromise, productsPromise]);
-    res.render('products', { tags, title: `Products`, tag, products });
+    const [categories, products] = await Promise.all([categoryPromise, productsPromise]);
+    res.render('products', { categories, title: `Products`, category, products });
 }
 
-exports.getProductsByTag = async(req, res) => {
-    const tag = req.params.tag;
-    const tagQuery = tag || { $exists: true };
-    const tagsPromise = Product.getTagsList();
-    const productsByTagPromise = Product.find({ tags: tagQuery });
-    const [tags, products] = await Promise.all([tagsPromise, productsByTagPromise]);
-    // res.json(products)
-    res.render('tag', { tags, title: `Products: ${tag}`, tag, products });
-    console.log(tag)
+exports.getProductsByCategory = async(req, res) => {
+    const category = req.params.category;
+    const categoryQuery = category || { $exists: true };
+    const categoriesPromise = Product.getCategoriesList();
+    const productsByCategoryPromise = Product.find({ category: categoryQuery });
+    const [categories, products] = await Promise.all([categoriesPromise, productsByCategoryPromise]);
+    res.render('tag', { categories, title: `Products: ${category}`, category, products });
+    console.log(category)
+    console.log(products)
 }
 
 exports.getProductBySlug = async(req, res, next) => {

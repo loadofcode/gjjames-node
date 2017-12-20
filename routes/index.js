@@ -11,7 +11,7 @@ const admin = 'admin';
 router.get('/', productController.homePage);
 router.get('/products', catchErrors(productController.getProducts));
 
-router.get('/products/tags/:tag', catchErrors(productController.getProductsByTag));
+router.get('/products/c/:category', catchErrors(productController.getProductsByCategory));
 
 router.get('/add', productController.addProduct);
 
