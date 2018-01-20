@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
 const categoryController = require('../controllers/categoryController');
+const tagController = require('../controllers/tagController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
@@ -54,6 +55,23 @@ router.get('/admin/add-category',
 router.post('/admin/add-category',
     authController.isAdminLoggedIn,
     catchErrors(categoryController.createCategory)
+);
+
+// Tag Routes
+router.get('/admin/add-tag',
+    authController.isAdminLoggedIn,
+    tagController.addTag
+);
+// add new tag
+router.post('/admin/add-tag',
+    authController.isAdminLoggedIn,
+    catchErrors(tagController.createTag)
+);
+
+// Admin Add User Route
+router.get('/admin/add-user',
+    authController.isAdminLoggedIn,
+    userController.addUser
 );
 
 // Login and Register and Logout

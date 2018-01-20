@@ -12,6 +12,10 @@ exports.registerForm = (req, res) => {
   res.render('register', { title: 'Register'});
 }
 
+exports.addUser = (req, res) => {
+  res.render('editUser', {title: 'Add New User'});
+}
+
 exports.validateRegister = (req, res, next) => {
   // validation middleware for our app
   req.sanitizeBody('name'); // sanitizeBody uses express-validator - check their docs for more info

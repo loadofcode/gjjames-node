@@ -3,6 +3,11 @@ extends layout
 include mixins/_adminSideBar
 
 block content
-  +adminSideBar()
-  div
-    h1 Admin Area
+  .admin__area
+    +adminSideBar()
+    .admin__main
+      h1 Admin Area
+      div
+        p This is where you can add new products and categories
+      div
+        p Currently the add user section isn't working but will soon

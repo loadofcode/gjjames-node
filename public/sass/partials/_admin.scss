@@ -1,0 +1,39 @@
+.admin__sidebar {
+  width: 225px;
+  height: 100vh;
+  background-color: #260B5D;
+  float: left;
+  // margin-top: -1.4em;
+
+  a.nav__link {
+    text-transform: none;
+  }
+  .nav__link--active {
+    background-color: white;
+    color: black;
+  }
+
+
+  @media all and (max-width: 1400px) {
+    margin-top: -2.8em;
+  }
+
+  @media all and (max-width: 900px) {
+    width: 100%;
+    height: auto;
+
+    .nav__Section {
+      display: flex;
+      margin-bottom: 17px;
+    }
+  }
+}
+
+.admin__main {
+  margin: 0 50px;
+  width: 100%;
+
+  @media all and (max-width: 900px) {
+    width: auto;
+  }
+}

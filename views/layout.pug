@@ -17,18 +17,18 @@ html
               li.nav__item
                 a.nav__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
                   span #{item.title}
-          .nav__section.nav__section--user
-            if user
+          .nav__section.nav__section--search
+            .search
+              input.search__input(type="text" placeholder="Search products..." name="search")
+              .search__results
+          if user
+            .nav__section.nav__section--user
               li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))
                 //- != h.icon('logout')
                 span Logout
                 if user.isAdmin == true
                   li.nav__item: a.nav__link(href="/admin", class=(currentPath.startsWith('/admin') ? 'nav__link--active' : ''))
                     span Admin
-          .nav__section.nav__section--search
-            .search
-              input.search__input(type="text" placeholder="Search products..." name="search")
-              .search__results
 
     block messages
       if locals.flashes

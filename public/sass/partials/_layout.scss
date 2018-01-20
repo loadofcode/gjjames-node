@@ -7,6 +7,14 @@ body {
   background:#efefef;
 }
 
+.admin__area {
+  display: flex;
+
+  @media all and (max-width: 900px) {
+    flex-direction: column;
+  }
+}
+
 .inner {
   max-width:1350px;
   margin: 0 auto;

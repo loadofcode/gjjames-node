@@ -1,5 +1,5 @@
 mixin productForm(product = {}, category = [])
-	form(action=`/add/${product._id || ''}` method="POST" class="form--flex card" enctype="multipart/form-data")
+	form(action=`/admin/add-product/${product._id || ''}` method="POST" class="form--flex card" enctype="multipart/form-data")
 		label(for="productName") Product Name
 		input(type="text", name="productName" value=product.productName)
 		label(for="SKU") SKU Code
@@ -21,7 +21,7 @@ mixin productForm(product = {}, category = [])
 				img(src=`uploads/${product.photo}`, alt=product.productName width=200)
 		label(for="description") Product Description
 		textarea(name="description")= product.description
-		- const choices = ['ring', 'diamond', 'necklace', 'bracelets', 'silver', 'gold', 'platinum']
+		- const choices = ['diamond', 'silver', 'gold', 'platinum']
 		- const tags = product.tags || []
 		ul.tags
 			each choice in choices

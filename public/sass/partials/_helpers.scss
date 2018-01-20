@@ -29,6 +29,10 @@
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
 }
 
+.category__card {
+    min-width: 500px;
+}
+
 pre.error {
     padding: 5rem;
     background: white;

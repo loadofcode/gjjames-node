@@ -1,9 +1,11 @@
 mixin adminSideBar()
-  .side__bar
+  .admin__sidebar
     .nav__Section
       li: a.nav__link(href="/admin/add-product", class=(currentPath.startsWith('/admin/add-product') ? 'nav__link--active' : ''))
         span Add Product
       li: a.nav__link(href="/admin/add-category", class=(currentPath.startsWith('/admin/add-category') ? 'nav__link--active' : ''))
         span Add Category
+      li: a.nav__link(href="/admin/add-tag", class=(currentPath.startsWith('/admin/add-tag') ? 'nav__link--active' : ''))
+        span Add Tag
       li: a.nav__link(href="/admin/add-user", class=(currentPath.startsWith('/admin/add-user') ? 'nav__link--active' : ''))
         span Add User

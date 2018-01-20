@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 const Category = mongoose.model('Category');
+const Tag = mongoose.model('Tag');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
@@ -35,7 +36,7 @@ exports.addProduct = (req, res) => {
         .exec()
         .then(category => {
             res.render('editProduct', {
-                title: 'Add Product',
+                title: 'Add New Product',
                 category: category.map((item, index) => {
                     return item.categoryName.toString();
                 })
@@ -63,7 +64,6 @@ exports.resize = async(req, res, next) => {
 exports.createProduct = async(req, res) => {
     console.log(req.body)
     const product = await (new Product(req.body)).save();
-    console.log('blah')
     req.flash('success', `Successfully added ${product.productName}`);
     res.redirect(`/product/${product.slug}`);
 };

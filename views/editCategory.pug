@@ -4,7 +4,8 @@ include mixins/_categoryForm
 include mixins/_adminSideBar
 
 block content
-	+adminSideBar()
-	.inner
-		h2 #{title}
-		+categoryForm(category)
+	.admin__area
+		+adminSideBar()
+		.admin__main
+			h2 #{title}
+			+categoryForm(category)

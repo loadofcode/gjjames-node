@@ -1,6 +1,5 @@
 mixin userForm(user = {})
-  form.form(action="/register" method="POST")
-    h2 Add User
+  form.form(action="/admin/add-user" method="POST")
     label(for="name") Name
     input(type="text" name="name" required)
     label(for="email") Email

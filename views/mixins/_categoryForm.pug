@@ -1,5 +1,5 @@
 mixin categoryForm(category = {})
-    form(action=`/add-category/${category._id || ''}` method="POST" class="form--flex card")
+    form(action=`/admin/add-category/${category._id || ''}` method="POST" class="form--flex card category__card")
         label(for="categoryName") Category Name
         input(type="text" name="categoryName" placeholder="Add a category")
         input(type="submit" value="Save Category" class="button btn-save")

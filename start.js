@@ -23,6 +23,7 @@ const connection = mongoose.connect(process.env.DATABASE, {
 //  Ready lets go
 require('./models/Product');
 require('./models/Category');
+require('./models/Tag');
 require('./models/User');
 
 // Start our App

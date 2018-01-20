@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Category = mongoose.model('Category');
 
 exports.addCategory = (req, res) => {
-    res.render('editCategory', { title: 'Add a new Category' });
+    res.render('editCategory', { title: 'Add new Category' });
 }
 
 exports.createCategory = async(req, res) => {
