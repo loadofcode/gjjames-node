@@ -1,0 +1,9 @@
+mixin adminSideBar()
+  .side__bar
+    .nav__Section
+      li: a.nav__link(href="/admin/add-product", class=(currentPath.startsWith('/admin/add-product') ? 'nav__link--active' : ''))
+        span Add Product
+      li: a.nav__link(href="/admin/add-category", class=(currentPath.startsWith('/admin/add-category') ? 'nav__link--active' : ''))
+        span Add Category
+      li: a.nav__link(href="/admin/add-user", class=(currentPath.startsWith('/admin/add-user') ? 'nav__link--active' : ''))
+        span Add User

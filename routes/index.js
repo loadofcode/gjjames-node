@@ -11,16 +11,23 @@ const admin = 'admin';
 
 // Main routes
 router.get('/', productController.homePage);
-router.get('/admin', productController.adminPage);
+router.get('/admin', 
+    authController.isAdminLoggedIn,
+    productController.adminPage
+);
 
 
 // Product Routes
 router.get('/products', catchErrors(productController.getProducts));
 router.get('/products/c/:category', catchErrors(productController.getProductsByCategory));
-router.get('/admin/add-product', productController.addProduct);
+router.get('/admin/add-product', 
+    authController.isAdminLoggedIn,
+    productController.addProduct
+);
 
 // Add new Product
 router.post('/admin/add-product',
+    authController.isAdminLoggedIn,
     productController.upload,
     catchErrors(productController.resize),
     catchErrors(productController.createProduct)
@@ -28,6 +35,7 @@ router.post('/admin/add-product',
 
 // Update a Product
 router.post('/admin/add-product/:id',
+    authController.isAdminLoggedIn,
     productController.upload,
     catchErrors(productController.resize),
     catchErrors(productController.updateProduct)
@@ -38,14 +46,21 @@ router.get('/product/:slug', catchErrors(productController.getProductBySlug));
 
 
 // Category Routes
-router.get('/add-category', categoryController.addCategory);
+router.get('/admin/add-category',
+    authController.isAdminLoggedIn,
+    categoryController.addCategory
+);
 // add new category
-router.post('/add-category', catchErrors(categoryController.createCategory));
+router.post('/admin/add-category',
+    authController.isAdminLoggedIn,
+    catchErrors(categoryController.createCategory)
+);
 
 // Login and Register and Logout
 router.get('/login', userController.loginForm);
+router.post('/login', authController.login);
 router.get('/register', userController.registerForm);
-router.post('/register', 
+router.post('/register',
     userController.validateRegister,
     userController.register,
     authController.login

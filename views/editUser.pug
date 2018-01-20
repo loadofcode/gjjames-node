@@ -1,10 +1,10 @@
 extends layout
 
-include mixins/_productForm
+include mixins/_userForm
 include mixins/_adminSideBar
 
 block content
 	+adminSideBar()
 	.inner
 		h2 #{title}
-		+productForm(product, category)
+		+userForm(user)

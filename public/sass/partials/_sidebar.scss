@@ -1,0 +1,20 @@
+.side__bar {
+  width: 150px;
+  height: 100vh;
+  background-color: black;
+  float: left;
+  margin-top: -1.4em;
+
+  a.nav__link {
+    text-transform: none;
+  }
+  .nav__link--active {
+    background-color: white;
+    color: black;
+  }
+
+
+  @media all and (max-width: 1400px) {
+    margin-top: -4em;
+  }
+}

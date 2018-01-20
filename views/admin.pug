@@ -1,4 +1,8 @@
 extends layout
 
+include mixins/_adminSideBar
+
 block content
-  h1 Admin Area
+  +adminSideBar()
+  div
+    h1 Admin Area

@@ -19,6 +19,10 @@ const userSchema = new Schema({
     type: String,
     required: 'Please Supply a Name',
     trim: true
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false
   }
 });
 
