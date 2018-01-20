@@ -21,6 +21,9 @@ exports.homePage = (req, res) => {
     res.render('index', { title: 'Home' });
 };
 
+exports.adminPage = (req, res) => {
+    res.render('admin', { title: 'Admin' });
+};
 // exports.addProduct = (req, res) => {
 //     const category = Category.find();
 //     console.log("category", category.categoryName);
@@ -65,11 +68,15 @@ exports.createProduct = async(req, res) => {
     res.redirect(`/product/${product.slug}`);
 };
 
+// old method for getting products
+//
 // exports.getProducts = async(req, res) => {
 //     const products = await Product.find();
 //     res.render('products', { title: 'Products', products });
 // }
 
+
+// new method for getting products with categories as well
 exports.getProducts = async(req, res) => {
     const category = req.params.category;
     const categoryPromise = Product.getCategoriesList();

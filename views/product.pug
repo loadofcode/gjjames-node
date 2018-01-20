@@ -8,7 +8,7 @@ block content
                     img(src=`/uploads/${product.photo || 'store.png'}`, alt="product.productName")
                 .product__info
                     h2
-                        a(href=`/products/${product.slug}`) #{product.productName}
+                        a(href=`/product/${product.slug}`) #{product.productName}
                     h3= product.SKU
                     p= product.description
                     if product.tags
