@@ -1,0 +1,18 @@
+extends layout
+
+include mixins/_adminSideBar
+
+block content
+  .admin__area
+    +adminSideBar()
+    .admin__main
+      h1 Edit Your Account
+      //- pre= h.dump(user)
+      if user.isAdmin == true
+        p Your account has full admin privileges
+      form.form(action="/admin/account" method="POST" class="form--flex card")
+        label(for="name") Name 
+        input(type="text" name="name" value=user.name)
+        label(for="email") Email
+        input(type="email" name="email" value=user.email)
+        input.button(type="submit" value="Update My Account" class="button btn-save")

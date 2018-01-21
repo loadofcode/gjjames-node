@@ -85,4 +85,13 @@ router.post('/register',
 );
 router.get('/logout', authController.logout);
 
+// My Account section
+router.get('/admin/account',
+    authController.isAdminLoggedIn,
+    userController.account
+);
+router.post('/admin/account',
+    catchErrors(userController.updateAccount)
+);
+
 module.exports = router;

@@ -10,8 +10,13 @@ block content
                     h2
                         a(href=`/product/${product.slug}`) #{product.productName}
                     h3= product.SKU
+                    if product.category
+                        h4 Category: 
+                            span= product.category
+                    h4 Product Description:
                     p= product.description
                     if product.tags
+                        //- pre= h.dump(product)
                         ul.tags
                             each tag in product.tags
                                 li.tag

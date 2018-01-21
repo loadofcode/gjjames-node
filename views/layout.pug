@@ -23,12 +23,13 @@ html
               .search__results
           if user
             .nav__section.nav__section--user
-              li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))
-                //- != h.icon('logout')
-                span Logout
-                if user.isAdmin == true
-                  li.nav__item: a.nav__link(href="/admin", class=(currentPath.startsWith('/admin') ? 'nav__link--active' : ''))
-                    span Admin
+              if user.isAdmin == false
+                li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))
+                  //- != h.icon('logout')
+                  span Logout
+              if user.isAdmin == true
+                li.nav__item: a.nav__link(href="/admin", class=(currentPath.startsWith('/admin') ? 'nav__link--active' : ''))
+                  span Admin
 
     block messages
       if locals.flashes
@@ -40,9 +41,10 @@ html
                 .flash(class=`flash--${category}`)
                   p.flash__text!= message
                   button.flash__remove(onClick="this.parentElement.remove()") &times;
+
     .content
       block content
 
     block scripts
-      script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+      //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
       script(src="/dist/App.bundle.js")

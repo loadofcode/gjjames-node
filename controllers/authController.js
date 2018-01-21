@@ -16,12 +16,11 @@ exports.logout = (req, res) => {
 }
 
 exports.isAdminLoggedIn = (req, res, next) => {
-  const user = User.findOne({ _id: req.params.id })
-  console.log(this.user)
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() && req.user.isAdmin == true) {
     next()
     return
   }
-  req.flash('error', 'Ooops you must be an admin to do that');
-  res.redirect('/');
+  req.flash('error', `You don't have access`);
+  res.redirect('back');
 }
+

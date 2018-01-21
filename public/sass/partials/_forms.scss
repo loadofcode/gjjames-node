@@ -36,3 +36,11 @@ label {
     display: flex;
     flex-direction: column;
 }
+
+.login__form {
+    width: 500px;
+    margin: 50px auto;
+    .button {
+        margin-top: 20px;
+    }
+}

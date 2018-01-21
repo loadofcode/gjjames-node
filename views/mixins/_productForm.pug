@@ -21,8 +21,8 @@ mixin productForm(product = {}, category = [])
 				img(src=`uploads/${product.photo}`, alt=product.productName width=200)
 		label(for="description") Product Description
 		textarea(name="description")= product.description
-		- const choices = ['diamond', 'silver', 'gold', 'platinum']
-		- const tags = product.tags || []
+		- const choices = tag
+		- const tags = product.tag || []
 		ul.tags
 			each choice in choices
 				.tag.tag__choice

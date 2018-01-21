@@ -46,6 +46,7 @@
     &__text {
         padding: 1rem 1rem;
         display: block;
+        text-transform: capitalize;
     }
     &__count {
         padding: 1rem 1rem;
@@ -54,5 +55,18 @@
         margin-right: -1px;
         /* ugh */
         background-clip: padding-box;
+    }
+}
+
+.tag__choice label {
+    text-transform: capitalize;
+}
+
+.tags--flex {
+    display: flex;
+    justify-content: center;
+    li {
+        margin-right: 20px;
+        width: 100px;
     }
 }

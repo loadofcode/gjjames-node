@@ -1,7 +1,7 @@
 .admin__sidebar {
   width: 225px;
   height: 100vh;
-  background-color: #260B5D;
+  background-color: #240D65;
   float: left;
   // margin-top: -1.4em;
 
@@ -11,6 +11,13 @@
   .nav__link--active {
     background-color: white;
     color: black;
+  }
+
+  .nav__Section {
+    margin-top: 43px;
+    a {
+      border: none;
+    }
   }
 
 
@@ -24,7 +31,9 @@
 
     .nav__Section {
       display: flex;
+      justify-content: space-evenly;
       margin-bottom: 17px;
+      margin-top: 0;
     }
   }
 }
@@ -35,5 +44,9 @@
 
   @media all and (max-width: 900px) {
     width: auto;
+  }
+
+  select {
+    text-transform: capitalize;
   }
 }
