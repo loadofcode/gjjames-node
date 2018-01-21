@@ -78,10 +78,10 @@ exports.getProducts = async(req, res) => {
     const tagPromise = Product.getTagsList();
     const productsPromise = Product.find();
     const [categories, products, tags] = await Promise.all([categoryPromise, productsPromise, tagPromise]);
-    const tag = tags.map((tag) => {
-        console.log(tag)
-    })
-    res.render('products', { categories, tags, title: `Products`, products, tag });
+    // const tag = tags.map((tag) => {
+    //     console.log(tag)
+    // })
+    res.render('products', { categories, tags, title: `Products`, products });
 }
 
 exports.getProductsByCategory = async(req, res) => {

@@ -28,7 +28,7 @@ html
                   //- != h.icon('logout')
                   span Logout
               if user.isAdmin == true
-                li.nav__item: a.nav__link(href="/admin", class=(currentPath.startsWith('/admin') ? 'nav__link--active' : ''))
+                li.nav__item: a.nav__link.admin__link(href="/admin", class=(currentPath.startsWith('/admin') ? 'nav__link--active' : ''))
                   span Admin
 
     block messages
