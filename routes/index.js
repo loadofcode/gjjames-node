@@ -20,6 +20,7 @@ router.get('/admin',
 
 // Product Routes
 router.get('/products', catchErrors(productController.getProducts));
+router.get('/products/page/:page', catchErrors(productController.getProducts));
 router.get('/products/c/:category', catchErrors(productController.getProductsByCategory));
 router.get('/admin/add-product', 
     authController.isAdminLoggedIn,
@@ -93,5 +94,8 @@ router.get('/admin/account',
 router.post('/admin/account',
     catchErrors(userController.updateAccount)
 );
+
+// API Endpoints
+router.get('/api/search', catchErrors(productController.searchProducts))
 
 module.exports = router;

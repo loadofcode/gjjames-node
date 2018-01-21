@@ -19,7 +19,7 @@ block content
                     h4 Product Description:
                     p= product.description
                     if product.tags
-                        //- pre= h.dump(product)
+                        //- pre= h.dump(product) //shows all product data
                         ul.tags
                             each tag in product.tags
                                 li.tag

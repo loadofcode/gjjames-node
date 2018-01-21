@@ -73,15 +73,27 @@ exports.createProduct = async(req, res) => {
 
 // new method for getting products with categories as well
 exports.getProducts = async(req, res) => {
+    const page = req.params.page || 1;
+    const limit = 4;
+    const skip = (page * limit) - limit;
     const category = req.params.category;
     const categoryPromise = Product.getCategoriesList();
     const tagPromise = Product.getTagsList();
-    const productsPromise = Product.find();
-    const [categories, products, tags] = await Promise.all([categoryPromise, productsPromise, tagPromise]);
-    // const tag = tags.map((tag) => {
-    //     console.log(tag)
-    // })
-    res.render('products', { categories, tags, title: `Products`, products });
+    const countPromise = Product.count();
+    const productsPromise = Product
+        .find()
+        .skip(skip)
+        .limit(limit)
+        .sort({created: 'desc'})
+
+    const [categories, products, tags, count] = await Promise.all([categoryPromise, productsPromise, tagPromise, countPromise]);
+    const pages = Math.ceil(count / limit);
+    if (!products.length && skip) {
+        req.flash('info', `${page} doesn't exist, you've been redirected to ${pages}`);
+        res.redirect(`/products/page/${pages}`)
+        return
+    }
+    res.render('products', { categories, tags, title: `Products`, products, count, pages, page });
 }
 
 exports.getProductsByCategory = async(req, res) => {
@@ -113,3 +125,22 @@ exports.updateProduct = async(req, res) => {
     req.flash('success', `Successfully updated <strong>${product.productName}</strong>. <a href="/products/${product.slug}">View Product</a>`)
     res.redirect(`/products/${product._id}/edit`);
 }
+
+exports.searchProducts = async (req, res) => {
+    const products = await Product
+    // first find stores that match
+    .find({
+        $text: {
+            $search: req.query.q
+        }
+    }, {
+        score: { $meta: 'textScore' }
+    })
+    // sort the results
+    .sort({
+        score: { $meta: 'textScore' } // sort the returned results by score value
+    })
+    // limit to 50 items
+    .limit(5)
+    res.json(products)
+} 

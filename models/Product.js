@@ -44,6 +44,15 @@ productSchema.pre('save', async function(next) {
     next();
 })
 
+// define our indexing
+productSchema.index({
+    productName: 'text',
+    category: 'text',
+    tags: 'text',
+    SKU: 'text'
+});
+
+
 productSchema.statics.getTagsList = function() {
     // mongoDB aggregate pipeline
     return this.aggregate([
