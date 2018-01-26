@@ -1,6 +1,7 @@
 .stores {
   display:flex;
   flex-wrap: wrap;
+  // justify-content: space-between;
   margin: -1.25em 0 0 -1.25em;
   @media all and (max-width: 1024px) {
     flex-wrap: wrap;
@@ -10,9 +11,11 @@
 .store {
   background:white;
   margin: 1.25em 0 0 1.25em;
-  // width: calc(33.3333% - 14.25em);
+  width: calc(33.3333% - 14.25em);
+  margin-bottom: 1.5em;
   width: 18.5%;
   box-shadow: $shad;
+  min-height: 246px;
   &--wide {
     width: 100%;
   }
