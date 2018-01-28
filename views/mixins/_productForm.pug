@@ -1,0 +1,31 @@
+mixin productForm(product = {}, category = [])
+	form(action=`/admin/add-product/${product._id || ''}` method="POST" class="form--flex card" enctype="multipart/form-data")
+		label(for="productName") Product Name
+		input(type="text", name="productName" value=product.productName)
+		label(for="SKU") SKU Code
+		input(type="text", name="SKU" value=product.SKU)
+
+		//- GET categories from category collection and dispay in select input
+		- const options = category
+		- const categories = product.category || []
+		label(for="category") Category
+		select(name="category")
+			option(value="" disabled selected) -- Please choose a category --
+			each option in category
+				option(value=option id=option name=option)= option
+
+		//- Image upload
+		label(for="photo") Photo
+			input(type="file" name="photo" id="photo" accept="image/gif, image/png, image/jpeg")
+			if product.photo
+				img(src=`uploads/${product.photo}`, alt=product.productName width=200)
+		label(for="description") Product Description
+		textarea(name="description")= product.description
+		- const choices = tag
+		- const tags = product.tag || []
+		ul.tags
+			each choice in choices
+				.tag.tag__choice
+					input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
+					label(for=choice)= choice
+		input(type="submit" value="Save Product" class="button btn-save")

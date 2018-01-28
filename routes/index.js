@@ -1,16 +1,108 @@
 const express = require('express');
 const router = express.Router();
+const productController = require('../controllers/productController');
+const categoryController = require('../controllers/categoryController');
+const tagController = require('../controllers/tagController');
+const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
+const { catchErrors } = require('../handlers/errorHandlers');
 
-// Do work here
-router.get('/', (req, res) => {
-// res.render('hello', { 
-//     name: 'wes',
-//     dog: 'dix'
-// })
-    res.render('hello')
-})
-router.get('/admin', (req, res) => {
-    res.render('admin')
-})
+const stock = 'stock123';
+const admin = 'admin';
+
+// Main routes
+router.get('/', productController.homePage);
+router.get('/admin', 
+    authController.isAdminLoggedIn,
+    productController.adminPage
+);
+
+
+// Product Routes
+router.get('/products', catchErrors(productController.getProducts));
+router.get('/products/page/:page', catchErrors(productController.getProducts));
+router.get('/products/c/:category', catchErrors(productController.getProductsByCategory));
+router.get('/admin/add-product', 
+    authController.isAdminLoggedIn,
+    productController.addProduct
+);
+
+// Add new Product
+router.post('/admin/add-product',
+    authController.isAdminLoggedIn,
+    productController.upload,
+    catchErrors(productController.resize),
+    catchErrors(productController.createProduct)
+);
+
+// Update a Product
+router.post('/admin/add-product/:id',
+    authController.isAdminLoggedIn,
+    productController.upload,
+    catchErrors(productController.resize),
+    catchErrors(productController.updateProduct)
+);
+
+router.get('/products/:id/edit', catchErrors(productController.editProduct));
+router.get('/product/:slug', catchErrors(productController.getProductBySlug));
+
+
+// Category Routes
+router.get('/admin/add-category',
+    authController.isAdminLoggedIn,
+    categoryController.addCategory
+);
+// add new category
+router.post('/admin/add-category',
+    authController.isAdminLoggedIn,
+    catchErrors(categoryController.createCategory)
+);
+
+// Tag Routes
+router.get('/admin/add-tag',
+    authController.isAdminLoggedIn,
+    tagController.addTag
+);
+// add new tag
+router.post('/admin/add-tag',
+    authController.isAdminLoggedIn,
+    catchErrors(tagController.createTag)
+);
+
+// Admin Add User Route
+router.get('/admin/add-user',
+    authController.isAdminLoggedIn,
+    userController.addUser
+);
+
+// Login and Register and Logout
+router.get('/login', userController.loginForm);
+router.post('/login', authController.login);
+router.get('/register', userController.registerForm);
+router.post('/register',
+    userController.validateRegister,
+    userController.register,
+    authController.login
+);
+router.get('/logout', authController.logout);
+
+// My Account section
+router.get('/admin/account',
+    authController.isAdminLoggedIn,
+    userController.account
+);
+router.post('/admin/account',
+    catchErrors(userController.updateAccount)
+);
+
+// API Endpoints
+router.get('/api/search', catchErrors(productController.searchProducts))
+
+router.post('/account/forgot', catchErrors(authController.forgot))
+router.get('/account/reset/:token', catchErrors(authController.reset))
+router.post('/account/reset/:token',
+    authController.confirmedPasswords,
+    catchErrors(authController.update)
+)
 
 module.exports = router;

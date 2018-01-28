@@ -1,0 +1,13 @@
+extends layout
+
+include mixins/_categoryForm
+include mixins/_adminSideBar
+
+block content
+	.admin__area
+		+adminSideBar()
+		.admin__main
+			h2 #{title}
+			div
+				p This is where you can add a new Category - categories are top level - i.e. Ring, Necklace, Bracelet etc etc
+			+categoryForm(category)

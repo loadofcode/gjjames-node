@@ -1,0 +1,13 @@
+extends layout
+
+include mixins/_tagForm
+include mixins/_adminSideBar
+
+block content
+	.admin__area
+		+adminSideBar()
+		.admin__main
+			h2 #{title}
+			div
+				p This is where you can add a new Tag - tags are secondary/desciptor level - i.e. gold, silver, diamond, ruby, etc
+			+tagForm()

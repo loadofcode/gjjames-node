@@ -6,15 +6,18 @@
     background: white;
     position: absolute;
     width: 100%;
-    top: 100%;
+    top:47px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     z-index: 5;
     left: 0;
+    @media all and (max-width: 900px) {
+      top: 43px;
+    }
   }
   &__input {
-    font-size: 30px;
+    font-size: 20px;
     background: none;
-    color: white;
+    color: $white;
     outline: 0;
     border: 0;
   }

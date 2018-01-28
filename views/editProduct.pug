@@ -1,0 +1,11 @@
+extends layout
+
+include mixins/_productForm
+include mixins/_adminSideBar
+
+block content
+	.admin__area
+		+adminSideBar()
+		.admin__main
+			h2 #{title}
+			+productForm(product, category)

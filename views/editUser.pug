@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/_userForm
+include mixins/_adminSideBar
+
+block content
+	.admin__area
+		+adminSideBar()
+		.admin__main
+			h2 #{title}
+			p This feature is coming soon
+			

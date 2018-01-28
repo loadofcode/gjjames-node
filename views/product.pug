@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    .inner.inner__product
+        .back__button
+            p
+                a(href="/products") < Back
+        .card.product__card
+            .product__inner
+                .product__img
+                    img(src=`/uploads/${product.photo || 'store.png'}`, alt="product.productName")
+                .product__info
+                    h2
+                        a(href=`/product/${product.slug}`) #{product.productName}
+                    h3= product.SKU
+                    if product.category
+                        h4 Category: 
+                            span= product.category
+                    h4 Product Description:
+                    p= product.description
+                    if product.tags
+                        //- pre= h.dump(product) //shows all product data
+                        ul.tags
+                            each tag in product.tags
+                                li.tag
+                                    a.tag__link(href=`/tags/${tag}`)
+                                        span.tag__text #{tag}
+        .product__contact
+                input(type="Submit" value="enquire about product" class="button btn-more")
