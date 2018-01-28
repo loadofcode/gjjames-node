@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 30);
+/******/ 	return __webpack_require__(__webpack_require__.s = 31);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -76,7 +76,7 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var bind = __webpack_require__(6);
-var isBuffer = __webpack_require__(29);
+var isBuffer = __webpack_require__(30);
 
 /*global toString:true*/
 
@@ -964,7 +964,7 @@ var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _dompurify = __webpack_require__(37);
+var _dompurify = __webpack_require__(29);
 
 var _dompurify2 = _interopRequireDefault(_dompurify);
 
@@ -1846,61 +1846,6 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
- * @license  MIT
- */
-
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer);
-};
-
-function isBuffer(obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj);
-}
-
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer(obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0));
-}
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__(10);
-
-var _bling = __webpack_require__(8);
-
-var _typeAhead = __webpack_require__(9);
-
-var _typeAhead2 = _interopRequireDefault(_typeAhead);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-(0, _typeAhead2.default)((0, _bling.$)('.search'));
-// import autocomplete from './modules/autocompete';
-
-/***/ }),
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2872,6 +2817,55 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
   return purify;
 });
 //# sourceMappingURL=purify.js.map
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+
+// The _isBuffer check is for Safari 5-7 support, because it's missing
+// Object.prototype.constructor. Remove this eventually
+module.exports = function (obj) {
+  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer);
+};
+
+function isBuffer(obj) {
+  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj);
+}
+
+// For Node v0.10 support. Remove this eventually.
+function isSlowBuffer(obj) {
+  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0));
+}
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(10);
+
+var _bling = __webpack_require__(8);
+
+var _typeAhead = __webpack_require__(9);
+
+var _typeAhead2 = _interopRequireDefault(_typeAhead);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _typeAhead2.default)((0, _bling.$)('.search'));
+// import autocomplete from './modules/autocompete';
 
 /***/ })
 /******/ ]);
