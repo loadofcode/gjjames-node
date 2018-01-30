@@ -6,44 +6,55 @@ html
     link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
-    block header
-      header.top
-        nav.nav
-          .nav__section.nav__section--pages
-            li.nav__item
-              a.nav__link.nav__link--logo(href="/")
-                != h.icon('logo')
-            each item in h.menu
+    #container
+      block header
+        header.top
+          nav.nav
+            .nav__section.nav__section--pages
               li.nav__item
-                a.nav__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
-                  span #{item.title}
-          .nav__section.nav__section--search
-            .search
-              input.search__input(type="text" placeholder="Search products..." name="search")
-              .search__results
-          if user
-            .nav__section.nav__section--user
-              if user.isAdmin == false
-                li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))
-                  //- != h.icon('logout')
-                  span Logout
-              if user.isAdmin == true
-                li.nav__item: a.nav__link.admin__link(href="/admin", class=(currentPath.startsWith('/admin') ? 'nav__link--active' : ''))
-                  span Admin
+                a.nav__link.nav__link--logo(href="/")
+                  != h.icon('logo')
+              each item in h.menu
+                li.nav__item
+                  a.nav__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
+                    span #{item.title}
+            .nav__section.nav__section--search
+              .search
+                input.search__input(type="text" placeholder="Search products..." name="search")
+                .search__results
+            if user
+              .nav__section.nav__section--user
+                if user.isAdmin == false
+                  li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))
+                    //- != h.icon('logout')
+                    span Logout
+                if user.isAdmin == true
+                  li.nav__item: a.nav__link.admin__link(href="/admin", class=(currentPath.startsWith('/admin') ? 'nav__link--active' : ''))
+                    span Admin
 
-    block messages
-      if locals.flashes
-        .inner
-          .flash-messages
-            - const categories = Object.keys(locals.flashes)
-            each category in categories
-              each message in flashes[category]
-                .flash(class=`flash--${category}`)
-                  p.flash__text!= message
-                  button.flash__remove(onClick="this.parentElement.remove()") &times;
+      block messages
+        if locals.flashes
+          .inner
+            .flash-messages
+              - const categories = Object.keys(locals.flashes)
+              each category in categories
+                each message in flashes[category]
+                  .flash(class=`flash--${category}`)
+                    p.flash__text!= message
+                    button.flash__remove(onClick="this.parentElement.remove()") &times;
 
-    .content
-      block content
+      .content
+        block content
+
+      block footer
+        footer
+          div
+            nav.nav.footer
+              each item in h.menu
+                li
+                  a(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
+                    span #{item.title}
+            
 
     block scripts
       //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
