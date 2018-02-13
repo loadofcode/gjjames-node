@@ -6,29 +6,42 @@ mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 // import all of our models - they need to be imported only once
-const Store = require('../models/Store');
-const Review = require('../models/Review');
-const User = require('../models/User');
+// const Store = require('../models/Store');
+// const Review = require('../models/Review');
+const Product = require('../models/Product');
+const Category = require('../models/Category');
+const Tag = require('../models/Tag');
+// const User = require('../models/User');
 
 
-const stores = JSON.parse(fs.readFileSync(__dirname + '/stores.json', 'utf-8'));
-const reviews = JSON.parse(fs.readFileSync(__dirname + '/reviews.json', 'utf-8'));
-const users = JSON.parse(fs.readFileSync(__dirname + '/users.json', 'utf-8'));
+// const stores = JSON.parse(fs.readFileSync(__dirname + '/stores.json', 'utf-8'));
+// const reviews = JSON.parse(fs.readFileSync(__dirname + '/reviews.json', 'utf-8'));
+const categories = JSON.parse(fs.readFileSync(__dirname + '/categories.json', 'utf-8'));
+const tags = JSON.parse(fs.readFileSync(__dirname + '/tags.json', 'utf-8'));
+const products = JSON.parse(fs.readFileSync(__dirname + '/products.json', 'utf-8'));
+// const users = JSON.parse(fs.readFileSync(__dirname + '/users.json', 'utf-8'));
 
 async function deleteData() {
   console.log('😢😢 Goodbye Data...');
-  await Store.remove();
-  await Review.remove();
-  await User.remove();
+  // await Store.remove();
+  // await Review.remove();
+  await Product.remove();
+  await Category.remove();
+  await Tag.remove();
+  // await User.remove();
   console.log('Data Deleted. To load sample data, run\n\n\t npm run sample\n\n');
   process.exit();
 }
 
 async function loadData() {
   try {
-    await Store.insertMany(stores);
-    await Review.insertMany(reviews);
-    await User.insertMany(users);
+    // await Store.insertMany(stores);
+    // await Review.insertMany(reviews);
+    await Category.insertMany(categories);
+    await Tag.insertMany(tags);
+    await Product.insertMany(products);
+    
+    // await User.insertMany(users);
     console.log('👍👍👍👍👍👍👍👍 Done!');
     process.exit();
   } catch(e) {
