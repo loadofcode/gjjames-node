@@ -54,7 +54,9 @@ html
                 li
                   a(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
                     span #{item.title}
-            
+              li
+                a(href="/login")
+                  span Login
 
     block scripts
       //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
