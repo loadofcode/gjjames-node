@@ -21,11 +21,11 @@ const productSchema = new mongoose.Schema({
     tags: [String],
     category: {
         type: String,
-        required: 'Please choose a category for this product'
+        //required: 'Please choose a category for this product'
     },
     photo: {
         type: String,
-        required: 'Please choose a photo to upload'
+        //required: 'Please choose a photo to upload'
     }
 });
 
