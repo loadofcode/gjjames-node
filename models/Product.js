@@ -33,6 +33,7 @@ productSchema.pre('save', async function(next) {
     if (!this.isModified('productName')) {
         return next();
     }
+    // using SKU for slug now
     this.slug = await slug(this.SKU).split('/').join('');
     // find other products of slug, slug-1, slug-2
     const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
