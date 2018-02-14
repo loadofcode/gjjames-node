@@ -74,7 +74,7 @@ exports.createProduct = async(req, res) => {
 // new method for getting products with categories as well
 exports.getProducts = async(req, res) => {
     const page = req.params.page || 1;
-    const limit = 5;
+    const limit = 50;
     const skip = (page * limit) - limit;
     const category = req.params.category;
     const categoryPromise = Product.getCategoriesList();
