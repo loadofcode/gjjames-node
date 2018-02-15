@@ -84,7 +84,7 @@ exports.getProducts = async(req, res) => {
         .find()
         .skip(skip)
         .limit(limit)
-        .sort({created: 'desc'})
+        .sort({SKU: 'desc'})
 
     const [categories, products, tags, count] = await Promise.all([categoryPromise, productsPromise, tagPromise, countPromise]);
     const pages = Math.ceil(count / limit);
