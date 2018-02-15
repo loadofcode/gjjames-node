@@ -25,8 +25,8 @@ mixin productForm(product = {}, category = [])
 		- const choices = tag
 		- const tags = product.tag || []
 		ul.tags
-			each choice in tags
+			each choice in tag
 				.tag.tag__choice
-					input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
+					input(type="checkbox" id=choice value=choice name="tags" )
 					label(for=choice)= choice
 		input(type="submit" value="Save Product" class="button btn-save")

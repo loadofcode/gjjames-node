@@ -40,7 +40,6 @@ exports.addProduct = async (req, res) => {
 
 }
 
-
 exports.upload = multer(multerOptions).single('photo');
 
 exports.resize = async(req, res, next) => {
@@ -63,13 +62,6 @@ exports.createProduct = async(req, res) => {
     req.flash('success', `Successfully added ${product.productName}`);
     res.redirect(`/product/${product.slug}`);
 };
-
-// old method for getting products
-//
-// exports.getProducts = async(req, res) => {
-//     const products = await Product.find();
-//     res.render('products', { title: 'Products', products });
-// }
 
 // new method for getting products with categories as well
 exports.getProducts = async(req, res) => {
@@ -122,8 +114,6 @@ exports.editProduct = async(req, res) => {
     const tag = tags.map((tag) => {
         return tag.tagName.toString()
     })
-    
-
     res.render('editProduct', { title: `Edit ${product.productName}`, product, category, tag });
 }
 
