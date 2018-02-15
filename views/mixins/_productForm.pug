@@ -27,6 +27,6 @@ mixin productForm(product = {}, category = [])
 		ul.tags
 			each choice in tag
 				.tag.tag__choice
-					input(type="checkbox" id=choice value=choice name="tags" )
+					input(type="checkbox" id=choice value=choice name="tags")
 					label(for=choice)= choice
 		input(type="submit" value="Save Product" class="button btn-save")
