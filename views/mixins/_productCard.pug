@@ -8,4 +8,4 @@ mixin productCard(product = {})
         //- p= product.SKU
         if user.isAdmin === true
           .admin__editing
-            a(href=`/product/${store._id}/edit` class="button btn-edit") Edit 
+            a(href=`/products/${product._id}/edit` class="button btn-edit") Edit 
