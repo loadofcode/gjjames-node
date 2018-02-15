@@ -1,8 +1,11 @@
 mixin productCard(product = {})
-    .store
-        a(href=`/product/${product.slug}` class="store--hover")
-            .store__hero
-                img(src=`/uploads/${product.photo || 'store.png'}`, alt=product.SKU)
-            .store__details
-                p.title--product  #{product.productName}
-                //- p= product.SKU
+  .store
+    a(href=`/product/${product.slug}` class="store--hover")
+      .store__hero
+        img(src=`/uploads/${product.photo || 'store.png'}`, alt=product.SKU)
+      .store__details
+        p.title--product  #{product.productName}
+        //- p= product.SKU
+        if user.isAdmin === true
+          .admin__editing
+            a(href=`/product/${store._id}/edit` class="button btn-edit") Edit 
