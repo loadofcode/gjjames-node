@@ -6,6 +6,6 @@ mixin productCard(product = {})
       .store__details
         p.title--product  #{product.productName}
         //- p= product.SKU
-        if user.isAdmin === true
+        if user.isAdmin == true
           .admin__editing
             a(href=`/products/${product._id}/edit` class="button btn-edit") Edit 

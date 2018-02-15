@@ -112,9 +112,19 @@ exports.getProductBySlug = async(req, res, next) => {
 }
 
 exports.editProduct = async(req, res) => {
-    const product = await Product.findOne({ _id: req.params.id });
+    const productPromise = Product.findOne({ _id: req.params.id });
+    const categoriesPromise = Category.find();
+    const tagsPromise = Tag.find();
+    const [categories, tags, product] = await Promise.all([categoriesPromise, tagsPromise, productPromise]);
+    const category = categories.map((category) => {
+        return category.categoryName.toString();
+    })
+    const tag = tags.map((tag) => {
+        return tag.tagName.toString()
+    })
+    
 
-    res.render('editProduct', { title: `Edit ${product.productName}`, product });
+    res.render('editProduct', { title: `Edit ${product.productName}`, product, category, tag });
 }
 
 exports.updateProduct = async(req, res) => {
