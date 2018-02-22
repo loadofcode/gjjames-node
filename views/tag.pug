@@ -5,7 +5,7 @@ include mixins/_productCard
 block content
     .inner
         h2 #{title}
-        ul.tags
+        ul.tags.tags--flex
             each c in categories
                 li.tag
                     a.tag__link(href=`/products/c/${c._id}` class=(c._id === category ? 'tag__link--active' : ''))
