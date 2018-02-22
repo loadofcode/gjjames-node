@@ -92,7 +92,9 @@ exports.getProductsByCategory = async(req, res) => {
     const category = req.params.category;
     const categoryQuery = category || { $exists: true };
     const categoriesPromise = Product.getCategoriesList();
-    const productsByCategoryPromise = Product.find({ category: categoryQuery });
+    const productsByCategoryPromise = Product
+        .find({ category: categoryQuery })
+        .sort({SKU: 'desc'});
     const [categories, products] = await Promise.all([categoriesPromise, productsByCategoryPromise]);
     res.render('tag', { categories, title: `Products: ${category}`, category, products });
 }
