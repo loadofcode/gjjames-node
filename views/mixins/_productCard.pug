@@ -4,6 +4,7 @@ mixin productCard(product = {})
       .store__hero
         img(src=`/uploads/${product.photo || 'store.png'}`, alt=product.SKU)
       .store__details
+        p.title--product  #{product.SKU}
         p.title--product  #{product.productName}
         //- p= product.SKU
     if user
