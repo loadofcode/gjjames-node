@@ -5,7 +5,7 @@ function searchResultsHTML(products) {
   return products.map(product => {
     return `
       <a href="/product/${product.slug}" class="search__result search__result--margin">
-        <img src="/uploads/${product.photo}"/><strong>${product.SKU}</strong><span>- ${product.productName}</span>
+        <img src="/uploads/${product.photo}"/><strong>${product.SKU} </strong><span>- ${product.productName}</span>
       </a>
     `;
   }).join('');
