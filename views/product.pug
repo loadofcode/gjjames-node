@@ -20,8 +20,8 @@ block content
                     if product.description
                         h4.title--color Product Description:
                         p= product.description
-                    if product.tags
-                        //- pre= h.dump(product) //shows all product data
+                    if product.tags != []
+                        //- pre= h.dump(product.tags)
                         ul.tags
                             each tag in product.tags
                                 li.tag
