@@ -16,6 +16,7 @@
   width: 18.5%;
   box-shadow: $shad;
   min-height: 246px;
+  overflow: hidden;
   &--wide {
     width: 100%;
   }
@@ -25,6 +26,9 @@
       line-height: 1.2;
       margin-bottom: 0;
     }
+  }
+  &:hover img{
+    transform: scale(1.1);
   }
   @media all and (max-width: 1240px) {
     width: 18%;
@@ -82,7 +86,7 @@
     position: absolute;
     left: 0;
     object-fit: cover;
-    // clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+    transition: all .2s ease-in-out;
   }
 }
 
