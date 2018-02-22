@@ -10,20 +10,22 @@ block content
                 .product__img
                     img(src=`/uploads/${product.photo || 'store.png'}`, alt="product.productName")
                 .product__info
-                    h2
+                    h2.title--color
                         a(href=`/product/${product.slug}`) #{product.productName}
-                    h3= product.SKU
+                    h3.title--color SKU: 
+                        span= product.SKU
                     if product.category
-                        h4 Category: 
+                        h4.title--color Category: 
                             span= product.category
-                    h4 Product Description:
-                    p= product.description
+                    if product.description
+                        h4.title--color Product Description:
+                        p= product.description
                     if product.tags
                         //- pre= h.dump(product) //shows all product data
                         ul.tags
                             each tag in product.tags
                                 li.tag
-                                    a.tag__link(href=`/tags/${tag}`)
+                                    div.tag__link
                                         span.tag__text #{tag}
         .product__contact
                 input(type="Submit" value="enquire about product" class="button btn-more")

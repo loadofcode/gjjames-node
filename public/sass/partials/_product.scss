@@ -33,11 +33,17 @@
         margin: 0 auto;
         margin-top: 1.75em;
         height: 40px;
-        width: 220px;
+        width: auto;
         &:hover {
             background: $white;
             color: $lightPurple;
         }
+    }
+}
+.title--color {
+    color: $black;
+    span, p {
+        color: $lightPurple;
     }
 }
 
