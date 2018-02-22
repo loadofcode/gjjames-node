@@ -7,6 +7,7 @@ const promisify = require('es6-promisify');
 const transport = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
   port: process.env.MAIL_PORT,
+  secure: process.env.MAIL_SECURE,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS
@@ -31,8 +32,9 @@ exports.send = async (options) => {
   const html = generateHTML(options.filename, options)
   const text = htmltoText.fromString(html)
   const mailOptions = {
-    from: options.user.email,
-    to: 'ggomersall@gmail.com',
+    from: options.from,
+    replyTo: options.from,
+    to: options.to,
     subject: options.subject,
     html,
     text
