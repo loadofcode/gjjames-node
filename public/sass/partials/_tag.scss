@@ -47,6 +47,7 @@
         padding: 1rem 1rem;
         display: block;
         text-transform: capitalize;
+        margin: auto;
     }
     &__count {
         padding: 1rem 1rem;
@@ -66,7 +67,7 @@
     display: flex;
     justify-content: center;
     li {
-        margin-right: 20px;
+        margin-right: 10px;
         width: 100px;
     }
 }

@@ -47,9 +47,9 @@ productSchema.pre('save', async function(next) {
 
 // define our indexing
 productSchema.index({
-    productName: 'text',
-    category: 'text',
-    tags: 'text',
+    // productName: 'text',
+    // category: 'text',
+    // tags: 'text',
     SKU: 'text'
 });
 
