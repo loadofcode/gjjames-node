@@ -8,8 +8,6 @@ block content
         h2 #{title}
         ul.tags.tags--flex
             each c in categories
-                if c == "Necklace"
-                    span
                 li.tag
                     a.tag__link(href=`/products/c/${c._id}`)
                         span.tag__text= `${c._id}s`
