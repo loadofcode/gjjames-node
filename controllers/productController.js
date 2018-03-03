@@ -100,6 +100,17 @@ exports.getProductsByCategory = async(req, res) => {
     res.render('tag', { categories, title, category, products });
 }
 
+exports.recentlyViewed = async ( req, res ) => {
+    // create empty recentlyViewed array
+    const recentlyViewed = [];
+    console.log(recentlyViewed);
+    // find the product we're looking at and push into array
+
+    // set the cookie aka res.cookie('recentlyViewed', recentlyViewed)
+
+    // display the recentlyViewed gallery
+}
+
 exports.getProductBySlug = async(req, res, next) => {
     const product = await Product.findOne({ slug: req.params.slug });
     if (!product) return next();

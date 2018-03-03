@@ -38,7 +38,6 @@ app.use(cookieParser())
 // This keeps users logged in and allows sending of flash messages
 app.use(session({
     secret: process.env.SECRET,
-    recenctlyViewed: 'some products go here',
     key: process.env.KEY,
     resave: false,
     saveUninitialized: false,

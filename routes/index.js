@@ -1,3 +1,5 @@
+import { recentlyViewed } from '../controllers/productController';
+
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
@@ -44,7 +46,7 @@ router.post('/admin/add-product/:id',
 );
 
 router.get('/products/:id/edit', catchErrors(productController.editProduct));
-router.get('/product/:slug', catchErrors(productController.getProductBySlug));
+router.get('/product/:slug', productController.recentlyViewed, catchErrors(productController.getProductBySlug));
 
 
 // Category Routes
