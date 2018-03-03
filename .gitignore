@@ -5,3 +5,4 @@ node_modules
 .idea
 haters/
 variables.env.now
+public/uploads
