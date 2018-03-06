@@ -3,3 +3,5 @@ mixin categoryForm(category = {})
         label(for="categoryName") Category Name
         input(type="text" name="categoryName" placeholder="Add a category" value=category.categoryName)
         input(type="submit" value="Save Category" class="button btn-save")
+        -console.log ( 'Inside category' )
+        -console.log(category.categoryName)

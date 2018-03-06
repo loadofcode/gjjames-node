@@ -1,5 +1,5 @@
-mixin tagForm(tag = {})
+mixin tagForm(tag={})
     form(action=`/admin/add-tag/${tag._id || ''}` method="POST" class="form--flex card category__card")
         label(for="tagName") Tag Name
-        input(type="text" name="tagName" placeholder="Add a Tag" value=tag.tagName )
+        input(type="text" name="tagName" placeholder="Add a Tag" value=tag.tagName)
         input(type="submit" value="Save Tag" class="button btn-save")

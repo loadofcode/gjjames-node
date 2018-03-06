@@ -10,7 +10,7 @@ exports.createTag = async (req, res) => {
     const newTag = new Tag(req.body);
     await newTag.save()
     req.flash('success', `Successfully created Tag: ${newTag.tagName}`);
-    res.redirect('/admin');
+    res.redirect('back');
 }
 
 exports.editTag = async (req, res) => {
