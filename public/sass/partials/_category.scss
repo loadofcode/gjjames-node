@@ -1,0 +1,15 @@
+.category_list, .tags_list {
+  width: 481px;
+  .tag {
+    padding: 1rem;
+    &:nth-child(odd) {
+      background: white;
+    }
+  }
+  .tag__text{
+    display: inline;
+  }
+  .tag__edit {
+    float: right;
+  }
+}

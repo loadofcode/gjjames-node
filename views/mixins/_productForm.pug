@@ -1,5 +1,5 @@
 mixin productForm(product = {}, category = [])
-	pre= h.dump(product)
+	//- pre= h.dump(product)
 	form(action=`/admin/add-product/${product._id || ''}` method="POST" class="form--flex card" enctype="multipart/form-data")
 		label(for="productName") Product Name
 		input(type="text", name="productName" value=product.productName)

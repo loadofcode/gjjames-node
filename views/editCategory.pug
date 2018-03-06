@@ -11,3 +11,12 @@ block content
 			div
 				p This is where you can add a new Category - categories are top level - i.e. Ring, Necklace, Bracelet etc etc
 			+categoryForm(category)
+			h2 Saved Categories
+			p When adding or updating a category please make sure you save it as SINGULAR!
+			ul.category_list
+				each c in categories
+					li.tag
+						span.tag__text= `${c.categoryName}s`
+						span.tag__edit
+							a(href=`/categories/${c._id}/edit` class="button btn-edit")
+								<i class="fas fa-edit"></i>

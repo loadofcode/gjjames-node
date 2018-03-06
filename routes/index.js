@@ -36,7 +36,6 @@ router.post('/admin/add-product',
     catchErrors(productController.resize),
     catchErrors(productController.createProduct)
 );
-
 // Update a Product
 router.post('/admin/add-product/:id',
     authController.isAdminLoggedIn,
@@ -44,32 +43,42 @@ router.post('/admin/add-product/:id',
     catchErrors(productController.resize),
     catchErrors(productController.updateProduct)
 );
-
 router.get('/products/:id/edit', catchErrors(productController.editProduct));
 router.get('/product/:slug', catchErrors(productController.getProductBySlug));
 
 
 // Category Routes
+//
+//////////////////
 router.get('/admin/add-category',
     authController.isAdminLoggedIn,
     categoryController.addCategory
 );
-// add new category
 router.post('/admin/add-category',
     authController.isAdminLoggedIn,
     catchErrors(categoryController.createCategory)
 );
+router.get('/categories/:id/edit', catchErrors(categoryController.editCategory));
+router.post('/admin/add-category/:id',
+    catchErrors(categoryController.updateCategory)
+);
 
 // Tag Routes
+//
+//////////////////
 router.get('/admin/add-tag',
     authController.isAdminLoggedIn,
     tagController.addTag
 );
-// add new tag
 router.post('/admin/add-tag',
     authController.isAdminLoggedIn,
     catchErrors(tagController.createTag)
 );
+router.get('/tags/:id/edit', catchErrors(tagController.editTag));
+router.post('/admin/add-tag/:id',
+    catchErrors(tagController.updateTag)
+);
+
 
 // Admin Add User Route
 router.get('/admin/add-user',
