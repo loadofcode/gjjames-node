@@ -6,7 +6,7 @@ exports.addTag = async (req, res) => {
     res.render('editTag', { title: 'Add new Tag', tags });
 }
 
-exports.createTag = async(req, res) => {
+exports.createTag = async (req, res) => {
     const newTag = new Tag(req.body);
     await newTag.save()
     req.flash('success', `Successfully created Tag: ${newTag.tagName}`);
@@ -16,10 +16,10 @@ exports.createTag = async(req, res) => {
 exports.editTag = async (req, res) => {
     const tag = await Tag.findOne({ _id: req.params.id });
     const tags = await Tag.find();
-    res.render('editTags', { title: `Editing ${tag.tagName} - Are sure you want to do this ?`, tag, tags });
+    res.render('editTag', { title: `Editing ${tag.tagName} - Are sure you want to do this ?`, tag, tags });
 }
 
-exports.updateTag = async(req, res) => {
+exports.updateTag = async (req, res) => {
     const tag = await Tag.findOneAndUpdate({ _id: req.params.id }, req.body, {
         new: true, // returns new category instead of old one
         runValidators: true
