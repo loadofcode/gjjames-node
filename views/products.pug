@@ -6,7 +6,7 @@ include mixins/_pagination
 block content
     .inner
         h2 #{title}
-        pre= h.dump(categories)
+        //- pre= h.dump(categories)
         ul.tags.tags--flex
             each c in categories
                 li.tag
