@@ -3,8 +3,7 @@ extends layout
 block content
     .inner.inner__product
         .back__button
-            p
-                a(href="/products") < Back
+            span(onclick="goBack()") < Back
         .card.product__card
             .product__inner
                 .product__img
@@ -29,3 +28,7 @@ block content
                                         span.tag__text #{tag}
         .product__contact
                 input(type="Submit" value="enquire about product" class="button btn-more")
+    script.
+        function goBack() {
+            window.history.back();
+        }

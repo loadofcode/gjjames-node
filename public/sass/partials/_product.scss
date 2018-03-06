@@ -47,6 +47,12 @@
     }
 }
 
+.back__button {
+    span:hover {
+        cursor: pointer;
+    }
+}
+
 @media all and (max-width:1024px) {
     .product__inner {
         flex-direction: column;

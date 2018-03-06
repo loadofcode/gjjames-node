@@ -6,12 +6,13 @@ include mixins/_pagination
 block content
     .inner
         h2 #{title}
+        pre= h.dump(categories)
         ul.tags.tags--flex
             each c in categories
                 li.tag
                     a.tag__link(href=`/products/c/${c._id}`)
                         span.tag__text= `${c._id}s`
-                        //- span.tag__count= c.count
+
         .stores
             each product in products
                 +productCard(product)
