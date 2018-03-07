@@ -31,3 +31,15 @@
     width: 32%;
   }
 }
+
+@media all and (max-width:442px) {
+  .category_list, .tags_list {
+    width: 100%;
+  }
+  .tags_list {
+    height: auto;
+  }
+  .tags_list .tag {
+    width: auto;
+  }
+}

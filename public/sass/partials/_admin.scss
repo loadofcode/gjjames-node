@@ -51,6 +51,18 @@
     width: auto;
   }
 
+  @media all and (max-width: 442px) {
+    margin: 0 20px;
+    .category__card {
+      min-width: 300px;
+      width: 100%;
+      padding: 2rem;
+      .btn-save{
+        width: 100%;
+      }
+    }
+  }
+
   select {
     text-transform: capitalize;
   }
