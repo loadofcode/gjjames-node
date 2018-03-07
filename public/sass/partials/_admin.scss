@@ -1,19 +1,25 @@
 .admin__sidebar {
   width: 225px;
   height: 75vh;
-  background-color: #240D65;
   float: left;
-
+  
   a.nav__link {
     text-transform: none;
+    color: #371178;
+    align-items: left;
+    &:hover {
+      background: $lightPurple;
+      color: $white;
+    }
   }
   .nav__link--active {
-    background-color: white;
-    color: black;
+    background-color:#371178;
+    color: white !important;
   }
 
   .nav__Section {
     margin-top: 43px;
+    list-style: none;
     a {
       border: none;
     }
