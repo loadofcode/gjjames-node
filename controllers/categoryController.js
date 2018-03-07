@@ -28,3 +28,10 @@ exports.updateCategory = async (req, res) => {
     req.flash('success', `Successfully updated <strong>${category.categoryName}</strong>.`)
     res.redirect(`/admin/add-category`);
 }
+
+exports.deleteCategory = async (req, res) => {
+    const category = await Category.findOneAndRemove({ _id: req.params.id });
+
+    req.flash('success', `Successfully deleted <strong>${category.categoryName}</strong>.`)
+    res.redirect(`/admin/add-category`);
+}

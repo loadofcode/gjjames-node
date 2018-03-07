@@ -27,3 +27,10 @@ exports.updateTag = async (req, res) => {
     req.flash('success', `Successfully updated <strong>${tag.tagName}</strong>.`)
     res.redirect(`/admin/add-tag`);
 }
+
+exports.deleteTag = async (req, res) => {
+    const tag = await Tag.findOneAndRemove({ _id: req.params.id });
+
+    req.flash('success', `Successfully deleted <strong>${tag.tagName}</strong>.`)
+    res.redirect(`/admin/add-tag`);
+}

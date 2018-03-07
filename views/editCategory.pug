@@ -17,6 +17,11 @@ block content
 				each c in categories
 					li.tag
 						span.tag__text= `${c.categoryName}s`
-						span.tag__edit
+						div.edit__wrapper
+							span.tag__edit
 							a(href=`/categories/${c._id}/edit` class="button btn-edit")
 								<i class="fas fa-edit"></i>
+							span.tag__delete
+								a(href=`/category/${c._id}/delete` class="button btn-edit" )
+									<i class="fas fa-trash-alt"></i>
+						

@@ -10,8 +10,14 @@
   .tag__text{
     display: inline;
   }
-  .tag__edit {
+  .edit__wrapper {
     float: right;
+  }
+  .tag__delete {
+    margin-left: 10px;
+    .btn-edit {
+      background:red;
+    }
   }
 }
 

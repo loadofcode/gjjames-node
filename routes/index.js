@@ -62,6 +62,9 @@ router.get('/categories/:id/edit', catchErrors(categoryController.editCategory))
 router.post('/admin/add-category/:id',
     catchErrors(categoryController.updateCategory)
 );
+router.get('/category/:id/delete', catchErrors(categoryController.deleteCategory));
+
+
 
 // Tag Routes
 //
@@ -78,6 +81,8 @@ router.get('/tags/:id/edit', catchErrors(tagController.editTag));
 router.post('/admin/add-tag/:id',
     catchErrors(tagController.updateTag)
 );
+router.get('/tag/:id/delete', catchErrors(tagController.deleteTag));
+
 
 
 // Admin Add User Route
