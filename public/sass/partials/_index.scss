@@ -1,0 +1,49 @@
+.hero__container {
+  text-align: center;
+  top: 260px;
+  position: relative;
+  margin-top: -40px;
+  .hero__logo {
+    margin: 0 auto;
+  }
+  .search {
+    border: 1px solid white;
+    border-radius: 4px;
+    background: white;
+    width: 40%;
+    margin: 10px auto;
+    .search__input {
+      color: black;
+    }
+    
+  }
+}
+@media (min-width:1401px){
+  .hero__container{
+    margin-top: 0;
+  }
+}
+
+@media (max-width:900px) {
+  .hero__container {
+    .search {
+      width: 80%;
+    }
+  }
+}
+
+@media (max-width:414px) {
+  .hero__image {
+    background-size: cover;
+    height: 600px;
+    background-position-x: -234px;
+    }
+  .hero__container {
+    top: 130px;
+
+    .search {
+      width: 90%;
+    }
+  }
+
+}

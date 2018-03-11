@@ -142,7 +142,7 @@ exports.updateProduct = async(req, res) => {
 
 exports.searchProducts = async (req, res) => {
     const products = await Product
-    // first find stores that match
+    // first find products that match
     .find({
         $text: {
             $search: req.query.q

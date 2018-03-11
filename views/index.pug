@@ -1,4 +1,11 @@
 extends layout
 
 block content
-  p hi
+  div.hero__image
+    div.hero__container
+      a.hero__logo(href="/")
+        != h.icon('logo')
+      //- .nav__section.nav__section--search
+      .search
+        input.search__input.hero__search(type="text" placeholder="Search Model Number..." name="hero-search")
+        .search__hero-results
