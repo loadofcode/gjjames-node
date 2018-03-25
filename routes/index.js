@@ -19,6 +19,7 @@ router.get('/admin',
     productController.adminPage
 );
 
+router.get('/email');
 
 // Product Routes
 router.get('/products', catchErrors(productController.getProducts));
