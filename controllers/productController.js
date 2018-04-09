@@ -5,6 +5,7 @@ const Tag = mongoose.model('Tag');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
+const mail = require('../handlers/mail');
 
 const multerOptions = {
     storage: multer.memoryStorage(),
@@ -28,6 +29,22 @@ exports.adminPage = (req, res) => {
 
 exports.emailPage = (req, res) => {
     res.render('email', {title: 'Email Us' });
+}
+
+exports.productEnquiry = async (req, res) => {
+    const customerName = req.body.name.trim()
+    const customerEmail = req.body.email.trim()
+    console.log(customerEmail, customerName)
+    await mail.send({
+        from: 'info@gjjames.co.uk',
+        replyTo: customerEmail,
+        to: 'ggomersall@gmail.com',
+        subject: 'Product enquiry',
+        customerName,
+        filename: 'product-enquire'
+      })
+    req.flash('success', `Thanks for enquiring about this product`);
+    res.redirect('/email');
 }
 
 exports.addProduct = async (req, res) => {

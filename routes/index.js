@@ -19,7 +19,8 @@ router.get('/admin',
     productController.adminPage
 );
 
-router.get('/email');
+router.get('/email', productController.emailPage);
+router.post('/email/success', catchErrors(productController.productEnquiry))
 
 // Product Routes
 router.get('/products', catchErrors(productController.getProducts));
