@@ -20,21 +20,6 @@ const generateHTML = (filename, options = {}) => {
   return inline
 }
 
-// exports.enquirySend = async (options) => {
-//   const html = generateHTML(options.filename, options)
-//   const text = htmltoText.fromString(html)
-//   const enquireOptions = {
-//     from: options.from,
-//     replyTo: options.replyTo,
-//     to: options.to,
-//     subject: options.subject,
-//     html,
-//     text
-//   }
-//   const sendEnquiry = promisify(transport.sendMail, transport);
-//   return sendEnquiry(enquireOptions);
-// }
-
 exports.send = async (options) => {
   const html = generateHTML(options.filename, options)
   const text = htmltoText.fromString(html)
