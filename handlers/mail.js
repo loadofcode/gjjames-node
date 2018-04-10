@@ -14,15 +14,6 @@ const transport = nodemailer.createTransport({
   }
 });
 
-// Example of a message 
-// transport.sendMail({
-//   from: 'Wes Bos',
-//   to:'ggomersall@gmail.com',
-//   subject: 'Just trying this out',
-//   html:`Hey <strong>YOU</strong>, whats cracking`,
-//   text:`Hey **YOU**, whats cracking`
-// });
-
 const generateHTML = (filename, options = {}) => {
   const html = pug.renderFile(`${__dirname}/../views/email/${filename}.pug`, options);
   const inline = juice(html);
