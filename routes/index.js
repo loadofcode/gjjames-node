@@ -21,7 +21,7 @@ router.get('/admin',
 );
 
 router.get('/email', pageController.emailPage);
-router.post('/email/success', catchErrors(productController.productEnquiry))
+
 
 // Product Routes
 //
@@ -53,7 +53,8 @@ router.get('/product/:slug', catchErrors(productController.getProductBySlug));
 router.post('/email/success', 
     catchErrors(productController.productEnquiry)
 );
-
+// enquire about products
+router.post('/email/success', catchErrors(productController.productEnquiry))
 
 
 // Category Routes
