@@ -19,18 +19,6 @@ const multerOptions = {
     }
 };
 
-exports.homePage = (req, res) => {
-    res.render('index', { title: 'Home' });
-};
-
-exports.adminPage = (req, res) => {
-    res.render('admin', { title: 'Admin' });
-};
-
-exports.emailPage = (req, res) => {
-    res.render('email', {title: 'Email Us' });
-}
-
 exports.productEnquiry = async (req, res) => {
     const customerName = req.body.name.trim()
     const customerEmail = req.body.email.trim()

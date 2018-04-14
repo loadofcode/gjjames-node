@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const pageController = require('../controllers/pageController');
 const productController = require('../controllers/productController');
 const categoryController = require('../controllers/categoryController');
 const tagController = require('../controllers/tagController');
@@ -13,13 +14,13 @@ const stock = 'stock123';
 const admin = 'admin';
 
 // Main routes
-router.get('/', productController.homePage);
+router.get('/', pageController.homePage);
 router.get('/admin', 
     authController.isAdminLoggedIn,
-    productController.adminPage
+    pageController.adminPage
 );
 
-router.get('/email', productController.emailPage);
+router.get('/email', pageController.emailPage);
 router.post('/email/success', catchErrors(productController.productEnquiry))
 
 // Product Routes
