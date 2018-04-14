@@ -24,6 +24,8 @@ router.get('/email', pageController.emailPage);
 router.post('/email/success', catchErrors(productController.productEnquiry))
 
 // Product Routes
+//
+//////////////////
 router.get('/products', catchErrors(productController.getProducts));
 router.get('/products/page/:page', catchErrors(productController.getProducts));
 router.get('/products/c/:category', catchErrors(productController.getProductsByCategory));
@@ -31,7 +33,6 @@ router.get('/admin/add-product',
     authController.isAdminLoggedIn,
     productController.addProduct
 );
-
 // Add new Product
 router.post('/admin/add-product',
     authController.isAdminLoggedIn,
@@ -48,6 +49,11 @@ router.post('/admin/add-product/:id',
 );
 router.get('/products/:id/edit', catchErrors(productController.editProduct));
 router.get('/product/:slug', catchErrors(productController.getProductBySlug));
+// product enquiry
+router.post('/email/success', 
+    catchErrors(productController.productEnquiry)
+);
+
 
 
 // Category Routes
@@ -116,6 +122,7 @@ router.post('/admin/account',
 
 // API Endpoints
 router.get('/api/search', catchErrors(productController.searchProducts))
+
 
 router.post('/account/forgot', catchErrors(authController.forgot))
 router.get('/account/reset/:token', catchErrors(authController.reset))

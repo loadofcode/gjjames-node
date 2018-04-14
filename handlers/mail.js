@@ -14,35 +14,11 @@ const transport = nodemailer.createTransport({
   }
 });
 
-// Example of a message 
-// transport.sendMail({
-//   from: 'Wes Bos',
-//   to:'ggomersall@gmail.com',
-//   subject: 'Just trying this out',
-//   html:`Hey <strong>YOU</strong>, whats cracking`,
-//   text:`Hey **YOU**, whats cracking`
-// });
-
 const generateHTML = (filename, options = {}) => {
   const html = pug.renderFile(`${__dirname}/../views/email/${filename}.pug`, options);
   const inline = juice(html);
   return inline
 }
-
-// exports.enquirySend = async (options) => {
-//   const html = generateHTML(options.filename, options)
-//   const text = htmltoText.fromString(html)
-//   const enquireOptions = {
-//     from: options.from,
-//     replyTo: options.replyTo,
-//     to: options.to,
-//     subject: options.subject,
-//     html,
-//     text
-//   }
-//   const sendEnquiry = promisify(transport.sendMail, transport);
-//   return sendEnquiry(enquireOptions);
-// }
 
 exports.send = async (options) => {
   const html = generateHTML(options.filename, options)
