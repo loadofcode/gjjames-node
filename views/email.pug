@@ -1,6 +1,8 @@
-form(action="/email/success" method="POST" class="form--flex card category__card")
-    label(for="name") Name
-    input(type="text" name="name" placeholder="Your Name" value='')
-    label(for="name") Email
-    input(type="email" name="email" placeholder="Your Email" value='')
-    input(type="submit" value="Submit" class="button btn-send")
+extends layout
+
+include mixins/_contactForm
+
+block content
+    .inner
+        div.contact__form
+            +contactForm()

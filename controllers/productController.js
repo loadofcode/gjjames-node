@@ -22,13 +22,17 @@ const multerOptions = {
 exports.productEnquiry = async (req, res) => {
     const customerName = req.body.name.trim()
     const customerEmail = req.body.email.trim()
-    console.log(customerEmail, customerName)
+    const customerTelephone = req.body.phone.trim()
+    const customerCompany = req.body.company.trim()
+    console.log(customerEmail, customerName, )
     await mail.send({
         from: 'info@gjjames.co.uk',
         replyTo: customerEmail,
         to: 'ggomersall@gmail.com',
         subject: 'Product enquiry',
         customerName,
+        customerTelephone,
+        customerCompany,
         filename: 'product-enquire'
       })
     req.flash('success', `Thanks for enquiring about this product`);
