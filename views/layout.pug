@@ -27,7 +27,6 @@ html
               .nav__section.nav__section--user
                 if user.isAdmin == false
                   li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))
-                    //- != h.icon('logout')
                     span Logout
                 if user.isAdmin == true
                   li.nav__item: a.nav__link.admin__link(href="/admin", class=(currentPath.startsWith('/admin') ? 'nav__link--active' : ''))
@@ -52,13 +51,12 @@ html
           div
             nav.nav.footer
               each item in h.menu
-                li
+                li.link__item
                   a(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
                     span #{item.title}
-              li
+              li.link__item
                 a(href="/login")
                   span Login
 
     block scripts
-      //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
       script(src="/dist/App.bundle.js")

@@ -31,14 +31,8 @@ html
         footer
           div
             nav.nav.footer
-              //- each item in h.menu
-              //-   li
-              //-     a(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
-              //-       span #{item.title}
-              //- li
-              a(href="/login")
+              a.link__item(href="/login")
                 span Login
 
     block scripts
-      //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
       script(src="/dist/App.bundle.js")
