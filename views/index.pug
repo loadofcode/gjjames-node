@@ -1,5 +1,7 @@
 extends layout
 
+include mixins/_topThreeCategory
+
 block content
   div.hero__image
     div.hero__container
@@ -9,3 +11,5 @@ block content
       .search__hero
         input.search__input.hero__search(type="text" placeholder="Search Model Number..." name="hero-search")
         .search__hero-results
+  .top-categories__container
+    +topThreeCategory()
