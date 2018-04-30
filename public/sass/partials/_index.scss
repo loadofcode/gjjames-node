@@ -55,6 +55,9 @@
 }
 
 @media (max-width:900px) {
+  .hero__image {
+    height: 700px;
+  }
   .hero__container {
     .search__hero {
       width: 80%;
