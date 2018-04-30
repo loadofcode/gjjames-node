@@ -29,7 +29,7 @@ router.get('/email', pageController.emailPage);
 router.get('/products', catchErrors(productController.getProducts));
 router.get('/products/page/:page', catchErrors(productController.getProducts));
 router.get('/products/c/:category', catchErrors(productController.getProductsByCategory));
-router.get('/admin/add-product', 
+router.get('/admin/add-product',
     authController.isAdminLoggedIn,
     productController.addProduct
 );
@@ -55,6 +55,8 @@ router.post('/email/success',
 );
 // enquire about products
 router.post('/email/success', catchErrors(productController.productEnquiry))
+// delete product
+router.get('/products/:id/delete', catchErrors(productController.deleteProduct));
 
 
 // Category Routes

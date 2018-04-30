@@ -10,5 +10,10 @@ mixin productCard(product = {})
     if user
       if user.isAdmin == true
         .admin__editing
-          a(href=`/products/${product._id}/edit` class="button btn-edit")
-            <i class="fas fa-edit"></i>
+          div.edit__wrapper
+            span.product__edit
+              a(href=`/products/${product._id}/edit` class="button btn-edit")
+                <i class="fas fa-edit"></i>
+            span.product__delete
+              a(href=`/products/${product._id}/delete` class="button btn-edit" )
+                <i class="fas fa-trash-alt"></i>

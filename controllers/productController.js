@@ -153,6 +153,13 @@ exports.updateProduct = async(req, res) => {
     res.redirect(`/products/${product._id}/edit`);
 }
 
+exports.deleteProduct = async (req, res) => {
+    const product = await Product.findOneAndRemove({ _id: req.params.id });
+
+    req.flash('success', `Successfully deleted <strong>${product.productName}</strong>.`)
+    res.redirect(`/products`);
+}
+
 exports.searchProducts = async (req, res) => {
     const products = await Product
     // first find products that match
