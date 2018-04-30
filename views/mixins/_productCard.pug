@@ -1,6 +1,6 @@
 mixin productCard(product = {})
   .store
-    a(href=`/product/${product.slug}` class="store--hover")
+    a(href=`/stock1234/product/${product.slug}` class="store--hover")
       .store__hero
         img(src=`/uploads/${product.photo || 'store.png'}`, alt=product.SKU)
       .store__details
@@ -12,7 +12,7 @@ mixin productCard(product = {})
         .admin__editing
           div.edit__wrapper
             span.product__edit
-              a(href=`/products/${product._id}/edit` class="button btn-edit")
+              a(href=`/stock1234/products/${product._id}/edit` class="button btn-edit")
                 <i class="fas fa-edit"></i>
             span.product__delete
               a(href=`/products/${product._id}/delete` class="button btn-edit" )

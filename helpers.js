@@ -19,8 +19,8 @@ exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 exports.siteName = `gjjames.co.uk`;
 
 exports.menu = [
-  { slug: '/products', title: 'Products', icon: 'store', },
+  { slug: '/stock1234/products', title: 'Products', icon: 'store', },
 
-  { slug: '/contact', title: 'Contact', icon: 'pencil', },
+  // { slug: '/contact', title: 'Contact', icon: 'pencil', },
   // { slug: '/admin/add-product', title: 'Add', icon: 'add', }
 ];

@@ -2,10 +2,10 @@ mixin pagination(page, pages, count)
   .pagination
     .pagination__prev
       if page > 1
-        a(href=`/products/page/${page - 1}`) Prev
+        a(href=`/stock1234/products/page/${page - 1}`) Prev
     .pagination__text
       p Page #{page} of #{pages}
     .pagination__next
       if page < pages
-        a(href=`/products/page/${parseFloat(page) + 1}`) Next
+        a(href=`/stock1234/products/page/${parseFloat(page) + 1}`) Next
   

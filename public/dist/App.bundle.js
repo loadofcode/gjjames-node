@@ -1019,7 +1019,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function searchResultsHTML(products) {
   return products.map(function (product) {
-    return '\n      <a href="/product/' + product.slug + '" class="search__result search__result--margin">\n        <img src="/uploads/' + product.photo + '"/><strong>' + product.SKU + ' </strong><span>- ' + product.productName + '</span>\n      </a>\n    ';
+    return '\n      <a href="/stock1234/product/' + product.slug + '" class="search__result search__result--margin">\n        <img src="/uploads/' + product.photo + '"/><strong>' + product.SKU + ' </strong><span>- ' + product.productName + '</span>\n      </a>\n    ';
   }).join('');
 }
 

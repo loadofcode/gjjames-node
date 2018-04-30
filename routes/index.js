@@ -14,21 +14,21 @@ const stock = 'stock123';
 const admin = 'admin';
 
 // Main routes
-router.get('/', pageController.homePage);
+router.get('/stock1234', pageController.homePage);
 router.get('/admin', 
     authController.isAdminLoggedIn,
     pageController.adminPage
 );
 
-router.get('/email', pageController.emailPage);
+router.get('/', pageController.emailPage);
 
 
 // Product Routes
 //
 //////////////////
-router.get('/products', catchErrors(productController.getProducts));
-router.get('/products/page/:page', catchErrors(productController.getProducts));
-router.get('/products/c/:category', catchErrors(productController.getProductsByCategory));
+router.get('/stock1234/products', catchErrors(productController.getProducts));
+router.get('/stock1234/products/page/:page', catchErrors(productController.getProducts));
+router.get('/stock1234/products/c/:category', catchErrors(productController.getProductsByCategory));
 router.get('/admin/add-product',
     authController.isAdminLoggedIn,
     productController.addProduct
@@ -47,12 +47,12 @@ router.post('/admin/add-product/:id',
     catchErrors(productController.resize),
     catchErrors(productController.updateProduct)
 );
-router.get('/products/:id/edit', catchErrors(productController.editProduct));
-router.get('/product/:slug', catchErrors(productController.getProductBySlug));
+router.get('/stock1234/products/:id/edit', catchErrors(productController.editProduct));
+router.get('/stock1234/product/:slug', catchErrors(productController.getProductBySlug));
 // product enquiry
-router.post('/email/success', 
-    catchErrors(productController.productEnquiry)
-);
+// router.post('/contact/success', 
+//     catchErrors(productController.productEnquiry)
+// );
 // enquire about products
 router.post('/email/success', catchErrors(productController.productEnquiry))
 // delete product
