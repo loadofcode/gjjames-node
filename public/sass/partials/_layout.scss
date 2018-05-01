@@ -55,4 +55,17 @@ body {
 
 .home_Nav {
   background: $purple;
+
+  @media all and (max-width: 1200px) {
+    .nav__link--logo svg {
+      width: 150px;
+    }
+  }
+
+  @media all and (max-width:414px) {
+    .nav__link--logo svg {
+      width: 50% !important;
+    }
+  }
+  
 }
