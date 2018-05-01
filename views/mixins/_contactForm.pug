@@ -1,5 +1,5 @@
 mixin contactForm()
-  form(action="/email/success" method="POST" class="form--flex card email__card")
+  form(action="/contact/success" method="POST" class="form--flex card email__card")
     div.contact__form-width
       label(for="name") Name
       input(type="text" name="name" placeholder="Your Name" value='' required)
@@ -9,10 +9,6 @@ mixin contactForm()
       input(type="text" name="phone" placeholder="Your Telephone" value='')
       label(for="company") Company Name
       input(type="text" name="company" placeholder="Your Company" value='' required)
-      //- div.flex--contact
-      //-   label(for="contactagreement")
-      //-   input(type="checkbox" name="contactagreement" placeholder='' value='')
-      //-   span By ticking this box you agree to signing up to our newsletter
     div.contact__form-width
       label(for="message") Message
       textarea(name="message", cols="30", rows="10" required)

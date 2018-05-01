@@ -22,6 +22,8 @@ router.get('/admin',
 
 router.get('/', pageController.emailPage);
 
+router.post('/contact/success', catchErrors(pageController.websiteEnquiry))
+
 
 // Product Routes
 //
