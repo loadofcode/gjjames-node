@@ -19,21 +19,11 @@ const multerOptions = {
     }
 };
 
-exports.homePage = (req, res) => {
-    res.render('index', { title: 'Home' });
-};
-
-exports.adminPage = (req, res) => {
-    res.render('admin', { title: 'Admin' });
-};
-
-exports.emailPage = (req, res) => {
-    res.render('email', {title: 'Email Us' });
-}
-
 exports.productEnquiry = async (req, res) => {
     const customerName = req.body.name.trim()
     const customerEmail = req.body.email.trim()
+    const customerTelephone = req.body.phone.trim()
+    const customerCompany = req.body.company.trim()
     console.log(customerEmail, customerName)
     await mail.send({
         from: 'info@gjjames.co.uk',
@@ -41,6 +31,8 @@ exports.productEnquiry = async (req, res) => {
         to: 'ggomersall@gmail.com',
         subject: 'Product enquiry',
         customerName,
+        customerTelephone,
+        customerCompany,
         filename: 'product-enquire'
       })
     req.flash('success', `Thanks for enquiring about this product`);
@@ -81,7 +73,7 @@ exports.resize = async(req, res, next) => {
 exports.createProduct = async(req, res) => {
     const product = await (new Product(req.body)).save();
     req.flash('success', `Successfully added ${product.productName}`);
-    res.redirect(`/product/${product.slug}`);
+    res.redirect(`/stock1234/product/${product.slug}`);
 };
 
 // new method for getting products with categories as well
@@ -103,7 +95,7 @@ exports.getProducts = async(req, res) => {
     const pages = Math.ceil(count / limit);
     if (!products.length && skip) {
         req.flash('info', `${page} doesn't exist, you've been redirected to ${pages}`);
-        res.redirect(`/products/page/${pages}`)
+        res.redirect(`/stock1234/products/page/${pages}`)
         return
     }
     res.render('products', { categories, tags, title: `Products`, products, count, pages, page });
@@ -120,17 +112,6 @@ exports.getProductsByCategory = async(req, res) => {
     const [categories, products] = await Promise.all([categoriesPromise, productsByCategoryPromise]);
     res.render('tag', { categories, title, category, products });
 }
-
-// exports.recentlyViewed = async ( req, res ) => {
-//     // create empty recentlyViewed array
-//     // const recentlyViewed = [];
-//     // console.log(recentlyViewed);
-//     // find the product we're looking at and push into array
-
-//     // set the cookie aka res.cookie('recentlyViewed', recentlyViewed)
-
-//     // display the recentlyViewed gallery
-// }
 
 exports.getProductBySlug = async(req, res, next) => {
     const product = await Product.findOne({ slug: req.params.slug });
@@ -158,7 +139,14 @@ exports.updateProduct = async(req, res) => {
         runValidators: true
     }).exec();
     req.flash('success', `Successfully updated <strong>${product.productName}</strong>. <a href="/product/${product.slug}">View Product</a>`)
-    res.redirect(`/products/${product._id}/edit`);
+    res.redirect(`/stock1234/products/${product._id}/edit`);
+}
+
+exports.deleteProduct = async (req, res) => {
+    const product = await Product.findOneAndRemove({ _id: req.params.id });
+
+    req.flash('success', `Successfully deleted <strong>${product.productName}</strong>.`)
+    res.redirect(`/stock1234/products`);
 }
 
 exports.searchProducts = async (req, res) => {

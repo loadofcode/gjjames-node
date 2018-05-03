@@ -1,11 +1,15 @@
 extends layout
 
+include mixins/_topThreeCategory
+
 block content
   div.hero__image
     div.hero__container
-      a.hero__logo(href="/")
+      a.hero__logo(href="/stock1234")
         != h.icon('logo')
       //- .nav__section.nav__section--search
-      .search
+      .search__hero
         input.search__input.hero__search(type="text" placeholder="Search Model Number..." name="hero-search")
         .search__hero-results
+  .top-categories__container
+    +topThreeCategory()

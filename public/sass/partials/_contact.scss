@@ -1,0 +1,23 @@
+.contact__form-width {
+  
+}
+.email__card, .contact-text {
+  @media all and (min-width:992px) {
+    width: 670px;
+    margin: 20px auto 0;
+  }
+}
+
+.flex--contact {
+  display: inline;
+}
+
+
+@media all and (max-width:414px) {
+  .email__card, .contact-text {
+    width: auto;
+  }
+  .contact-text {
+    margin-top: -2rem;
+  }
+}

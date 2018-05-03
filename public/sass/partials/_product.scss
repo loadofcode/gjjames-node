@@ -54,6 +54,10 @@
     }
 }
 
+.product__delete {
+    margin-left: 15px;
+}
+
 @media all and (max-width:1024px) {
     .product__inner {
         flex-direction: column;

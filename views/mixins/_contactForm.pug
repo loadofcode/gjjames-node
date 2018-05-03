@@ -1,0 +1,17 @@
+mixin contactForm()
+  form(action="/contact/success" method="POST" class="form--flex card email__card")
+    div.contact__form-width
+      label(for="name") Name
+      input(type="text" name="name" placeholder="Your Name" value='' required)
+      label(for="email") Email
+      input(type="email" name="email" placeholder="Your Email" value='' required)
+      label(for="phone") Telephone
+      input(type="text" name="phone" placeholder="Your Telephone" value='')
+      label(for="company") Company Name
+      input(type="text" name="company" placeholder="Your Company" value='' required)
+    div.contact__form-width
+      label(for="message") Message
+      textarea(name="message", cols="30", rows="10" required)
+
+    br
+    input(type="submit" value="Submit" class="button btn-send")
