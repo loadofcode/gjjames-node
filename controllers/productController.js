@@ -83,6 +83,7 @@ exports.getProducts = async(req, res) => {
     const skip = (page * limit) - limit;
     const category = req.params.category;
     const categoryPromise = Product.getCategoriesList();
+    const categoriesLink = await Category.find();
     const tagPromise = Product.getTagsList();
     const countPromise = Product.count();
     const productsPromise = Product
@@ -98,7 +99,7 @@ exports.getProducts = async(req, res) => {
         res.redirect(`/stock1234/products/page/${pages}`)
         return
     }
-    res.render('products', { categories, tags, title: `Products`, products, count, pages, page });
+    res.render('products', { categoriesLink, categories, tags, title: `Products`, products, count, pages, page });
 }
 
 exports.getProductsByCategory = async(req, res) => {
