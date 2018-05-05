@@ -18,7 +18,6 @@ exports.websiteEnquiry = async (req, res) => {
   const telephone = req.body.phone.trim()
   const company = req.body.company.trim()
   const message = req.body.message
-  console.log(checkbox)
   await mail.send({
       from: 'info@gjjames.co.uk',
       replyTo: email,
