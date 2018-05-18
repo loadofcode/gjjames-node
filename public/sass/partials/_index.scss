@@ -48,6 +48,36 @@
   }
 }
 
+.newsletter__container {
+  background: #d4cbec;
+  padding: 43px 0 50px;
+  @media (max-width:769px) {
+    padding-top: 25px;
+  }
+  margin-bottom: -30px;
+  margin-top: 60px;
+  #mc_embed_signup {
+    background: none !important;
+  }
+  form {
+    .clear {
+      input#mc-embedded-subscribe {
+        margin-left: 15px;
+        @media (max-width: 769px) {
+          margin-left: 0;
+        }
+        background-color: #371178;
+        &:hover {
+          background-color: #fff;
+          border: 1px solid #371178;
+          color: #371178;
+        }
+      }
+    }
+    
+  }
+}
+
 @media (min-width:1401px){
   .hero__container{
     margin-top: 0;
