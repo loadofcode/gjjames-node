@@ -2,6 +2,9 @@
   .contact-title {
   
     margin-top: 30px;
+    @media (max-width: 768px) {
+      margin-top: 0;
+    }
     
     h2, p {
       text-align: center;
@@ -38,7 +41,25 @@
   .contact-form__wrapper {
     h3 {
       text-align: center;
-
+    }
+    @media (max-width: 414px) {
+      form.card {
+        padding: 2rem;
+      }
+    }
+    
+    .contact-field_wrap {
+      display: flex;
+      justify-content: space-between;
+      @media (max-width:414px) {
+        flex-wrap: wrap;
+      }
+      .contact-field_name, .contact-field_email {
+        width: 48%;
+        @media (max-width:414px) {
+          width: 100%;
+        }
+      }
     }
   }
 
@@ -47,14 +68,21 @@
     max-width: 600px;
     margin: 10px auto;
   }
+
 }
-.contact__form-width {
-  
-}
-.email__card, .contact-text {
-  @media all and (min-width:992px) {
-    width: 670px;
-    margin: 20px auto 0;
+
+.contact__form {
+  .email__card, .contact-text {
+    @media all and (min-width:992px) {
+      width: 670px;
+      margin: 20px auto 0;
+    }
+  }
+  form.email__card {
+    padding: 5rem;
+    @media (max-width:414px) {
+      padding: 2rem;
+    }
   }
 }
 

@@ -51,11 +51,14 @@
 .newsletter__container {
   background: #d4cbec;
   padding: 43px 0 50px;
+  margin-bottom: -30px;
+  margin-top: 60px;
   @media (max-width:769px) {
     padding-top: 25px;
   }
-  margin-bottom: -30px;
-  margin-top: 60px;
+  @media(max-width:414px) {
+    margin-top: 25px;
+  }
   #mc_embed_signup {
     background: none !important;
   }
