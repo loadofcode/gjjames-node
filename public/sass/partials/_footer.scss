@@ -1,5 +1,5 @@
 footer {
-  height: 230px;
+  min-height: 230px;
   background-image: linear-gradient(90deg, #1F085F 0%, #53279F 100%);
   // position: absolute;
   // bottom: 0;
@@ -8,5 +8,24 @@ footer {
   position:absolute;
   bottom:0;
   width:100%;
+  color: #fff;
   // height: 60px;
+}
+.footer__wrapper {
+  .footer__logo {
+    text-align: center;
+    a svg {
+      width: 140px;
+    }
+  }
+  p.company_info.side__right {
+    // float: right;
+    text-align: center;
+    padding: 0 20px;
+    font-size: 13px;
+    span {
+      margin: 0 10px;
+      border: 1px solid white;
+    }
+  }
 }

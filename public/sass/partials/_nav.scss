@@ -56,8 +56,15 @@
     &.footer {
         justify-content: center;
         color: white;
+        @media (max-width: 414px) {
+            flex-wrap: nowrap;
+            font-size: 14px;
+        }
         li {
             padding: 0.5rem 2rem;
+            @media (max-width:414px) {
+                padding: 0.5rem 0.8rem;
+            }
         }
         li:nth-child(n+2) {
             border-left: 1px solid white;

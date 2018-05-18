@@ -47,7 +47,7 @@ html
         block content
 
       block footer
-        footer
+        footer.footer__wrapper
           div
             nav.nav.footer
               each item in h.menu
@@ -60,6 +60,13 @@ html
               li.link__item
                 a(href="/login")
                   span Login
+          .footer__logo
+            a(href="/stock1234")
+              != h.icon('logo')
+            .border
+          p.company_info.side__right Company Registration No. 6543866 
+            span
+            Registered Office:  South Street House, 51 South Street, Isleworth, Middlesex, TW7 7AA
 
     block scripts
       script(src="/dist/App.bundle.js")
