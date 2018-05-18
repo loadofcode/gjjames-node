@@ -1,0 +1,27 @@
+mixin productEnquireModal()
+
+  #myModal.modal
+    // Modal content
+    .modal-content
+      span.close ×
+      .enquire__form
+        h3 Enquire about #{product.SKU} - #{product.productName}
+        form(action="/product-enquire/success" method="POST" class="form--flex card email__card")
+          div.contact__form-width
+            .contact-field_wrap
+              .contact-field_name
+                label(for="name") Fullname
+                input(type="text" name="name" placeholder="Your Name" value='' required)
+              .contact-field_email
+                label(for="email") Email Address
+                input(type="email" name="email" placeholder="Your Email" value='' required)
+            label(for="company") Company Name
+            input(type="text" name="company" placeholder="Your Company" value='' required)
+            label(for="telephone") Phone Number
+            input(type="text" name="telephone" placeholder="telephone" value='' required)
+          div.contact__form-width
+            label(for="message") Message
+            textarea(name="message", cols="30", rows="4" required)
+
+          br
+          input(type="submit" value="Submit" class="button btn-send")
