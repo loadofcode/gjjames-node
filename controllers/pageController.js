@@ -51,7 +51,7 @@ exports.contactPageForm = async (req, res) => {
   await mail.send({
       from: 'info@gjjames.co.uk',
       replyTo: email,
-      to: 'ggomersall@gmail.com',
+      to: 'gareth@gjjames.co.uk',
       subject: subject,
       email,
       name,
