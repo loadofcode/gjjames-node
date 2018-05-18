@@ -1,3 +1,53 @@
+.contact__page {
+  .contact-title {
+  
+    margin-top: 30px;
+    
+    h2, p {
+      text-align: center;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+  }
+  .contact-details {
+    display: flex;
+    justify-content: center;
+    @media (max-width: 414px) {
+      flex-wrap: wrap;
+    }
+    .contact-phone, .contact-email {
+      .contact-space {
+        margin-left: 5px;
+      }
+      h3 {
+        margin: 0 0 5px;;
+      }
+      p {
+        margin: 0;
+      }
+      text-align: center;
+      margin: 10px 50px;
+      @media (max-width: 414px) {
+        margin: 10px;
+      }
+    }
+  }
+  .contact-form__wrapper {
+    h3 {
+      text-align: center;
+
+    }
+  }
+
+  .border {
+    border-bottom: 1px solid #371178;
+    max-width: 600px;
+    margin: 10px auto;
+  }
+}
 .contact__form-width {
   
 }

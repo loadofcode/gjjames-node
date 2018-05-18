@@ -21,6 +21,6 @@ exports.siteName = `gjjames.co.uk`;
 exports.menu = [
   { slug: '/stock1234/products', title: 'Products', icon: 'store', },
 
-  { slug: '/contact', title: 'Contact', icon: 'pencil', },
+  { slug: '/stock1234/contact', title: 'Contact', icon: 'pencil', },
   // { slug: '/admin/add-product', title: 'Add', icon: 'add', }
 ];

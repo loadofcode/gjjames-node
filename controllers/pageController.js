@@ -16,6 +16,10 @@ exports.privacyPage = (req, res) => {
   res.render('privacy-policy', {title: 'Privacy Policy'});
 }
 
+exports.contactPage = (req, res) => {
+  res.render('contact', {title: 'Contact Us'});
+}
+
 exports.websiteEnquiry = async (req, res) => {
   const name = req.body.name.trim()
   const email = req.body.email.trim()
@@ -36,4 +40,25 @@ exports.websiteEnquiry = async (req, res) => {
     })
   req.flash('success', `Thank you for contacting us, we'll be in touch soon`);
   res.redirect('/');
+}
+
+exports.contactPageForm = async (req, res) => {
+  const name = req.body.name.trim()
+  const email = req.body.email.trim()
+  const subject = req.body.subject.trim()
+  const company = req.body.company.trim()
+  const message = req.body.message
+  await mail.send({
+      from: 'info@gjjames.co.uk',
+      replyTo: email,
+      to: 'ggomersall@gmail.com',
+      subject: subject,
+      email,
+      name,
+      company,
+      message,
+      filename: 'contact-page-form'
+    })
+  req.flash('success', `Thank you for contacting us, we'll be in touch soon`);
+  res.redirect('/stock1234/contact');
 }

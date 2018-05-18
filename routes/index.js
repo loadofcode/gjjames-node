@@ -21,10 +21,12 @@ router.get('/admin',
 );
 
 router.get('/stock1234/privacy-policy', pageController.privacyPage)
+router.get('/stock1234/contact', pageController.contactPage)
 
 router.get('/', pageController.emailPage);
 
 router.post('/contact/success', catchErrors(pageController.websiteEnquiry))
+router.post('/contact-page/success', catchErrors(pageController.contactPageForm))
 
 
 // Product Routes
