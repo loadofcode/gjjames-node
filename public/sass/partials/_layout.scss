@@ -69,3 +69,9 @@ body {
   }
   
 }
+
+.hidden__mobile {
+  @media (max-width: 416px) {
+    display: none;
+  }
+}
