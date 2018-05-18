@@ -20,6 +20,8 @@ router.get('/admin',
     pageController.adminPage
 );
 
+router.get('/stock1234/privacy-policy', pageController.privacyPage)
+
 router.get('/', pageController.emailPage);
 
 router.post('/contact/success', catchErrors(pageController.websiteEnquiry))

@@ -59,7 +59,7 @@
         li {
             padding: 2rem;
         }
-        li:nth-child(2) {
+        li:nth-child(n+2) {
             border-left: 1px solid white;
         }
         span {

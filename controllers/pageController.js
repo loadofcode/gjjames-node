@@ -12,6 +12,10 @@ exports.emailPage = (req, res) => {
   res.render('email', {title: 'Email Us' });
 }
 
+exports.privacyPage = (req, res) => {
+  res.render('privacy-policy', {title: 'Privacy Policy'});
+}
+
 exports.websiteEnquiry = async (req, res) => {
   const name = req.body.name.trim()
   const email = req.body.email.trim()
