@@ -30,7 +30,7 @@ exports.websiteEnquiry = async (req, res) => {
       from: 'info@gjjames.co.uk',
       replyTo: email,
       to: 'gareth@gjjames.co.uk',
-      subject: 'Product enquiry',
+      subject: 'Website enquiry',
       email,
       name,
       telephone,
