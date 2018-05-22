@@ -20,23 +20,28 @@ const multerOptions = {
 };
 
 exports.productEnquiry = async (req, res) => {
+    const product = await Product.findOne({ slug: req.params.slug })
+    const productSKU = product.SKU;
     const customerName = req.body.name.trim()
     const customerEmail = req.body.email.trim()
-    const customerTelephone = req.body.phone.trim()
+    const customerTelephone = req.body.telephone.trim()
     const customerCompany = req.body.company.trim()
-    console.log(customerEmail, customerName)
+    const customerMessage = req.body.message
+    console.log(customerEmail, customerName, product)
     await mail.send({
         from: 'info@gjjames.co.uk',
         replyTo: customerEmail,
         to: 'ggomersall@gmail.com',
-        subject: 'Product enquiry',
+        subject: `Product enquiry for ${productSKU}`,
         customerName,
         customerTelephone,
         customerCompany,
+        customerMessage,
+        productSKU,
         filename: 'product-enquire'
       })
-    req.flash('success', `Thanks for enquiring about this product`);
-    res.redirect('/email');
+    req.flash('success', `Thanks for enquiring about this product, we'll be in touch soon`);
+    res.redirect(`back`);
 }
 
 exports.addProduct = async (req, res) => {

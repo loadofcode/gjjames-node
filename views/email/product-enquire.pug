@@ -1,0 +1,19 @@
+extends email-layout
+
+block content
+  h2 Product enquiry from #{productSKU} product page.
+  p #{customerName} has enquired about the following product: 
+    b #{productSKU}
+
+  h3 Message:
+  p #{customerMessage}
+  br
+  h3 Their contact details are:
+  p Name: #{customerName}
+  p Company: #{customerCompany}
+  p Email: #{customerEmail}
+  p Phone: #{customerTelephone}
+  
+  
+
+

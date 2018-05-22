@@ -3,6 +3,7 @@ include mixins/_productEnquireModal
 
 block content
     .inner.inner__product
+        pre= h.dump(product)
         .back__button
             span(onclick="goBack()") < Back
         .card.product__card

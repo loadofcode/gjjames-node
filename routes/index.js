@@ -27,6 +27,7 @@ router.get('/', pageController.emailPage);
 
 router.post('/contact/success', catchErrors(pageController.websiteEnquiry))
 router.post('/contact-page/success', catchErrors(pageController.contactPageForm))
+router.post('/product-enquire/success', catchErrors(productController.productEnquiry))
 
 
 // Product Routes
@@ -55,13 +56,6 @@ router.post('/admin/add-product/:id',
 );
 router.get('/stock1234/products/:id/edit', catchErrors(productController.editProduct));
 router.get('/stock1234/product/:slug', catchErrors(productController.getProductBySlug));
-// product enquiry
-// router.post('/contact/success', 
-//     catchErrors(productController.productEnquiry)
-// );
-// enquire about products
-router.post('/email/success', catchErrors(productController.productEnquiry))
-// delete product
 router.get('/products/:id/delete', catchErrors(productController.deleteProduct));
 
 
