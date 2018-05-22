@@ -27,7 +27,7 @@ router.get('/', pageController.emailPage);
 
 router.post('/contact/success', catchErrors(pageController.websiteEnquiry))
 router.post('/contact-page/success', catchErrors(pageController.contactPageForm))
-router.post('/product-enquire/success', catchErrors(productController.productEnquiry))
+// router.post('/product-enquire/success', catchErrors(productController.productEnquiry))
 
 
 // Product Routes
