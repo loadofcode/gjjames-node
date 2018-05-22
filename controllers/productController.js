@@ -42,7 +42,7 @@ exports.productEnquiry = async (req, res) => {
         filename: 'product-enquire'
       })
     req.flash('success', `Thanks for enquiring about product: <strong>${productSKU}</strong>. We'll be in touch soon`);
-    res.redirect(`/stock1234/product`);
+    res.redirect(`/stock1234/products`);
 }
 
 exports.addProduct = async (req, res) => {
