@@ -20,7 +20,7 @@ const multerOptions = {
 };
 
 exports.productEnquiry = async (req, res) => {
-    const product = await Product.findOne({ slug: req.params.slug })
+    const product = Product.findOne({ slug: req.params.slug })
     const productSKU = product.SKU;
     const customerName = req.body.name.trim()
     const customerEmail = req.body.email.trim()
@@ -41,7 +41,7 @@ exports.productEnquiry = async (req, res) => {
         filename: 'product-enquire'
       })
     req.flash('success', `Thanks for enquiring about this product, we'll be in touch soon`);
-    res.redirect(`back`);
+    res.redirect(`/stock1234/product/${product.slug}`);
 }
 
 exports.addProduct = async (req, res) => {
