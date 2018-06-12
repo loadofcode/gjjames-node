@@ -19,29 +19,29 @@ const multerOptions = {
     }
 };
 
-// exports.productEnquiry = async (req, res) => {
-//     const productSKU = req.params.SKU;
-//     const productSlug = req.params.slug;
-//     const customerName = req.body.name.trim()
-//     const customerEmail = req.body.email.trim()
-//     const customerTelephone = req.body.telephone.trim()
-//     const customerCompany = req.body.company.trim()
-//     const customerMessage = req.body.message
-//     await mail.send({
-//         from: 'info@gjjames.co.uk',
-//         replyTo: customerEmail,
-//         to: 'ggomersall@gmail.com',
-//         subject: `Product enquiry for ${productSKU}`,
-//         customerName,
-//         customerTelephone,
-//         customerCompany,
-//         customerMessage,
-//         productSKU,
-//         filename: 'product-enquire'
-//       })
-//     req.flash('success', `Thanks for your enquiry. We'll be in touch soon`);
-//     res.redirect(`/stock1234/products`);
-// }
+exports.productEnquiry = async (req, res) => {
+    const productSlug = req.params.slug;
+    const customerName = req.body.name.trim()
+    const customerEmail = req.body.email.trim()
+    const customerTelephone = req.body.telephone.trim()
+    const customerCompany = req.body.company.trim()
+    const customerMessage = req.body.message
+    const productSKU = req.body.product
+    await mail.send({
+        from: 'info@gjjames.co.uk',
+        replyTo: customerEmail,
+        // to: 'gareth@gjjames.co.uk',
+        to: 'ggomersall@gmail.com',
+        subject: `Product enquiry for ${productSKU}`,
+        customerName,
+        customerTelephone,
+        customerCompany,
+        customerMessage,
+        productSKU,
+        filename: 'product-enquire'
+      })
+    req.flash('success', `Thanks for your enquiry. We'll be in touch soon`);
+}
 
 exports.addProduct = async (req, res) => {
     const categoriesPromise = Category.find();
@@ -121,7 +121,6 @@ exports.getProductsByCategory = async(req, res) => {
 exports.getProductBySlug = async(req, res, next) => {
     const product = await Product.findOne({ slug: req.params.slug });
     if (!product) return next();
-    console.log(product)
     res.render('product', { product, title: product.productName });
 }
 
