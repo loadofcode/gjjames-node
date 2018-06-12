@@ -30,8 +30,7 @@ exports.productEnquiry = async (req, res) => {
     await mail.send({
         from: 'info@gjjames.co.uk',
         replyTo: customerEmail,
-        // to: 'gareth@gjjames.co.uk',
-        to: 'ggomersall@gmail.com',
+        to: 'gareth@gjjames.co.uk',
         subject: `Product enquiry for ${productSKU}`,
         customerName,
         customerTelephone,
