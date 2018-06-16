@@ -37,6 +37,7 @@ exports.productEnquiry = async (req, res) => {
         customerCompany,
         customerMessage,
         productSKU,
+        customerEmail,
         filename: 'product-enquire'
       })
     req.flash('success', `Thanks for your enquiry. We'll be in touch soon`);
