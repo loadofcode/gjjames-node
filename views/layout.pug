@@ -1,6 +1,8 @@
 doctype html
 html
   head
+    if process.env.NODE_ENV == 'production'
+      include includes/ga.pug
     title= `${title} | ${h.siteName}`
     link(rel='stylesheet', href='/dist/style.css')
     link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
