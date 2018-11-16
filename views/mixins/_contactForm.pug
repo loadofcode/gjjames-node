@@ -12,6 +12,7 @@ mixin contactForm()
     div.contact__form-width
       label(for="message") Message
       textarea(name="message", cols="30", rows="10" required)
+    div.g-recaptcha(data-sitekey="6LeU7isUAAAAAPiAtvq-WI_cVfEO46u_vEcF6wWZ")
 
     br
     input(type="submit" value="Submit" class="button btn-send")
