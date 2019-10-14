@@ -1,0 +1,10 @@
+mixin filtersList(tagParents = {})
+  .filters
+    ul.filter-parent__list
+      each parent in tagParents
+        h4= parent.tagParentName
+        ul.filter-children__list
+          each child in parent.tags
+            li.filter-children__item
+              input(type="checkbox", id=child value=child name="filters")
+              label(for=child)= child

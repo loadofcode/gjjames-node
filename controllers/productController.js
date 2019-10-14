@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 const Category = mongoose.model('Category');
 const Tag = mongoose.model('Tag');
+const TagParent = mongoose.model('TagParent');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
@@ -89,6 +90,7 @@ exports.getProducts = async(req, res) => {
     const categoryPromise = Product.getCategoriesList();
     const categoriesLink = await Category.find();
     const tagPromise = Product.getTagsList();
+    const tagParentPromise = TagParent.find()
     const countPromise = Product.count();
     const productsPromise = Product
         .find()
@@ -96,14 +98,14 @@ exports.getProducts = async(req, res) => {
         .limit(limit)
         .sort({SKU: 'desc'})
 
-    const [categories, products, tags, count] = await Promise.all([categoryPromise, productsPromise, tagPromise, countPromise]);
+    const [categories, products, tags, tagParents, count] = await Promise.all([categoryPromise, productsPromise, tagPromise, tagParentPromise, countPromise]);
     const pages = Math.ceil(count / limit);
     if (!products.length && skip) {
         req.flash('info', `${page} doesn't exist, you've been redirected to ${pages}`);
         res.redirect(`/stock1234/products/page/${pages}`)
         return
     }
-    res.render('products', { categoriesLink, categories, tags, title: `Products`, products, count, pages, page });
+    res.render('products', { categoriesLink, categories, tags, tagParents, title: `Products`, products, count, pages, page });
 }
 
 exports.getProductsByCategory = async(req, res) => {

@@ -1,6 +1,7 @@
 extends layout
 
 include mixins/_productCard
+include mixins/_filtersList
 include mixins/_pagination
 
 block content
@@ -12,7 +13,8 @@ block content
                 li.tag
                     a.tag__link(href=`/stock1234/products/c/${c._id}`)
                         span.tag__text= `${c._id}s`
-
+        .filters--list
+            +filtersList(tagParents)
         .stores
             each product in products
                 +productCard(product)
