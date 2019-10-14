@@ -6,6 +6,7 @@ const pageController = require('../controllers/pageController');
 const productController = require('../controllers/productController');
 const categoryController = require('../controllers/categoryController');
 const tagController = require('../controllers/tagController');
+const tagParentController = require('../controllers/tagParentController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
@@ -36,6 +37,7 @@ router.post('/product-enquire/success', catchErrors(productController.productEnq
 router.get('/stock1234/products', catchErrors(productController.getProducts));
 router.get('/stock1234/products/page/:page', catchErrors(productController.getProducts));
 router.get('/stock1234/products/c/:category', catchErrors(productController.getProductsByCategory));
+router.get('/stock1234/products/t/:tags', catchErrors(productController.getProductsByTags));
 router.get('/admin/add-product',
     authController.isAdminLoggedIn,
     productController.addProduct
@@ -95,6 +97,22 @@ router.post('/admin/add-tag/:id',
 );
 router.get('/tag/:id/delete', catchErrors(tagController.deleteTag));
 
+// Tag Parent Routes
+//
+//////////////////
+router.get('/admin/add-tag-parent',
+    authController.isAdminLoggedIn,
+    tagParentController.addTagParent
+);
+router.post('/admin/add-tag-parent',
+    authController.isAdminLoggedIn,
+    catchErrors(tagParentController.createTagParent)
+);
+router.get('/tag-parents/:id/edit', catchErrors(tagParentController.editTagParent));
+router.post('/admin/add-tag-parent/:id',
+    catchErrors(tagParentController.updateTagParent)
+);
+router.get('/tag-parent/:id/delete', catchErrors(tagParentController.deleteTagParent));
 
 
 // Admin Add User Route

@@ -1,0 +1,30 @@
+extends layout
+
+include mixins/_tagParentForm
+include mixins/_adminSideBar
+
+block content
+	.admin__area
+		+adminSideBar()
+		.admin__main
+			h2 #{title}
+			div
+				p This is where you can add a new Parent Tag - parent tags are owner of child tags - i.e. metals, stones, etc
+			+tagParentForm(tagParent)
+			pre= h.dump(tagParents)
+			if tagParents
+				h2 Saved Parent Tags
+				p When adding or updating a parent tag please make sure you save it as SINGULAR!
+				ul.tags_list
+					
+					each t in tagParents
+						
+						li.tag
+							span.tag__text #{t.tagParentName}
+							div.edit__wrapper
+								span.tag__edit
+									a(href=`/tag-parents/${t._id}/edit` class="button btn-edit")
+										<i class="fas fa-edit"></i>
+								span.tag__delete
+									a(href=`/tag-parent/${t._id}/delete` class="button btn-edit" )
+										<i class="fas fa-trash-alt"></i>

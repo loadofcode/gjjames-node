@@ -25,6 +25,7 @@ require('./models/Product');
 require('./models/Category');
 require('./models/Tag');
 require('./models/User');
+require('./models/TagParent');
 
 // Start our App
 const app = require('./app')

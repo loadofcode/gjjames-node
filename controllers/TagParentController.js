@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 const TagParent = mongoose.model('TagParent');
+const Tag = mongoose.model('Tag');
 
 exports.addTagParent = async(req, res) => {
   const tagParents = await TagParent.find();
-  res.render('editTagParent', {title: 'Add new Tag Parent', tagParents});
+  const tags = await Tag.find()
+  const tag = tags.map(tag => {return tag.tagName.toString()})
+  res.render('editTagParent', {title: 'Add new Tag Parent', tagParents, tag});
 }
 
 exports.createTagParent = async(req, res) => {
@@ -15,8 +18,9 @@ exports.createTagParent = async(req, res) => {
 
 exports.editTagParent = async(req, res) => {
   const tagParent = await TagParent.findOne({ _id: req.params.id });
-  const tagParents = await TagParent.find();
-  res.render('editTagParent', {title: `Editing ${tagParent.tagParentName} - Are you sure you want to do this?`, tagParent, tagParents});
+  const tags = await Tag.find()
+  const tag = tags.map(tag => tag.tagName.toString())
+  res.render('editTagParent', {title: `Editing ${tagParent.tagParentName} - Are you sure you want to do this?`, tagParent, tag});
 }
 
 exports.updateTagParent = async(req, res) => {
@@ -32,6 +36,5 @@ exports.deleteTagParent = async(req, res) => {
   const tagParent = await TagParent.findOneAndRemove({_id: req.params.id});
 
   req.flash('success', `Successfully deleted <strong>${tagParent.tagParentName}</strong>.`);
-  re
-  screen.redirect(`/admin/add-tag-parent`);
+  res.redirect(`/admin/add-tag-parent`);
 }

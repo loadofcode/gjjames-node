@@ -143,7 +143,7 @@ exports.updateProduct = async(req, res) => {
         new: true, // returns new product instead of old one
         runValidators: true
     }).exec();
-    req.flash('success', `Successfully updated <strong>${product.productName}</strong>. <a href="/product/${product.slug}">View Product</a>`)
+    req.flash('success', `Successfully updated <strong>${product.productName}</strong>. <a href="/stock1234/product/${product.slug}">View Product</a>`)
     res.redirect(`/stock1234/products/${product._id}/edit`);
 }
 
