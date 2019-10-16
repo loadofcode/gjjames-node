@@ -1,8 +1,9 @@
 mixin filtersList(tagParents = {})
   .filters
-    ul.filter-parent__list
+    .filter-parent__list
+      h2 Filter By
       each parent in tagParents
-        h4= parent.tagParentName
+        h4.filter-parent__title= parent.tagParentName
         ul.filter-children__list
           each child in parent.tags
             li.filter-children__item

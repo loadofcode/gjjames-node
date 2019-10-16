@@ -37,7 +37,7 @@ router.post('/product-enquire/success', catchErrors(productController.productEnq
 router.get('/stock1234/products', catchErrors(productController.getProducts));
 router.get('/stock1234/products/page/:page', catchErrors(productController.getProducts));
 router.get('/stock1234/products/c/:category', catchErrors(productController.getProductsByCategory));
-router.get('/stock1234/products/t/:tags', catchErrors(productController.getProductsByTags));
+router.get('/stock1234/products/:tags', catchErrors(productController.getProductsByTagFilter));
 router.get('/admin/add-product',
     authController.isAdminLoggedIn,
     productController.addProduct
