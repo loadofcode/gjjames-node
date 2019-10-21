@@ -83,40 +83,73 @@ exports.createProduct = async(req, res) => {
 
 // new method for getting products with categories as well
 exports.getProducts = async(req, res) => {
+    // let productsByTagPromise;
     const page = req.params.page || 1;
     const limit = 50;
     const skip = (page * limit) - limit;
     const category = req.params.category;
     const categoryPromise = Product.getCategoriesList();
     const categoriesLink = await Category.find();
+    const tags = req.query.tags;
+    console.log(tags)
+    const tagQuery = tags || { $exists: true }
     const tagPromise = Product.getTagsList();
     const tagParentPromise = TagParent.find()
     const countPromise = Product.count();
-    const productsPromise = Product
-        .find()
-        .skip(skip)
-        .limit(limit)
-        .sort({SKU: 'desc'})
 
-    const [categories, products, tags, tagParents, count] = await Promise.all([categoryPromise, productsPromise, tagPromise, tagParentPromise, countPromise]);
+    const productsByTagPromise = Product
+    .find({ tags: {$in: tagQuery}})
+    .sort({SKU: 'desc'});
+
+    const productsAllPromise = Product
+    .find()
+    .skip(skip)
+    .limit(limit)
+    .sort({SKU: 'desc'});
+    
+    const productsPromise = !tags ? productsAllPromise : productsByTagPromise
+
+    console.log({tags, tagQuery})
+ 
+    const [categories, products, tagsList, tagParents, count] = await Promise.all(
+        [
+            categoryPromise,
+            productsPromise,
+            tagPromise,
+            tagParentPromise,
+            countPromise,
+        ]);
+    // console.log({tagsList}, products[0])
     const pages = Math.ceil(count / limit);
     if (!products.length && skip) {
         req.flash('info', `${page} doesn't exist, you've been redirected to ${pages}`);
         res.redirect(`/stock1234/products/page/${pages}`)
         return
     }
-    res.render('products', { categoriesLink, categories, tags, tagParents, title: `Products`, products, count, pages, page });
+
+    res.render('products', { categoriesLink, categories, tagsList, tagParents, title: `Products`, products, count, pages, page });
+    // res.json({ categoriesLink, categories, tagsList, tagParents, title: `Products`, products, count, pages, page })
+    // res.json(products)
 }
 
 exports.getProductsByCategory = async(req, res) => {
     const category = req.params.category;
     const title = `category: ${category}s`
     const categoryQuery = category || { $exists: true };
+    const tags = req.query.tags;
+    const tagQuery = tags || { $exists: true }
     const categoriesPromise = Product.getCategoriesList();
+
+    const productsByCategoryWithTagPromise = Product
+    .find({ category: categoryQuery, tags: {$in: tagQuery}})
+    .sort({SKU: 'desc'});
+
     const productsByCategoryPromise = Product
         .find({ category: categoryQuery })
         .sort({SKU: 'desc'});
-    const [categories, products] = await Promise.all([categoriesPromise, productsByCategoryPromise]);
+        
+    const productsPromise = !tags ? productsByCategoryPromise : productsByCategoryWithTagPromise
+    const [categories, products] = await Promise.all([categoriesPromise, productsPromise]);
     res.render('tag', { categories, title, category, products });
 }
 
