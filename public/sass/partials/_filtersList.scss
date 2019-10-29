@@ -1,6 +1,30 @@
-.filters--list { 
+.filters--list {
   background: white;
   width: 20%;
   padding: 10px;
   border-radius: 5px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+.filter-children__list {
+  padding-left: 5px;
+  margin-bottom: 0;
+  list-style: none;
+
+  .filter-children__item {
+    overflow: hidden;
+    margin-bottom: 5px;
+    input {
+      float: left;
+      width: unset;
+    }
+    label {
+      float: left;
+      padding-left: 10px;
+      top: -3px;
+      position: relative;
+      padding: 0 0 0 10px;
+    }
+  }
 }

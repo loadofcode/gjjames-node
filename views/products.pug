@@ -13,10 +13,11 @@ block content
                 li.tag
                     a.tag__link(href=`/stock1234/products/c/${c._id}`)
                         span.tag__text= `${c._id}s`
-        .filters--list
-            +filtersList(tagParents)
-        .stores
-            each product in products
-                +productCard(product)
+        .products-content__flex
+            .filters--list
+                +filtersList(tagParents)
+            .stores
+                each product in products
+                    +productCard(product)
         +pagination(page, pages, count)
                 

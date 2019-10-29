@@ -1,11 +1,11 @@
 mixin filtersList(tagParents = {})
   .filters
     .filter-parent__list
-      h2 Filter By
+      h3 Filter By
       each parent in tagParents
         h4.filter-parent__title= parent.tagParentName
         ul.filter-children__list
           each child in parent.tags
             li.filter-children__item
-              input(type="checkbox", id=child value=child name="filters")
+              input(type="checkbox", id=child value=child name="filters" class="filters--checkbox")
               label(for=child)= child
