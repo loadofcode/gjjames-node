@@ -1942,48 +1942,61 @@ exports.$$ = $$;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-function searchFilters() {
-  var url = process.env.NODE_ENV === "production" ? "https://gjjames.co.uk" : "http://localhost";
-  var pathName = window.location.pathname;
-  var hash = [];
-  var newHash = void 0;
-  var checkboxValues = JSON.parse(sessionStorage.getItem("checkboxValues")) || {};
+var newHash = void 0;
+var baseUrl = process.env.NODE_ENV === "production" ? "https://gjjames.co.uk" : "http://localhost";
+var pathName = window.location.pathname;
+var checkboxes = document.querySelectorAll(".filters--checkbox");
+var hash = JSON.parse(sessionStorage.getItem("filterItems")) || [];
+var checkboxValues = JSON.parse(sessionStorage.getItem("checkboxValues")) || [];
 
-  if (window.location.search === "") sessionStorage.clear();
+function loadCheckBoxes() {
+  checkboxValues.forEach(function (key) {
+    joinHashItems();
+    document.querySelector("input[id='" + key.id + "']").checked = true;
+  });
+}
 
-  function joinHashItems() {
-    if (hash !== "") {
-      newHash = hash.join("&");
-      sessionStorage.setItem("filterItems", newHash);
-    }
-    sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+function joinHashItems() {
+  if (hash !== []) {
+    sessionStorage.setItem("filterItems", JSON.stringify(hash));
+    newHash = hash.join("&");
   }
+  sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+}
 
-  var checkboxes = document.querySelectorAll(".filters--checkbox");
-
+function searchFilters() {
   checkboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {
       if (this.checked) {
         var newString = "tags[]=" + checkbox.value;
         hash.push(newString);
 
-        checkboxValues[this.id] = this.checked;
+        var obj = {
+          id: this.id,
+          checked: this.checked
+        };
+        if (checkboxValues.indexOf(obj) == -1) checkboxValues.push(obj);
+
         joinHashItems();
       } else {
         var index = hash.indexOf("tags[]=" + checkbox.value);
+        var objIndex = checkboxValues.findIndex(function (check) {
+          return check.id === checkbox.value;
+        });
         if (index > -1) {
           hash.splice(index, 1);
-          delete checkboxValues[this.id];
+          checkboxValues.splice(objIndex, 1);
           joinHashItems();
         }
       }
 
-      console.log("filterItems", sessionStorage.filterItems);
-      console.log("CheckBoxValues", sessionStorage.checkboxValues);
+      var newUrl = hash && hash.length ? "" + baseUrl + pathName + "?" + newHash : "" + baseUrl + pathName;
 
-      // window.location = `${url}${pathName}?${sessionStorage.filterItems}`;
+      window.location = newUrl;
     });
   });
+
+  loadCheckBoxes();
 }
 
 exports.default = searchFilters;
