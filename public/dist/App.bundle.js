@@ -1942,29 +1942,31 @@ exports.$$ = $$;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var newHash = void 0;
-var baseUrl = process.env.NODE_ENV === "production" ? "https://gjjames.co.uk" : "http://localhost";
-var pathName = window.location.pathname;
-var checkboxes = document.querySelectorAll(".filters--checkbox");
-var hash = JSON.parse(sessionStorage.getItem("filterItems")) || [];
-var checkboxValues = JSON.parse(sessionStorage.getItem("checkboxValues")) || [];
-
-function loadCheckBoxes() {
-  checkboxValues.forEach(function (key) {
-    joinHashItems();
-    document.querySelector("input[id='" + key.id + "']").checked = true;
-  });
-}
-
-function joinHashItems() {
-  if (hash !== []) {
-    sessionStorage.setItem("filterItems", JSON.stringify(hash));
-    newHash = hash.join("&");
-  }
-  sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
-}
-
 function searchFilters() {
+  var newHash = void 0;
+  var baseUrl = process.env.NODE_ENV === "production" ? "https://gjjames.co.uk" : "http://localhost";
+  var pathName = window.location.pathname;
+  var checkboxes = document.querySelectorAll(".filters--checkbox");
+  var hash = JSON.parse(sessionStorage.getItem("filterItems")) || [];
+  var checkboxValues = JSON.parse(sessionStorage.getItem("checkboxValues")) || [];
+
+  function loadCheckBoxes() {
+    checkboxValues.forEach(function (key) {
+      joinHashItems();
+      document.querySelector("input[id='" + key.id + "']").checked = true;
+    });
+  }
+
+  function clearCheckBoxes() {}
+
+  function joinHashItems() {
+    if (hash !== []) {
+      sessionStorage.setItem("filterItems", JSON.stringify(hash));
+      newHash = hash.join("&");
+    }
+    sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+  }
+
   checkboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {
       if (this.checked) {
@@ -1993,6 +1995,8 @@ function searchFilters() {
       var newUrl = hash && hash.length ? "" + baseUrl + pathName + "?" + newHash : "" + baseUrl + pathName;
 
       window.location = newUrl;
+
+      if (window.location.search === "") console.log("empty search");
     });
   });
 

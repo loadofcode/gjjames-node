@@ -1,12 +1,11 @@
 mixin tagParentForm(tagParent = {})
-  pre= h.dump(tagParent)
   form(action=`/admin/add-tag-parent/${tagParent._id || ''}` method="POST" class="form--flex card category__card")
     label(for="tagParentName") Tag Parent Name
     input(type="text" name="tagParentName" placeholder="Add a Tag Parent" value=tagParent.tagParentName)
     - const choices = tag
     - const tags = tagParent.tags || []
 
-    p Assign tags below to the tag parent
+    p Assign tags below to the tag parent - i.e. Metals - you assign Gold, White Gold, etc etc
     ul.tags 
       each choice in choices
         .tag.tag__choice

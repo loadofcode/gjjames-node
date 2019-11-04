@@ -1,30 +1,32 @@
-let newHash;
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? `https://gjjames.co.uk`
-    : `http://localhost`;
-const pathName = window.location.pathname;
-const checkboxes = document.querySelectorAll(".filters--checkbox");
-const hash = JSON.parse(sessionStorage.getItem("filterItems")) || [];
-const checkboxValues =
-  JSON.parse(sessionStorage.getItem("checkboxValues")) || [];
-
-function loadCheckBoxes() {
-  checkboxValues.forEach(key => {
-    joinHashItems();
-    document.querySelector(`input[id='${key.id}']`).checked = true;
-  });
-}
-
-function joinHashItems() {
-  if (hash !== []) {
-    sessionStorage.setItem("filterItems", JSON.stringify(hash));
-    newHash = hash.join("&");
-  }
-  sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
-}
-
 function searchFilters() {
+  let newHash;
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? `https://gjjames.co.uk`
+      : `http://localhost`;
+  const pathName = window.location.pathname;
+  const checkboxes = document.querySelectorAll(".filters--checkbox");
+  const hash = JSON.parse(sessionStorage.getItem("filterItems")) || [];
+  const checkboxValues =
+    JSON.parse(sessionStorage.getItem("checkboxValues")) || [];
+
+  function loadCheckBoxes() {
+    checkboxValues.forEach(key => {
+      joinHashItems();
+      document.querySelector(`input[id='${key.id}']`).checked = true;
+    });
+  }
+
+  function clearCheckBoxes() {}
+
+  function joinHashItems() {
+    if (hash !== []) {
+      sessionStorage.setItem("filterItems", JSON.stringify(hash));
+      newHash = hash.join("&");
+    }
+    sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+  }
+
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener("change", function() {
       if (this.checked) {
@@ -56,6 +58,8 @@ function searchFilters() {
           : `${baseUrl}${pathName}`;
 
       window.location = newUrl;
+
+      if (window.location.search === "") console.log("empty search");
     });
   });
 
