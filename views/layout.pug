@@ -7,7 +7,7 @@ html
     link(rel='stylesheet', href='/dist/style.css')
     link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    script(src='http://www.google.com/recaptcha/api.js')
+    script(src='https://www.google.com/recaptcha/api.js')
     
   body
     #container
@@ -55,13 +55,13 @@ html
             nav.nav.footer
               each item in h.menu
                 li.link__item
-                  a(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
+                  a.footer__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
                     span #{item.title}
               li.link__item
-                a(href="/stock1234/privacy-policy")
+                a.footer__link(href="/stock1234/privacy-policy")
                   span Privacy Policy
               li.link__item
-                a(href="/login")
+                a.footer__link(href="/login")
                   span Login
           .footer__logo
             a(href="/stock1234")

@@ -15,8 +15,7 @@ exports.createTag = async (req, res) => {
 
 exports.editTag = async (req, res) => {
     const tag = await Tag.findOne({ _id: req.params.id });
-    const tags = await Tag.find();
-    res.render('editTag', { title: `Editing ${tag.tagName} - Are sure you want to do this ?`, tag, tags });
+    res.render('editTag', { title: `Editing ${tag.tagName} - Are sure you want to do this ?`, tag });
 }
 
 exports.updateTag = async (req, res) => {
