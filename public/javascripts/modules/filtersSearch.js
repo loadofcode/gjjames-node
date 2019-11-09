@@ -5,7 +5,13 @@ function searchFilters() {
       ? `https://gjjames.co.uk`
       : `http://localhost`;
   const pathName = window.location.pathname;
+
   const checkboxes = document.querySelectorAll(".filters--checkbox");
+  const clearFilterbutton = document.querySelector(".btn-filter");
+  const navLink = document.querySelectorAll(".nav__link");
+  const tagLink = document.querySelectorAll(".tag__link");
+  const footerLink = document.querySelectorAll(".footer__link");
+
   const hash = JSON.parse(sessionStorage.getItem("filterItems")) || [];
   const checkboxValues =
     JSON.parse(sessionStorage.getItem("checkboxValues")) || [];
@@ -17,7 +23,22 @@ function searchFilters() {
     });
   }
 
-  function clearCheckBoxes() {}
+  function clearCheckBoxes() {
+    clearFilterbutton.addEventListener("click", function() {
+      sessionStorage.clear();
+      window.location = `${baseUrl}${pathName}`;
+    });
+    function linkListener(parentLink) {
+      parentLink.forEach(link => {
+        link.addEventListener("click", function() {
+          sessionStorage.clear();
+        });
+      });
+    }
+    linkListener(navLink);
+    linkListener(tagLink);
+    linkListener(footerLink);
+  }
 
   function joinHashItems() {
     if (hash !== []) {
@@ -64,6 +85,7 @@ function searchFilters() {
   });
 
   loadCheckBoxes();
+  clearCheckBoxes();
 }
 
 export default searchFilters;

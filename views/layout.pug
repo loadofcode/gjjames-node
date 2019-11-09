@@ -55,13 +55,13 @@ html
             nav.nav.footer
               each item in h.menu
                 li.link__item
-                  a(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
+                  a.footer__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
                     span #{item.title}
               li.link__item
-                a(href="/stock1234/privacy-policy")
+                a.footer__link(href="/stock1234/privacy-policy")
                   span Privacy Policy
               li.link__item
-                a(href="/login")
+                a.footer__link(href="/login")
                   span Login
           .footer__logo
             a(href="/stock1234")

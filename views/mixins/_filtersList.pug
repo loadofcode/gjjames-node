@@ -1,7 +1,10 @@
 mixin filtersList(tagParents = {})
   .filters
     .filter-parent__list
-      h3 Filter By
+      .filter-title__wrapper
+        h3 Filter By
+        div
+          span.btn-filter clear all
       each parent in tagParents
         h4.filter-parent__title= parent.tagParentName
         ul.filter-children__list
