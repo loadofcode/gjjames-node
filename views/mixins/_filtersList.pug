@@ -3,7 +3,7 @@ mixin filtersList(tagParents = {})
     .filter-parent__list
       .filter-title__wrapper
         h3 Filter By
-        div
+        div.clear__wrapper
           span.btn-filter clear all
       each parent in tagParents
         h4.filter-parent__title= parent.tagParentName

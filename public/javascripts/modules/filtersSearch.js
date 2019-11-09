@@ -44,6 +44,7 @@ function searchFilters() {
     if (hash !== []) {
       sessionStorage.setItem("filterItems", JSON.stringify(hash));
       newHash = hash.join("&");
+      clearFilterbutton.style.display = "inline";
     }
     sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
   }
