@@ -1981,17 +1981,14 @@ function searchFilters() {
   }
 
   function stickyFilters() {
-    var filterBox = document.querySelector(".filters--list"),
-        stickyTop = filterBox.offsetTop;
+    var filterBox = document.querySelector(".filters--list");
+    var scroll = window.pageYOffset;
+    var headerOffsetTop = filterBox.offsetTop;
 
-    window.addEventListener("scroll", function (evt) {
-      if (window.scrollTop >= filterBox.offsetTop) {
-        // $("#stickyBanner").css({ position: "fixed", top: "0px" });
-        console.log("fixed");
-        filterBox.style.cssText = "position: fixed; top: 0px";
+    window.addEventListener("scroll", function () {
+      if (scroll >= headerOffsetTop) {
+        filterBox.style.cssText = "position: sticky; top: 10px";
       } else {
-        // $("#stickyBanner").css({ position: "relative", top: "0px" });
-        console.log("relative");
         filterBox.style.cssText = "position: relative; top: 0px";
       }
     });
@@ -2039,9 +2036,9 @@ function searchFilters() {
     });
   });
 
-  stickyFilters();
   loadCheckBoxes();
   clearCheckBoxes();
+  stickyFilters();
 }
 
 exports.default = searchFilters;
