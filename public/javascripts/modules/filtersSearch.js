@@ -40,6 +40,23 @@ function searchFilters() {
     linkListener(footerLink);
   }
 
+  function stickyFilters() {
+    const filterBox = document.querySelector(".filters--list"),
+      stickyTop = filterBox.offsetTop;
+
+    window.addEventListener("scroll", function(evt) {
+      if (window.scrollTop >= filterBox.offsetTop) {
+        // $("#stickyBanner").css({ position: "fixed", top: "0px" });
+        console.log("fixed");
+        filterBox.style.cssText = "position: fixed; top: 0px";
+      } else {
+        // $("#stickyBanner").css({ position: "relative", top: "0px" });
+        console.log("relative");
+        filterBox.style.cssText = "position: relative; top: 0px";
+      }
+    });
+  }
+
   function joinHashItems() {
     if (hash !== []) {
       sessionStorage.setItem("filterItems", JSON.stringify(hash));
@@ -85,6 +102,7 @@ function searchFilters() {
     });
   });
 
+  stickyFilters();
   loadCheckBoxes();
   clearCheckBoxes();
 }
