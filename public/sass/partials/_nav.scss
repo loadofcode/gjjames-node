@@ -1,169 +1,175 @@
 .nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0 170px;
+  justify-content: space-between;
+  /* Indigo Nav Background: */
+  background-image: $backgroundPurpleGrad;
+  &__section {
     display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0 170px;
-    justify-content: space-between;
-    /* Indigo Nav Background: */
-    background-image: $backgroundPurpleGrad;
-    &__section {
-        display: flex;
-        &--search {
-            flex: 0 1 auto;
-        }
+    &--search {
+      flex: 0 1 auto;
     }
-    &__item {
-        width: 100%;
-        display: flex;
+  }
+  &__item {
+    width: 100%;
+    display: flex;
+  }
+  &__link {
+    color: white;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    padding: 1.2rem 2rem 1rem 2rem;
+    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    border-bottom: 5px solid transparent;
+    svg {
+      width: 40px;
+      transition: all 0.2s;
+      fill: white;
+      margin-bottom: 1rem;
     }
-    &__link {
-        color: white;
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
-        text-transform: uppercase;
-        padding: 1.2rem 2rem 1rem 2rem;
-        display: block;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.2s;
-        border-bottom: 5px solid transparent;
+    &:hover,
+    &--active {
+      border-bottom-color: white;
+      svg {
+        transform: scale(1.2);
+      }
+    }
+    &--logo {
+      &:hover {
         svg {
-            width: 40px;
-            transition: all 0.2s;
-            fill: white;
-            margin-bottom: 1rem;
+          transform: none;
         }
-        &:hover,
-        &--active {
-            border-bottom-color: white;
-            svg {
-                transform: scale(1.2)
-            }
-        }
-        &--logo {
-            &:hover {
-                svg {
-                    transform: none;
-                }
-            }
-            svg {
-                width: 150px;
-                margin: 0;
-            }
-        }
+      }
+      svg {
+        width: 150px;
+        margin: 0;
+      }
     }
-    &.footer {
-        justify-content: center;
-        color: white;
-        @media (max-width: 414px) {
-            flex-wrap: nowrap;
-            font-size: 14px;
-        }
-        li {
-            padding: 0.5rem 2rem;
-            @media (max-width:414px) {
-                padding: 0.5rem 0.8rem;
-            }
-        }
-        li:nth-child(n+2) {
-            border-left: 1px solid white;
-        }
-        span {
-            color: white;
-        }
+  }
+  &.footer {
+    justify-content: center;
+    color: white;
+    @media (max-width: 414px) {
+      flex-wrap: nowrap;
+      font-size: 14px;
     }
+    li {
+      padding: 0.5rem 2rem;
+      @media (max-width: 414px) {
+        padding: 0.5rem 0.8rem;
+      }
+    }
+    li:nth-child(n + 2) {
+      border-left: 1px solid white;
+    }
+    span {
+      color: white;
+    }
+  }
 }
 
-@media all and (max-width:1740px) {
-    .nav {
-        padding: 0 50px;
-    }
+@media all and (max-width: 1740px) {
+  .nav {
+    padding: 0 50px;
+  }
 }
 
 @media all and (max-width: 1200px) {
-    .nav {
-        padding: 0;
-        &__link {
-            padding-left: 1rem;
-            padding-right: 1rem;
-            svg {
-                width: 30px;
-            }
-            &--logo {
-                svg {
-                    width: 100px;
-                }
-            }
+  .nav {
+    padding: 0;
+    &__link {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      svg {
+        width: 30px;
+      }
+      &--logo {
+        svg {
+          width: 100px;
         }
+      }
     }
+  }
 }
 
-@media all and (min-width:901px) {
-    .nav__section--search {
-        width: 40%;
-        padding: 0 15px;
-        .search {
-            border: 2px white solid;
-            height: 50px;
-            border-radius: 4px;
-            top: 45px;
-        }
+@media all and (max-width: 768px) {
+  .nav__section--pages {
+    height: 70px;
+  }
+}
+
+@media all and (min-width: 901px) {
+  .nav__section--search {
+    width: 40%;
+    padding: 0 15px;
+    .search {
+      border: 2px white solid;
+      height: 50px;
+      border-radius: 4px;
+      top: 45px;
     }
+  }
 }
 
 @media all and (max-width: 900px) {
-    .nav {
-        flex-wrap: wrap;
-        &__section {
-            order: 1;
-            &--search {
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                order: 2;
-                width: 100%;
-            }
-        }
+  .nav {
+    flex-wrap: wrap;
+    &__section {
+      order: 1;
+      &--search {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        order: 2;
+        width: 100%;
+      }
     }
+  }
 }
 
 @media all and (max-width: 650px) {
-    .nav {
-        &__section {
-            width: 100%;
-            &--user {
-                order: -1;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                .avatar {
-                    min-width: 20px;
-                    height: 20px;
-                }
-                svg {
-                    display: none;
-                }
-            }
+  .nav {
+    &__section {
+      width: 100%;
+      &--user {
+        order: -1;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .avatar {
+          min-width: 20px;
+          height: 20px;
         }
-        &__item {
-            width: 33.333333%;
+        svg {
+          display: none;
         }
-        &__link {
-            width: 100%;
-            svg {
-                // width: 5px;
-                max-width: 100%;
-            }
-            &--logo {
-                svg {
-                    width: 100%;
-                }
-            }
-        }
+      }
     }
-    .heart-count:before {
-        content: '♥️';
-        margin-right: 1rem;
+    &__item {
+      width: 33.333333%;
     }
+    &__link {
+      width: 100%;
+      svg {
+        // width: 5px;
+        max-width: 100%;
+      }
+      &--logo {
+        svg {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .heart-count:before {
+    content: "♥️";
+    margin-right: 1rem;
+  }
 }
 
 a.admin__link {
-    border-right: none;
-  }
+  border-right: none;
+}

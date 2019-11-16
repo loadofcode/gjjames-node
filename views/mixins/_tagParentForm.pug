@@ -1,5 +1,5 @@
 mixin tagParentForm(tagParent = {})
-  form(action=`/admin/add-tag-parent/${tagParent._id || ''}` method="POST" class="form--flex card category__card")
+  form(action=`/admin/add-parent-tag/${tagParent._id || ''}` method="POST" class="form--flex card category__card")
     label(for="tagParentName") Tag Parent Name
     input(type="text" name="tagParentName" placeholder="Add a Tag Parent" value=tagParent.tagParentName)
     - const choices = tag

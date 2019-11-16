@@ -97,7 +97,7 @@ exports.getProducts = async (req, res) => {
   const tagParentPromise = TagParent.find();
   const countPromise = Product.count();
 
-  const productsByTagPromise = Product.find({ tags: { $in: tagQuery } }).sort({
+  const productsByTagPromise = Product.find({ tags: { $all: tagQuery } }).sort({
     SKU: "desc"
   });
 

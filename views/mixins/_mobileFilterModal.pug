@@ -1,0 +1,11 @@
+mixin mobileFilterModal()
+
+    #mobileFilter.hidden__desktop
+        .modal__header
+            h3 Refine Products
+        .modal__content
+            .filters--list
+                span.btn-clear-mobile--filters.hidden__desktop clear all
+                +filtersList(tagParents)
+                .modal-close__wrapper
+                    span.btn.btn--modal__close Close
