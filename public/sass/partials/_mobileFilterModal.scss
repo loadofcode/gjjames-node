@@ -27,6 +27,9 @@
     overflow-y: auto;
   }
 
+  .modal-close__wrapper {
+    position: relative;
+  }
   span.btn.btn--modal__close {
     background: #53279f;
     color: #fff;
@@ -34,7 +37,7 @@
     padding: 1rem;
     position: absolute;
     right: 30px;
-    bottom: 30px;
+    margin-bottom: 20px;
     &:hover {
       cursor: pointer;
       background: lighten(#53279f, 15%);
