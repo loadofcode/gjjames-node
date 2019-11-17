@@ -2,7 +2,7 @@
   width: 225px;
   height: 75vh;
   float: left;
-  
+
   a.nav__link {
     text-transform: none;
     color: #371178;
@@ -13,7 +13,7 @@
     }
   }
   .nav__link--active {
-    background-color:#371178;
+    background-color: #371178;
     color: white !important;
   }
 
@@ -24,7 +24,6 @@
       border: none;
     }
   }
-
 
   @media all and (max-width: 1400px) {
     margin-top: -2.8em;
@@ -57,7 +56,7 @@
       min-width: 300px;
       width: 100%;
       padding: 2rem;
-      .btn-save{
+      .btn-save {
         width: 100%;
       }
     }
@@ -76,5 +75,4 @@ a.admin__link {
   position: relative;
   top: -205px;
   left: 10px;
-  
 }

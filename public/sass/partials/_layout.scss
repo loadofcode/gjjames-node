@@ -44,6 +44,11 @@ body {
 .inner {
   max-width: 1350px;
   margin: 0 auto;
+  @media all and (max-width: 768px) {
+    &.messages {
+      display: none;
+    }
+  }
   @media all and (max-width: 1400px) {
     padding: 2rem;
   }
@@ -71,7 +76,19 @@ body {
 
 .hidden__mobile {
   @media (max-width: 416px) {
-    display: none;
+    display: none !important;
+  }
+}
+
+.hidden__tablet {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+.hidden__desktop {
+  @media (min-width: 769px) {
+    display: none !important;
   }
 }
 
@@ -82,7 +99,6 @@ body {
     margin: 0;
     .store {
       margin-top: 0;
-      width: 23%;
     }
   }
 }

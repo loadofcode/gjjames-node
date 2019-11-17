@@ -1948,10 +1948,13 @@ function searchFilters() {
   var pathName = window.location.pathname;
 
   var checkboxes = document.querySelectorAll(".filters--checkbox");
-  var clearFilterbutton = document.querySelector(".btn-filter");
+  var clearFilterbutton = document.querySelector(".btn-clear--filter");
+  var clearFilterbuttonMobile = document.querySelector(".btn-clear-mobile--filters");
+  var mobileFilterModal = document.getElementById("mobileFilter");
   var navLink = document.querySelectorAll(".nav__link");
   var tagLink = document.querySelectorAll(".tag__link");
   var footerLink = document.querySelectorAll(".footer__link");
+  var refineButton = document.querySelector(".btn__refine");
 
   var hash = JSON.parse(sessionStorage.getItem("filterItems")) || [];
   var checkboxValues = JSON.parse(sessionStorage.getItem("checkboxValues")) || [];
@@ -1959,15 +1962,27 @@ function searchFilters() {
   function loadCheckBoxes() {
     checkboxValues.forEach(function (key) {
       joinHashItems();
-      document.querySelector("input[id='" + key.id + "']").checked = true;
+      var checkedBoxes = document.querySelectorAll("input[name='" + key.id + "']");
+      checkedBoxes.forEach(function (box) {
+        box.checked = true;
+      });
     });
   }
 
   function clearCheckBoxes() {
-    clearFilterbutton.addEventListener("click", function () {
-      sessionStorage.clear();
-      window.location = "" + baseUrl + pathName;
-    });
+    if (clearFilterbutton) {
+      clearFilterbutton.addEventListener("click", function () {
+        sessionStorage.clear();
+        window.location = "" + baseUrl + pathName;
+      });
+    }
+    if (clearFilterbuttonMobile) {
+      clearFilterbuttonMobile.addEventListener("click", function () {
+        sessionStorage.clear();
+        window.location = "" + baseUrl + pathName;
+      });
+    }
+
     function linkListener(parentLink) {
       parentLink.forEach(function (link) {
         link.addEventListener("click", function () {
@@ -1980,11 +1995,43 @@ function searchFilters() {
     linkListener(footerLink);
   }
 
+  function openMobileFilter() {
+    if (refineButton) {
+      refineButton.addEventListener("click", function () {
+        mobileFilterModal.classList.add("open");
+      });
+      // if (hash !== []) clearFilterbuttonMobile.style.display = "inline";
+    }
+  }
+  function closeMobileFilter() {
+    var filterCloseButton = document.querySelector(".btn--modal__close");
+    filterCloseButton.addEventListener("click", function () {
+      mobileFilterModal.classList.remove("open");
+    });
+  }
+
+  function stickyFiltersBox() {
+    var filterBox = document.querySelector(".filters--list");
+    var scroll = window.pageYOffset;
+    var headerOffsetTop = filterBox.offsetTop;
+
+    window.addEventListener("scroll", function () {
+      if (scroll >= headerOffsetTop) {
+        filterBox.style.cssText = "position: sticky; top: 10px";
+      } else {
+        filterBox.style.cssText = "position: relative; top: 0px";
+      }
+    });
+  }
+
   function joinHashItems() {
     if (hash !== []) {
+      var pagination = document.querySelector(".pagination");
+      if (document.querySelector(".pagination")) pagination.style.display = "none";
       sessionStorage.setItem("filterItems", JSON.stringify(hash));
       newHash = hash.join("&");
       clearFilterbutton.style.display = "inline";
+      clearFilterbuttonMobile.style.display = "inline";
     }
     sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
   }
@@ -2024,6 +2071,9 @@ function searchFilters() {
 
   loadCheckBoxes();
   clearCheckBoxes();
+  stickyFiltersBox();
+  openMobileFilter();
+  closeMobileFilter();
 }
 
 exports.default = searchFilters;
