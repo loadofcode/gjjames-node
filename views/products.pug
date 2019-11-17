@@ -22,6 +22,9 @@ block content
             .stores
                 each product in products
                     +productCard(product)
+                if products = []
+                    .noproduct__wrapper
+                        p No products match your search                    
         +pagination(page, pages, count)
-    +mobileFilterModal
+    +mobileFilterModal(categories)
                 

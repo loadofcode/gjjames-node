@@ -88,7 +88,9 @@ function searchFilters() {
 
   function joinHashItems() {
     if (hash !== []) {
-      document.querySelector(".pagination").style.display = "none";
+      const pagination = document.querySelector(".pagination");
+      if (document.querySelector(".pagination"))
+        pagination.style.display = "none";
       sessionStorage.setItem("filterItems", JSON.stringify(hash));
       newHash = hash.join("&");
       clearFilterbutton.style.display = "inline";

@@ -147,9 +147,11 @@ exports.getProductsByCategory = async (req, res) => {
   const tagQuery = tags || { $exists: true };
   const categoriesPromise = Product.getCategoriesList();
 
+  const tagParentPromise = TagParent.find();
+
   const productsByCategoryWithTagPromise = Product.find({
     category: categoryQuery,
-    tags: { $in: tagQuery }
+    tags: { $all: tagQuery }
   }).sort({ SKU: "desc" });
 
   const productsByCategoryPromise = Product.find({
@@ -159,11 +161,12 @@ exports.getProductsByCategory = async (req, res) => {
   const productsPromise = !tags
     ? productsByCategoryPromise
     : productsByCategoryWithTagPromise;
-  const [categories, products] = await Promise.all([
+  const [categories, products, tagParents] = await Promise.all([
     categoriesPromise,
-    productsPromise
+    productsPromise,
+    tagParentPromise
   ]);
-  res.render("tag", { categories, title, category, products });
+  res.render("tag", { categories, title, category, products, tagParents });
 };
 
 exports.getProductBySlug = async (req, res, next) => {
