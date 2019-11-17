@@ -21,10 +21,7 @@ block content
                 +filtersList(tagParents)
             .stores
                 each product in products
-                    +productCard(product)
-                if products = []
-                    .noproduct__wrapper
-                        p No products match your search                    
+                    +productCard(product)             
         +pagination(page, pages, count)
     +mobileFilterModal(categories)
                 
