@@ -1,9 +1,6 @@
 function searchFilters() {
   let newHash;
-  const baseUrl =
-    process.env.NODE_ENV === "production"
-      ? `https://gjjames.co.uk`
-      : `http://localhost`;
+  const baseUrl = `https://gjjames.co.uk`
   const pathName = window.location.pathname;
 
   const checkboxes = document.querySelectorAll(".filters--checkbox");
