@@ -23,10 +23,10 @@ mixin productForm(product = {}, category = [])
 		label(for="description") Product Description
 		textarea(name="description")= product.description
 		- const choices = tag
-		- const tags = product.tag || []
+		- const tags = product.tags || []
 		ul.tags
 			each choice in tag
 				.tag.tag__choice
-					input(type="checkbox" id=choice value=choice name="tags")
+					input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
 					label(for=choice)= choice
 		input(type="submit" value="Save Product" class="button btn-save")

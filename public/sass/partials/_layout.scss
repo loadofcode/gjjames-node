@@ -1,7 +1,8 @@
-html, body {
-  margin:0;
-  padding:0;
-  height:100%;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 html {
   font-size: 10px;
@@ -9,14 +10,14 @@ html {
 
 body {
   // background: $lightPurple;
-  background:#efefef;
+  background: #efefef;
 }
 
 #container {
-  min-height:100%;
-  position:relative;
+  min-height: 100%;
+  position: relative;
   & .content {
-    padding-bottom:260px;
+    padding-bottom: 260px;
     & .admin__area {
       margin-bottom: -30px;
     }
@@ -24,7 +25,7 @@ body {
 }
 
 .hero__image {
-  background: url('/images/gjjames-hero2.png') no-repeat center; 
+  background: url("/images/gjjames-hero2.png") no-repeat center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -41,8 +42,13 @@ body {
 }
 
 .inner {
-  max-width:1350px;
+  max-width: 1350px;
   margin: 0 auto;
+  @media all and (max-width: 768px) {
+    &.messages {
+      display: none;
+    }
+  }
   @media all and (max-width: 1400px) {
     padding: 2rem;
   }
@@ -51,7 +57,6 @@ body {
 .link__item {
   margin-top: 30px;
 }
-
 
 .home_Nav {
   background: $purple;
@@ -62,16 +67,38 @@ body {
     }
   }
 
-  @media all and (max-width:414px) {
+  @media all and (max-width: 414px) {
     .nav__link--logo svg {
       width: 50% !important;
     }
   }
-  
 }
 
 .hidden__mobile {
   @media (max-width: 416px) {
-    display: none;
+    display: none !important;
+  }
+}
+
+.hidden__tablet {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+.hidden__desktop {
+  @media (min-width: 769px) {
+    display: none !important;
+  }
+}
+
+.products-content__flex {
+  display: flex;
+  .stores {
+    width: 100%;
+    margin: 0;
+    .store {
+      margin-top: 0;
+    }
   }
 }
