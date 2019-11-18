@@ -1,6 +1,16 @@
+.filter-title__wrapper {
+  position: relative;
+}
 .filters--list {
   background: white;
-  width: 20%;
+  width: 100%;
+  @media all and (min-width: 769px) {
+    width: 20%;
+  }
+  @media all and (max-width: 768px) {
+    position: absolute;
+  }
+  height: 100%;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 15px;
@@ -11,19 +21,27 @@
   height: 0;
 }
 
-.btn-filter {
+.btn-clear--filter,
+.btn-clear-mobile--filters {
   display: none;
   background: #53279f;
   color: #fff;
   border-radius: 4px;
   padding: 1rem;
-  position: relative;
-  top: -34px;
-  left: 129px;
+  position: absolute;
+  top: -10px;
+  right: 0;
   &:hover {
     cursor: pointer;
     background: lighten(#53279f, 15%);
   }
+}
+.btn-clear-mobile--filters {
+  top: 43px;
+  left: 210px;
+  width: 100%;
+  min-width: 75px;
+  max-width: fit-content;
 }
 .filter-parent__title {
   margin: 0 0 10px;

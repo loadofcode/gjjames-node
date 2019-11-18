@@ -3,21 +3,29 @@ extends layout
 include mixins/_productCard
 include mixins/_filtersList
 include mixins/_pagination
+include mixins/_mobileFilterModal
 
 block content
     .inner
-        h2 #{title}
-        //- pre= h.dump(categories)
-        ul.tags.tags--flex
+        .products-title_wrapper
+            h2.products-title #{title}
+            .refine__wrapper.hidden__desktop
+                button.btn-purple.btn__refine Refine / Filter
+        ul.tags.tags--flex.hidden__mobile.hidden__tablet
             each c in categories
                 li.tag
                     a.tag__link(href=`/stock1234/products/c/${c._id}`)
                         span.tag__text= `${c._id}s`
         .products-content__flex
-            .filters--list
+            .filters--list.hidden__mobile.hidden__tablet
                 +filtersList(tagParents)
             .stores
-                each product in products
-                    +productCard(product)
+                if (products.length)
+                    each product in products
+                        +productCard(product)
+                else
+                    .noproduct__wrapper
+                        p No products match your search criteria, please adjust your chosen filters
         +pagination(page, pages, count)
+    +mobileFilterModal(categories)
                 
