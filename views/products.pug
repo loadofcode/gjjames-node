@@ -20,8 +20,12 @@ block content
             .filters--list.hidden__mobile.hidden__tablet
                 +filtersList(tagParents)
             .stores
-                each product in products
-                    +productCard(product)             
+                if (products.length)
+                    each product in products
+                        +productCard(product)
+                else
+                    .noproduct__wrapper
+                        p No products match your search criteria, please adjust your chosen filters
         +pagination(page, pages, count)
     +mobileFilterModal(categories)
                 
