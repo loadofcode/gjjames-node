@@ -7,6 +7,8 @@ const multer = require("multer");
 const jimp = require("jimp");
 const uuid = require("uuid");
 const mail = require("../handlers/mail");
+const request = require('request');
+
 
 const multerOptions = {
   storage: multer.memoryStorage(),
@@ -28,20 +30,43 @@ exports.productEnquiry = async (req, res) => {
   const customerCompany = req.body.company.trim();
   const customerMessage = req.body.message;
   const productSKU = req.body.product;
-  await mail.send({
-    from: "info@gjjames.co.uk",
-    replyTo: customerEmail,
-    to: "gareth@gjjames.co.uk",
-    subject: `Product enquiry for ${productSKU}`,
-    customerName,
-    customerTelephone,
-    customerCompany,
-    customerMessage,
-    productSKU,
-    customerEmail,
-    filename: "product-enquire"
+
+  const captcha = req.body['g-recaptcha-response'];
+  const secret = process.env.CAPTCHA_SECRET;
+  const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${captcha}&remoteip=${req.connection.remoteAddress}`;
+
+  if (captcha === undefined || captcha === '' || captcha === null) {
+    await req.flash('error', `Please tick the captcha box`);
+  }
+
+  await request(verificationURL, async function(error, response, body) {
+    body = JSON.parse(body);
+    console.log(body)
+
+    if(body.success !== undefined && !body.success) {
+      await req.flash('error', `Please tick the captcha box`);
+      res.redirect(`/stock1234/product/${productSKU}`);
+    }
+
+    if (body.success) {
+      await mail.send({
+        from: "info@gjjames.co.uk",
+        replyTo: customerEmail,
+        to: "gareth@gjjames.co.uk",
+        subject: `Product enquiry for ${productSKU}`,
+        customerName,
+        customerTelephone,
+        customerCompany,
+        customerMessage,
+        productSKU,
+        customerEmail,
+        filename: "product-enquire"
+      })
+      req.flash("success", `Thanks for your enquiry. We'll be in touch soon`);
+      res.redirect(`/stock1234/product/${productSKU}`);
+    }
+    
   });
-  req.flash("success", `Thanks for your enquiry. We'll be in touch soon`);
 };
 
 exports.addProduct = async (req, res) => {
