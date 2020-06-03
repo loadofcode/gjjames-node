@@ -1,5 +1,5 @@
 const express = require("express");
-const helmet = require("helmet");
+// const helmet = require("helmet");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
@@ -18,7 +18,7 @@ require("./handlers/passport");
 // const upload = multer({dest: './uploads'})
 
 const app = express();
-app.use(helmet());
+// app.use(helmet());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
