@@ -165,7 +165,7 @@ exports.getProducts = async (req, res) => {
 };
 
 exports.getProductsByCategory = async (req, res) => {
-  const category = req.params.category;
+  const category = req.params.category.replace(/-/g, ' ');
   const title = `category: ${category}s`;
   const categoryQuery = category || { $exists: true };
   const tags = req.query.tags;
