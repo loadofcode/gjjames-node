@@ -5,17 +5,20 @@ include mixins/_filtersList
 include mixins/_pagination
 include mixins/_mobileFilterModal
 
+
 block content
+    - const sortedCategories = categories.sort(function(a,b){if(a._id > b._id) { return -1; }  if(a._id < b._id) { return 1; } return 0;})
     .inner
         .products-title_wrapper
             h2.products-title #{title}
             .refine__wrapper.hidden__desktop
                 button.btn-purple.btn__refine Refine / Filter
         ul.tags.tags--flex.hidden__mobile.hidden__tablet
-            each c in categories
-                li.tag
-                    a.tag__link(href=`/stock1234/products/c/${c._id}`)
-                        span.tag__text= `${c._id}s`
+            if(categories)
+                each c in sortedCategories
+                    li.tag
+                        a.tag__link(href=`/stock1234/products/c/${c._id.replace(/\s/g , "-")}`)
+                            span.tag__text= `${c._id}s`
         .products-content__flex
             .filters--list.hidden__mobile.hidden__tablet
                 +filtersList(tagParents)
