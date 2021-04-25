@@ -12,8 +12,10 @@ function productEnquire() {
     var sendBtn = document.getElementsByClassName("btn-send")[0];
 
 
+    if (!btn) return null;
+    
     // When the user clicks on the button, open the modal 
-    if (btn || modal || span || sendBtn) {
+    if (modal && btn || span || sendBtn) {
         btn.onclick = function() {
             modal.style.display = "block";
         }

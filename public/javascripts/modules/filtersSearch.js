@@ -64,18 +64,21 @@ function searchFilters() {
   }
   function closeMobileFilter() {
     const filterCloseButton = document.querySelector(".btn--modal__close");
-    filterCloseButton.addEventListener("click", function() {
-      mobileFilterModal.classList.remove("open");
-    });
+    if(filterCloseButton) {
+
+      filterCloseButton.addEventListener("click", function() {
+        mobileFilterModal.classList.remove("open");
+      });
+    }
   }
 
   function stickyFiltersBox() {
     const filterBox = document.querySelector(".filters--list");
     const scroll = window.pageYOffset;
-    const headerOffsetTop = filterBox.offsetTop;
+    const headerOffsetTop = filterBox && filterBox.offsetTop;
 
     window.addEventListener("scroll", function() {
-      if (scroll >= headerOffsetTop) {
+      if (headerOffsetTop && scroll >= headerOffsetTop) {
         filterBox.style.cssText = "position: sticky; top: 10px";
       } else {
         filterBox.style.cssText = "position: relative; top: 0px";
@@ -90,8 +93,11 @@ function searchFilters() {
         pagination.style.display = "none";
       sessionStorage.setItem("filterItems", JSON.stringify(hash));
       newHash = hash.join("&");
-      clearFilterbutton.style.display = "inline";
-      clearFilterbuttonMobile.style.display = "inline";
+      if( clearFilterbutton || clearFilterbuttonMobile) {
+
+        clearFilterbutton.style.display = "inline";
+        clearFilterbuttonMobile.style.display = "inline";
+      }
     }
     sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
   }

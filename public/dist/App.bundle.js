@@ -2005,18 +2005,21 @@ function searchFilters() {
   }
   function closeMobileFilter() {
     var filterCloseButton = document.querySelector(".btn--modal__close");
-    filterCloseButton.addEventListener("click", function () {
-      mobileFilterModal.classList.remove("open");
-    });
+    if (filterCloseButton) {
+
+      filterCloseButton.addEventListener("click", function () {
+        mobileFilterModal.classList.remove("open");
+      });
+    }
   }
 
   function stickyFiltersBox() {
     var filterBox = document.querySelector(".filters--list");
     var scroll = window.pageYOffset;
-    var headerOffsetTop = filterBox.offsetTop;
+    var headerOffsetTop = filterBox && filterBox.offsetTop;
 
     window.addEventListener("scroll", function () {
-      if (scroll >= headerOffsetTop) {
+      if (headerOffsetTop && scroll >= headerOffsetTop) {
         filterBox.style.cssText = "position: sticky; top: 10px";
       } else {
         filterBox.style.cssText = "position: relative; top: 0px";
@@ -2030,8 +2033,11 @@ function searchFilters() {
       if (document.querySelector(".pagination")) pagination.style.display = "none";
       sessionStorage.setItem("filterItems", JSON.stringify(hash));
       newHash = hash.join("&");
-      clearFilterbutton.style.display = "inline";
-      clearFilterbuttonMobile.style.display = "inline";
+      if (clearFilterbutton || clearFilterbuttonMobile) {
+
+        clearFilterbutton.style.display = "inline";
+        clearFilterbuttonMobile.style.display = "inline";
+      }
     }
     sessionStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
   }
@@ -2101,8 +2107,10 @@ function productEnquire() {
     var span = document.getElementsByClassName("close")[0];
     var sendBtn = document.getElementsByClassName("btn-send")[0];
 
+    if (!btn) return null;
+
     // When the user clicks on the button, open the modal 
-    if (btn || modal || span || sendBtn) {
+    if (modal && btn || span || sendBtn) {
         btn.onclick = function () {
             modal.style.display = "block";
         };
