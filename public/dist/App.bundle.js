@@ -2016,15 +2016,19 @@ function searchFilters() {
   function stickyFiltersBox() {
     var filterBox = document.querySelector(".filters--list");
     var scroll = window.pageYOffset;
-    var headerOffsetTop = filterBox && filterBox.offsetTop;
+    var headerOffsetTop = filterBox && filterBox.length && filterBox.offsetTop;
 
-    window.addEventListener("scroll", function () {
-      if (headerOffsetTop && scroll >= headerOffsetTop) {
-        filterBox.style.cssText = "position: sticky; top: 10px";
-      } else {
-        filterBox.style.cssText = "position: relative; top: 0px";
-      }
-    });
+    if (filterBox === null) return;
+
+    if (window.location.pathname === "/stock1234/products") {
+      window.addEventListener("scroll", function () {
+        if (filterBox !== null && headerOffsetTop && scroll >= headerOffsetTop) {
+          filterBox.style.cssText = "position: sticky; top: 10px";
+        } else {
+          filterBox.style.cssText = "position: relative; top: 0px";
+        }
+      });
+    }
   }
 
   function joinHashItems() {
