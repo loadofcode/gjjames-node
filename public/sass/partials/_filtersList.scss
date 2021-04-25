@@ -54,7 +54,7 @@
 
   .filter-children__item {
     overflow: hidden;
-    margin-bottom: 5px;
+    padding: 5px 0 0;
     input {
       float: left;
       width: unset;
@@ -62,7 +62,7 @@
     label {
       float: left;
       padding-left: 10px;
-      top: -3px;
+      top: 0px;
       position: relative;
       padding: 0 0 0 10px;
     }
