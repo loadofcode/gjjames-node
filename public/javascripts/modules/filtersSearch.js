@@ -75,15 +75,19 @@ function searchFilters() {
   function stickyFiltersBox() {
     const filterBox = document.querySelector(".filters--list");
     const scroll = window.pageYOffset;
-    const headerOffsetTop = filterBox && filterBox.offsetTop;
+    const headerOffsetTop = filterBox && filterBox.length && filterBox.offsetTop;
 
-    window.addEventListener("scroll", function() {
-      if (headerOffsetTop && scroll >= headerOffsetTop) {
-        filterBox.style.cssText = "position: sticky; top: 10px";
-      } else {
-        filterBox.style.cssText = "position: relative; top: 0px";
-      }
-    });
+    if (filterBox === null) return;
+
+    if (window.location.pathname === "/stock1234/products"  ) {
+      window.addEventListener("scroll", function() {
+        if (filterBox !== null && headerOffsetTop && scroll >= headerOffsetTop) {
+          filterBox.style.cssText = "position: sticky; top: 10px";
+        } else {
+          filterBox.style.cssText = "position: relative; top: 0px";
+        }
+      });
+    }
   }
 
   function joinHashItems() {

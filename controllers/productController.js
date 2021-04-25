@@ -23,7 +23,7 @@ const multerOptions = {
 };
 
 exports.productEnquiry = async (req, res) => {
-  const productSlug = req.params.slug;
+  const productSlug = req.body.productSlug;
   const customerName = req.body.name.trim();
   const customerEmail = req.body.email.trim();
   const customerTelephone = req.body.telephone.trim();
@@ -35,24 +35,20 @@ exports.productEnquiry = async (req, res) => {
   const secret = process.env.CAPTCHA_SECRET;
   const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${captcha}&remoteip=${req.connection.remoteAddress}`;
 
-  if (captcha === undefined || captcha === '' || captcha === null) {
-    await req.flash('error', `Please tick the captcha box`);
-  }
 
   await request(verificationURL, async function(error, response, body) {
     body = JSON.parse(body);
-    console.log(body)
 
-    if(body.success !== undefined && !body.success) {
-      await req.flash('error', `Please tick the captcha box`);
-      res.redirect(`/stock1234/product/${productSKU}`);
+    if(body.success === false || body.success !== undefined && !body.success) {
+      req.flash('error', `There was an error, please try again.`);
+      res.redirect(`/stock1234/product/${productSlug}`);
     }
 
-    if (body.success) {
+    if (body.success === true) {
       await mail.send({
         from: "info@gjjames.co.uk",
         replyTo: customerEmail,
-        to: "gareth@gjjames.co.uk",
+        to: process.env.NODE_ENV === 'development' ? 'ggomersall@gmail.com' : "gareth@gjjames.co.uk",
         subject: `Product enquiry for ${productSKU}`,
         customerName,
         customerTelephone,
@@ -62,10 +58,10 @@ exports.productEnquiry = async (req, res) => {
         customerEmail,
         filename: "product-enquire"
       })
+      
       req.flash("success", `Thanks for your enquiry. We'll be in touch soon`);
-      res.redirect(`/stock1234/product/${productSKU}`);
+      res.redirect(`/stock1234/product/${productSlug}`);
     }
-    
   });
 };
 

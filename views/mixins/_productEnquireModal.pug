@@ -10,6 +10,7 @@ mixin productEnquireModal()
             span.product_enquire #{product.SKU} - #{product.productName}
           div.contact__form-width
             input(type="hidden" name="product" value=product.SKU)
+            input(type="hidden" name="productSlug" value=product.slug)
             .contact-field_wrap
               .contact-field_name
                 label(for="name") Full name
