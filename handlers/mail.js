@@ -7,20 +7,13 @@ const promisify = require('es6-promisify');
 const transport = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
   port: process.env.MAIL_PORT,
+  secure: process.env.MAIL_SECURE,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS
   }
 });
 
-// Example of a message 
-// transport.sendMail({
-//   from: 'Wes Bos',
-//   to:'ggomersall@gmail.com',
-//   subject: 'Just trying this out',
-//   html:`Hey <strong>YOU</strong>, whats cracking`,
-//   text:`Hey **YOU**, whats cracking`
-// });
 const generateHTML = (filename, options = {}) => {
   const html = pug.renderFile(`${__dirname}/../views/email/${filename}.pug`, options);
   const inline = juice(html);
@@ -31,8 +24,9 @@ exports.send = async (options) => {
   const html = generateHTML(options.filename, options)
   const text = htmltoText.fromString(html)
   const mailOptions = {
-    from: options.user.email,
-    to: 'ggomersall@gmail.com',
+    from: options.from,
+    replyTo: options.replyTo || options.from,
+    to: options.to,
     subject: options.subject,
     html,
     text

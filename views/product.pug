@@ -1,29 +1,38 @@
 extends layout
+include mixins/_productEnquireModal
 
 block content
     .inner.inner__product
+        //- pre= h.dump(product)
         .back__button
-            p
-                a(href="/products") < Back
+            span(onclick="goBack()") < Back
         .card.product__card
             .product__inner
                 .product__img
                     img(src=`/uploads/${product.photo || 'store.png'}`, alt="product.productName")
                 .product__info
-                    h2
+                    h2.title--color
                         a(href=`/product/${product.slug}`) #{product.productName}
-                    h3= product.SKU
+                    h3.title--color Model Number: 
+                        span= product.SKU
                     if product.category
-                        h4 Category: 
+                        h4.title--color Category: 
                             span= product.category
-                    h4 Product Description:
-                    p= product.description
-                    if product.tags
-                        //- pre= h.dump(product) //shows all product data
+                    if product.description
+                        h4.title--color Product Description:
+                        p= product.description
+                    if product.tags != []
+                        //- pre= h.dump(product.tags)
                         ul.tags
                             each tag in product.tags
                                 li.tag
-                                    a.tag__link(href=`/tags/${tag}`)
+                                    div.tag__link
                                         span.tag__text #{tag}
         .product__contact
-                input(type="Submit" value="enquire about product" class="button btn-more")
+                button#myBtn.button.btn-more enquire about product
+                //- input(type="Submit" value="enquire about product" class="button btn-more")
+        +productEnquireModal()
+    script.
+        function goBack() {
+            window.history.back();
+        }

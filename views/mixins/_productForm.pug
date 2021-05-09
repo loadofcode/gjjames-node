@@ -1,4 +1,5 @@
 mixin productForm(product = {}, category = [])
+	//- pre= h.dump(product)
 	form(action=`/admin/add-product/${product._id || ''}` method="POST" class="form--flex card" enctype="multipart/form-data")
 		label(for="productName") Product Name
 		input(type="text", name="productName" value=product.productName)
@@ -22,9 +23,9 @@ mixin productForm(product = {}, category = [])
 		label(for="description") Product Description
 		textarea(name="description")= product.description
 		- const choices = tag
-		- const tags = product.tag || []
+		- const tags = product.tags || []
 		ul.tags
-			each choice in choices
+			each choice in tag
 				.tag.tag__choice
 					input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
 					label(for=choice)= choice

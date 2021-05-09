@@ -10,4 +10,18 @@ block content
 			h2 #{title}
 			div
 				p This is where you can add a new Tag - tags are secondary/desciptor level - i.e. gold, silver, diamond, ruby, etc
-			+tagForm()
+			+tagForm(tag)
+			if tags
+				h2 Saved Tags
+				p When adding or updating a tag please make sure you save it as SINGULAR!
+				ul.tags_list
+					each t in tags
+						li.tag
+							span.tag__text #{t.tagName}
+							div.edit__wrapper
+								span.tag__edit
+									a(href=`/tags/${t._id}/edit` class="button btn-edit")
+										<i class="fas fa-edit"></i>
+								span.tag__delete
+									a(href=`/tag/${t._id}/delete` class="button btn-edit" )
+										<i class="fas fa-trash-alt"></i>

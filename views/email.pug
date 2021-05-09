@@ -1,0 +1,9 @@
+extends emailLayout
+
+include mixins/_contactForm
+
+block content
+    .inner
+        div.contact__form
+            p.contact-text Please fill in the form below for access to our website
+            +contactForm()

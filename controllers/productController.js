@@ -1,146 +1,268 @@
-const mongoose = require('mongoose');
-const Product = mongoose.model('Product');
-const Category = mongoose.model('Category');
-const Tag = mongoose.model('Tag');
-const multer = require('multer');
-const jimp = require('jimp');
-const uuid = require('uuid');
+const mongoose = require("mongoose");
+const Product = mongoose.model("Product");
+const Category = mongoose.model("Category");
+const Tag = mongoose.model("Tag");
+const TagParent = mongoose.model("TagParent");
+const multer = require("multer");
+const jimp = require("jimp");
+const uuid = require("uuid");
+const mail = require("../handlers/mail");
+const request = require('request');
+
 
 const multerOptions = {
-    storage: multer.memoryStorage(),
-    fileFilter(req, file, next) {
-        const isPhoto = file.mimetype.startsWith('image/');
-        if (isPhoto) {
-            next(null, true);
-        } else {
-            next({ message: 'That filetype isn\'t allowed!' }, false);
-        }
+  storage: multer.memoryStorage(),
+  fileFilter(req, file, next) {
+    const isPhoto = file.mimetype.startsWith("image/");
+    if (isPhoto) {
+      next(null, true);
+    } else {
+      next({ message: "That filetype isn't allowed!" }, false);
     }
+  }
 };
 
-exports.homePage = (req, res) => {
-    res.render('index', { title: 'Home' });
-};
+exports.productEnquiry = async (req, res) => {
+  const productSlug = req.body.productSlug;
+  const customerName = req.body.name.trim();
+  const customerEmail = req.body.email.trim();
+  const customerTelephone = req.body.telephone.trim();
+  const customerCompany = req.body.company.trim();
+  const customerMessage = req.body.message;
+  const productSKU = req.body.product;
 
-exports.adminPage = (req, res) => {
-    res.render('admin', { title: 'Admin' });
+  const captcha = req.body['g-recaptcha-response'];
+  const secret = process.env.CAPTCHA_SECRET;
+  const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${captcha}&remoteip=${req.connection.remoteAddress}`;
+
+
+  await request(verificationURL, async function(error, response, body) {
+    body = JSON.parse(body);
+
+    if(body.success === false || body.success !== undefined && !body.success) {
+      req.flash('error', `There was an error, please try again.`);
+      res.redirect(`/stock1234/product/${productSlug}`);
+    }
+
+    if (body.success === true) {
+      await mail.send({
+        from: "info@gjjames.co.uk",
+        replyTo: customerEmail,
+        to: process.env.NODE_ENV === 'development' ? 'ggomersall@gmail.com' : "gareth@gjjames.co.uk",
+        subject: `Product enquiry for ${productSKU}`,
+        customerName,
+        customerTelephone,
+        customerCompany,
+        customerMessage,
+        productSKU,
+        customerEmail,
+        filename: "product-enquire"
+      })
+      
+      req.flash("success", `Thanks for your enquiry. We'll be in touch soon`);
+      res.redirect(`/stock1234/product/${productSlug}`);
+    }
+  });
 };
 
 exports.addProduct = async (req, res) => {
-    const categoriesPromise = Category.find();
-    const tagsPromise = Tag.find();
-    const [categories, tags] = await Promise.all([categoriesPromise, tagsPromise]);
-    const category = categories.map((category) => {
-        return category.categoryName.toString();
-    })
-    const tag = tags.map((tag) => {
-        return tag.tagName.toString()
-    })
-    res.render('editProduct', {title: 'Add New Product', category, tag} )
-
-}
-
-
-exports.upload = multer(multerOptions).single('photo');
-
-exports.resize = async(req, res, next) => {
-    if (!req.file) {
-        return next();
-    }
-    // Change image name to UUID
-    const extension = req.file.mimetype.split('/')[1];
-    req.body.photo = `${uuid.v4()}.${extension}`;
-    // Resize image
-    const photo = await jimp.read(req.file.buffer);
-    await photo.resize(800, jimp.AUTO);
-    await photo.write(`./public/uploads/${req.body.photo}`);
-    // Save file
-    next();
+  const categoriesPromise = Category.find();
+  const tagsPromise = Tag.find();
+  const [categories, tags] = await Promise.all([
+    categoriesPromise,
+    tagsPromise
+  ]);
+  const category = categories.map(category => {
+    return category.categoryName.toString();
+  });
+  const tag = tags.map(tag => {
+    return tag.tagName.toString();
+  });
+  res.render("editProduct", { title: "Add New Product", category, tag });
 };
 
-exports.createProduct = async(req, res) => {
-    const product = await (new Product(req.body)).save();
-    req.flash('success', `Successfully added ${product.productName}`);
-    res.redirect(`/product/${product.slug}`);
+exports.upload = multer(multerOptions).single("photo");
+
+exports.resize = async (req, res, next) => {
+  if (!req.file) {
+    return next();
+  }
+  // Change image name to UUID
+  const extension = req.file.mimetype.split("/")[1];
+  req.body.photo = `${uuid.v4()}.${extension}`;
+  // Resize image
+  const photo = await jimp.read(req.file.buffer);
+  await photo.resize(800, jimp.AUTO);
+  await photo.write(`./public/uploads/${req.body.photo}`);
+  // Save file
+  next();
 };
 
-// old method for getting products
-//
-// exports.getProducts = async(req, res) => {
-//     const products = await Product.find();
-//     res.render('products', { title: 'Products', products });
-// }
+exports.createProduct = async (req, res) => {
+  const product = await new Product(req.body).save();
+  req.flash("success", `Successfully added ${product.productName}`);
+  res.redirect(`/stock1234/product/${product.slug}`);
+};
 
 // new method for getting products with categories as well
-exports.getProducts = async(req, res) => {
-    const page = req.params.page || 1;
-    const limit = 50;
-    const skip = (page * limit) - limit;
-    const category = req.params.category;
-    const categoryPromise = Product.getCategoriesList();
-    const tagPromise = Product.getTagsList();
-    const countPromise = Product.count();
-    const productsPromise = Product
-        .find()
-        .skip(skip)
-        .limit(limit)
-        .sort({created: 'desc'})
+exports.getProducts = async (req, res) => {
+  const page = req.params.page || 1;
+  const limit = 50;
+  const skip = page * limit - limit;
+  const category = req.params.category;
+  const categoryPromise = Product.getCategoriesList();
+  const categoriesLink = await Category.find();
+  const tags = req.query.tags;
+  const tagQuery = tags || { $exists: true };
+  const tagPromise = Product.getTagsList();
+  const tagParentPromise = TagParent.find();
+  const countPromise = Product.count();
 
-    const [categories, products, tags, count] = await Promise.all([categoryPromise, productsPromise, tagPromise, countPromise]);
-    const pages = Math.ceil(count / limit);
-    if (!products.length && skip) {
-        req.flash('info', `${page} doesn't exist, you've been redirected to ${pages}`);
-        res.redirect(`/products/page/${pages}`)
-        return
+  const productsByTagPromise = Product.find({ tags: { $all: tagQuery } }).sort({
+    SKU: "desc"
+  });
+
+  const productsAllPromise = Product.find()
+    .skip(skip)
+    .limit(limit)
+    .sort({ SKU: "desc" });
+
+  const productsPromise = !tags ? productsAllPromise : productsByTagPromise;
+  const [categories, products, tagsList, tagParents, count] = await Promise.all(
+    [
+      categoryPromise,
+      productsPromise,
+      tagPromise,
+      tagParentPromise,
+      countPromise
+    ]
+  );
+
+  const pages = Math.ceil(count / limit);
+  if (!products.length && skip) {
+    req.flash(
+      "info",
+      `${page} doesn't exist, you've been redirected to ${pages}`
+    );
+    res.redirect(`/stock1234/products/page/${pages}`);
+    return;
+  }
+  res.render("products", {
+    categoriesLink,
+    categories,
+    tagsList,
+    tagParents,
+    title: `Products`,
+    products,
+    count,
+    pages,
+    page
+  });
+};
+
+exports.getProductsByCategory = async (req, res) => {
+  const category = req.params.category.replace(/-/g, ' ');
+  const title = `category: ${category}s`;
+  const categoryQuery = category || { $exists: true };
+  const tags = req.query.tags;
+  const tagQuery = tags || { $exists: true };
+  const categoriesPromise = Product.getCategoriesList();
+
+  const tagParentPromise = TagParent.find();
+
+  const productsByCategoryWithTagPromise = Product.find({
+    category: categoryQuery,
+    tags: { $all: tagQuery }
+  }).sort({ SKU: "desc" });
+
+  const productsByCategoryPromise = Product.find({
+    category: categoryQuery
+  }).sort({ SKU: "desc" });
+
+  const productsPromise = !tags
+    ? productsByCategoryPromise
+    : productsByCategoryWithTagPromise;
+  const [categories, products, tagParents] = await Promise.all([
+    categoriesPromise,
+    productsPromise,
+    tagParentPromise
+  ]);
+  res.render("tag", { categories, title, category, products, tagParents });
+};
+
+exports.getProductBySlug = async (req, res, next) => {
+  const product = await Product.findOne({ slug: req.params.slug });
+  if (!product) return next();
+  res.render("product", { product, title: product.productName });
+};
+
+exports.editProduct = async (req, res) => {
+  const productPromise = Product.findOne({ _id: req.params.id });
+  const categoriesPromise = Category.find();
+  const tagsPromise = Tag.find();
+  const [categories, tags, product] = await Promise.all([
+    categoriesPromise,
+    tagsPromise,
+    productPromise
+  ]);
+  const category = categories.map(category => {
+    return category.categoryName.toString();
+  });
+  const tag = tags.map(tag => {
+    return tag.tagName.toString();
+  });
+  res.render("editProduct", {
+    title: `Edit ${product.productName}`,
+    product,
+    category,
+    tag
+  });
+};
+
+exports.updateProduct = async (req, res) => {
+  const product = await Product.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    {
+      new: true, // returns new product instead of old one
+      runValidators: true
     }
-    res.render('products', { categories, tags, title: `Products`, products, count, pages, page });
-}
+  ).exec();
+  req.flash(
+    "success",
+    `Successfully updated <strong>${product.productName}</strong>. <a href="/stock1234/product/${product.slug}">View Product</a>`
+  );
+  res.redirect(`/stock1234/products/${product._id}/edit`);
+};
 
-exports.getProductsByCategory = async(req, res) => {
-    const category = req.params.category;
-    const categoryQuery = category || { $exists: true };
-    const categoriesPromise = Product.getCategoriesList();
-    const productsByCategoryPromise = Product.find({ category: categoryQuery });
-    const [categories, products] = await Promise.all([categoriesPromise, productsByCategoryPromise]);
-    res.render('tag', { categories, title: `Products: ${category}`, category, products });
-}
+exports.deleteProduct = async (req, res) => {
+  const product = await Product.findOneAndRemove({ _id: req.params.id });
 
-exports.getProductBySlug = async(req, res, next) => {
-    const product = await Product.findOne({ slug: req.params.slug });
-    if (!product) return next();
-    res.render('product', { product, title: product.productName });
-}
-
-exports.editProduct = async(req, res) => {
-    const product = await Product.findOne({ _id: req.params.id });
-
-    res.render('editProduct', { title: `Edit ${product.productName}`, product });
-}
-
-exports.updateProduct = async(req, res) => {
-    const product = await Product.findOneAndUpdate({ _id: req.params.id }, req.body, {
-        new: true, // returns new product instead of old one
-        runValidators: true
-    }).exec();
-    req.flash('success', `Successfully updated <strong>${product.productName}</strong>. <a href="/products/${product.slug}">View Product</a>`)
-    res.redirect(`/products/${product._id}/edit`);
-}
+  req.flash(
+    "success",
+    `Successfully deleted <strong>${product.productName}</strong>.`
+  );
+  res.redirect(`/stock1234/products`);
+};
 
 exports.searchProducts = async (req, res) => {
-    const products = await Product
-    // first find stores that match
-    .find({
+  const products = await Product
+    // first find products that match
+    .find(
+      {
         $text: {
-            $search: req.query.q
+          $search: req.query.q
         }
-    }, {
-        score: { $meta: 'textScore' }
-    })
+      },
+      {
+        score: { $meta: "textScore" }
+      }
+    )
     // sort the results
     .sort({
-        score: { $meta: 'textScore' } // sort the returned results by score value
+      score: { $meta: "textScore" } // sort the returned results by score value
     })
     // limit to 50 items
-    .limit(5)
-    res.json(products)
-}
+    .limit(5);
+  res.json(products);
+};

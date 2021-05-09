@@ -1,10 +1,14 @@
 doctype html
 html
   head
+    if process.env.NODE_ENV == 'production'
+      include includes/ga.pug
     title= `${title} | ${h.siteName}`
     link(rel='stylesheet', href='/dist/style.css')
     link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
     meta(name="viewport" content="width=device-width, initial-scale=1")
+    script(src='https://www.google.com/recaptcha/api.js')
+    
   body
     #container
       block header
@@ -12,7 +16,7 @@ html
           nav.nav
             .nav__section.nav__section--pages
               li.nav__item
-                a.nav__link.nav__link--logo(href="/")
+                a.nav__link.nav__link--logo(href="/stock1234")
                   != h.icon('logo')
               each item in h.menu
                 li.nav__item
@@ -20,13 +24,12 @@ html
                     span #{item.title}
             .nav__section.nav__section--search
               .search
-                input.search__input(type="text" placeholder="Search products..." name="search")
+                input.search__input(type="text" placeholder="Search Model Number..." name="search")
                 .search__results
             if user
               .nav__section.nav__section--user
                 if user.isAdmin == false
                   li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))
-                    //- != h.icon('logout')
                     span Logout
                 if user.isAdmin == true
                   li.nav__item: a.nav__link.admin__link(href="/admin", class=(currentPath.startsWith('/admin') ? 'nav__link--active' : ''))
@@ -34,7 +37,7 @@ html
 
       block messages
         if locals.flashes
-          .inner
+          .inner.messages
             .flash-messages
               - const categories = Object.keys(locals.flashes)
               each category in categories
@@ -47,17 +50,27 @@ html
         block content
 
       block footer
-        footer
+        footer.footer__wrapper
           div
             nav.nav.footer
               each item in h.menu
-                li
-                  a(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
+                li.link__item
+                  a.footer__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
                     span #{item.title}
-              li
-                a(href="/login")
+              li.link__item
+                a.footer__link(href="/stock1234/privacy-policy")
+                  span Privacy Policy
+              li.link__item
+                a.footer__link(href="/login")
                   span Login
+          .footer__logo
+            a(href="/stock1234")
+              != h.icon('logo')
+            .border
+          p.company_info.side__right.hidden__mobile Company Registration No. 6543866 
+            span
+            Registered Office:  50 Oatlands drive, Weybridge, Surrey, KT13 9DF
 
     block scripts
-      //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
       script(src="/dist/App.bundle.js")
+      script(src="/javascripts/external/fontawesome-all.js")

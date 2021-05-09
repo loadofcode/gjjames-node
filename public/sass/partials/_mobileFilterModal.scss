@@ -1,0 +1,46 @@
+#mobileFilter {
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+  background-color: white;
+  padding: 1rem 0;
+
+  &.open {
+    display: block;
+  }
+  .modal__header {
+    h3 {
+      padding: 0 2rem;
+    }
+    border-bottom: 1px solid $lightPurple;
+  }
+  .modal__content {
+    position: absolute;
+    width: 100%;
+    padding: 0 2rem;
+    bottom: 0;
+    top: 70px;
+    overflow-y: auto;
+  }
+
+  .modal-close__wrapper {
+    position: relative;
+  }
+  span.btn.btn--modal__close {
+    background: #53279f;
+    color: #fff;
+    border-radius: 4px;
+    padding: 1rem;
+    position: absolute;
+    right: 30px;
+    margin-bottom: 20px;
+    &:hover {
+      cursor: pointer;
+      background: lighten(#53279f, 15%);
+    }
+  }
+}

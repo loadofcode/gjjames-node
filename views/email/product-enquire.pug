@@ -1,10 +1,19 @@
 extends email-layout
 
 block content
-  h2 Password Reset
-  p Hello. You have requested a password reset. Please click the following button to continue on with resetting your password. Please note this link is only valid for the next hour.
-  +button(resetURL, 'Reset my Password →')
-  p If you can't click the above button please visit #{resetURL}
+  h2 Product enquiry for #{productSKU}
+  p #{customerName} has enquired about the following product: 
+    b #{productSKU}
+
+  h3.email-title Message:
+  p #{customerMessage}
   br
-  p If you didn't request this email, please ignore it.
-  p made with love
+  h3.email-title Their contact details are:
+  p Name: #{customerName}
+  p Company: #{customerCompany}
+  p Email: #{customerEmail}
+  p Phone: #{customerTelephone}
+  
+  
+
+

@@ -1,4 +1,34 @@
 extends layout
 
+include mixins/_topThreeCategory
+
 block content
-  p hi
+  div.hero__image
+    div.hero__container
+      a.hero__logo(href="/stock1234")
+        != h.icon('logo')
+      //- .nav__section.nav__section--search
+      .search__hero
+        input.search__input.hero__search(type="text" placeholder="Search Model Number..." name="hero-search")
+        .search__hero-results
+  .top-categories__container
+    +topThreeCategory()
+  .newsletter__container
+    .inner
+      //-- Begin MailChimp Signup Form
+      link(href='//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css', rel='stylesheet', type='text/css')
+      style(type='text/css').
+        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+        /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+        We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+      #mc_embed_signup
+        form#mc-embedded-subscribe-form.validate(action='https://gjjames.us8.list-manage.com/subscribe/post?u=a88dfac32dfd8cf701cb357d8&id=e3e0c0af91', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate='')
+          #mc_embed_signup_scroll
+            label(for='mce-EMAIL') Subscribe to our mailing list
+            input#mce-EMAIL.email(type='email', value='', name='EMAIL', placeholder='email address', required='')
+            // real people should not fill this in and expect good things - do not remove this or risk form bot signups
+            div(style='position: absolute; left: -5000px;', aria-hidden='true')
+              input(type='text', name='b_a88dfac32dfd8cf701cb357d8_e3e0c0af91', tabindex='-1', value='')
+            .clear
+              input#mc-embedded-subscribe.button(type='submit', value='Subscribe', name='subscribe')
+      //-- End mc_embed_signup

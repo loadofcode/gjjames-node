@@ -18,8 +18,10 @@ body {
 
 h1, h2, h3, h4, h5, h6, {
   // font-size: 5rem;
-  font-family: 'Panama';
+  // font-family: 'Panama';
+  font-family: sans-serif;
   font-weight: 600;
+  text-transform: capitalize;
   // letter-spacing:-1px;
 }
 
@@ -29,7 +31,7 @@ a {
 }
 
 p a {
-  border-bottom: 2px solid $yellow;
+  border-bottom: 2px solid #371178;
 }
 
 p {
@@ -71,7 +73,7 @@ p {
 }
 
 .title--product{
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .title--single {

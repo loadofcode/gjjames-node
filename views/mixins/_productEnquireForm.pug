@@ -1,0 +1,20 @@
+mixin productEnquireForm()
+  form(action="/contact-page/success" method="POST" class="form--flex card email__card")
+    div.contact__form-width
+      .contact-field_wrap
+        .contact-field_name
+          label(for="name") Name
+          input(type="text" name="name" placeholder="Your Name" value='' required)
+        .contact-field_email
+          label(for="email") Email
+          input(type="email" name="email" placeholder="Your Email" value='' required)
+      label(for="company") Company Name
+      input(type="text" name="company" placeholder="Your Company" value='' required)
+      label(for="subject") Subject
+      input(type="text" name="subject" placeholder="Subject" value='' required)
+    div.contact__form-width
+      label(for="message") Message
+      textarea(name="message", cols="30", rows="7" required)
+
+    br
+    input(type="submit" value="Submit" class="button btn-send")
